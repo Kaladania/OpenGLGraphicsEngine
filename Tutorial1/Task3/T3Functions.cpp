@@ -16,7 +16,7 @@ void OutputMessage(int menuChoice)
 		std::cout << "It looks like it might rain. Better take your umbrella.\n" << std::endl;
 		break;
 	case(3):
-		std::cout << "Don't forget your sunscreen!\n" << std::endl;
+		std::cout << "Don't forget your umbrealla!\n" << std::endl;
 		break;
 	case(4):
 		std::cout << "Exiting Application. Goodbye.\n" << std::endl;
