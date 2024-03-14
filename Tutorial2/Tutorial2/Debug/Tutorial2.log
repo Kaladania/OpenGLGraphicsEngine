@@ -1,0 +1,7 @@
+﻿  GLUTCallbacks.cpp
+C:\Users\a018073n.STUDENT.002\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.h(34,116): error C2548: 'HelloGL::DrawTriangle': missing default argument for parameter 5
+  HelloGL.cpp
+C:\Users\a018073n.STUDENT.002\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.h(34,116): error C2548: 'HelloGL::DrawTriangle': missing default argument for parameter 5
+  main.cpp
+C:\Users\a018073n.STUDENT.002\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.h(34,116): error C2548: 'HelloGL::DrawTriangle': missing default argument for parameter 5
+  Generating Code...
