@@ -1,7 +1,6 @@
-﻿  GLUTCallbacks.cpp
-C:\Users\a018073n.STUDENT.002\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.h(34,116): error C2548: 'HelloGL::DrawTriangle': missing default argument for parameter 5
-  HelloGL.cpp
-C:\Users\a018073n.STUDENT.002\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.h(34,116): error C2548: 'HelloGL::DrawTriangle': missing default argument for parameter 5
-  main.cpp
-C:\Users\a018073n.STUDENT.002\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.h(34,116): error C2548: 'HelloGL::DrawTriangle': missing default argument for parameter 5
-  Generating Code...
+﻿  HelloGL.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.cpp(101,8): warning C4101: 'triangleCoordinates': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.cpp(196,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.cpp(270,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial2\Tutorial2\HelloGL.cpp(271,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial2\Debug\Tutorial2.exe
