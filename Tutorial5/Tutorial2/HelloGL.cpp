@@ -6,6 +6,10 @@
 HelloGL::HelloGL(int argc, char* argv[])
 {
 	polygonRotation = 0.0f;
+	camera = new Camera();
+
+	camera->eye.z = 1.0f;
+	camera->up.y = 1.0f;
 
 	GLUTCallbacks::Init(this); //sets the current gl instance pointer to this current instance
 	glutInit(&argc, argv);
@@ -16,12 +20,23 @@ HelloGL::HelloGL(int argc, char* argv[])
 	glutDisplayFunc(GLUTCallbacks::Display); //draws window
 	glutTimerFunc(refreshRate, GLUTCallbacks::GameTimer, refreshRate);
 	glutKeyboardFunc(GLUTCallbacks::Keyboard);
+
+	glMatrixMode(GL_PROJECTION); //switches transformation pipeline to 3D matrix
+	glLoadIdentity(); //loads the identity matrix (sets matrix back to 1)
+
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); //sets viewport to be entire window
+
+	//sets correct scene perspective
+	//field of view, aspect ratio, near clipping distance, far clipping distance
+	gluPerspective(45, 1, 0, 1000);
+
+	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
 	glutMainLoop();
 }
 
 HelloGL::~HelloGL(void)
 {
-
+	delete camera;
 }
 
 /// <summary>
@@ -113,12 +128,12 @@ void HelloGL::Display()
 	vertex3 = std::make_tuple(-0.55f, 0.4f);
 	vertex4 = std::make_tuple(-0.75f, 0.4f);
 
-	rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
+	//rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
 
 	
 	//glPushMatrix(); //begins matrix calculation
 	
-	
+	glTranslatef(0.0f, 0.0f, -3.0f);
 	SetColor(RED, colorCode);
 	DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
 
@@ -141,6 +156,8 @@ void HelloGL::Display()
 	vertex1 = std::make_tuple(0.0f, 0.0f);
 	DrawEqualPolygon(colorCode, vertex1, 6, 0.5f, rotationAxis, 1); //Draws a hexagon
 
+	glutWireCube(0.1);
+
 	//polygonRotationSpeed = 1.0f;
 	SetColor(PURPLE, colorCode);
 	DrawEqualPolygon(colorCode, vertex1, 4, 0.5f, rotationAxis, 1); //Draws a hexagon
@@ -157,6 +174,7 @@ void HelloGL::Display()
 	SetColor(RED, colorCode);
 	DrawEqualPolygon(colorCode, vertex1, 3, 0.15f, rotationAxis, 1); //Draws a hexagon
 
+	Draw3D();
 	//glPopMatrix();
 	
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
@@ -168,23 +186,93 @@ void HelloGL::Display()
 /// </summary>
 void HelloGL::Update() 
 {
+	glLoadIdentity(); //resets pre-existing matrix transformations
+
+	gluLookAt(camera->eye.x, camera->eye.y, camera->eye.z, camera->center.x, camera->center.y, camera->center.z, camera->up.x, camera->up.y, camera->up.z); //moves the camera
+
 	glutPostRedisplay(); //forces the scene to redraw itself
 	
 	triangleRotation = UpdateRotation(triangleRotation, 2.0f);
 }
 
 void HelloGL::Keyboard(unsigned char key, int x, int y)
-{
-	if (key == 'd') 
+{    
+	switch (key)
 	{
-		polygonRotation = UpdateRotation(polygonRotation, 0.7f);
-	}
-	else if (key == 'f')
-	{
-		polygonRotation = UpdateRotation(polygonRotation, -0.7f);
-	}
+	case 'k':
+		camera->eye.x -= 0.01f;
+		break;
+
+	case ';':
+		camera->eye.x += 0.01f;
+		break;
+
+	case 'o':
+		camera->eye.y += 0.01f;
+		break;
+
+	case 'l':
+		camera->eye.y -= 0.02f;
+		break;
+
+	case 'i':
+		camera->eye.z -= 0.03f;
+		break;
+
+	case 'p':
+		camera->eye.z += 0.03f;
+		break;
+
+	case 'a':
+		std::get<0>(translationAxis) += -0.02f;
+		break;
+
+	case 'd':
+		std::get<0>(translationAxis) += 0.02f;
+		break;
+
+	case 'w':
+		std::get<1>(translationAxis) += 0.02f;
+		break;
+
+	case 's':
+		std::get<1>(translationAxis) += -0.02f;
+		break;
+
+	case 'q':
+		std::get<2>(translationAxis) += -0.2f;
+		break;
+
+	case 'e':
+		std::get<2>(translationAxis) += 0.2f;
+		break;
+
+	case '1':
+		rotationAxis = std::make_tuple(-1.0f, 0.0f, 0.0f);
+		polygonRotation = UpdateRotation(polygonRotation, -2.0f);
+		break;
+
+	case '4':
+		rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
+		polygonRotation = UpdateRotation(polygonRotation, -2.0f);
+		break;
+
+	case '6':
+		rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
+		polygonRotation = UpdateRotation(polygonRotation, 2.0f);
+		break;
 
 	
+	}
+
+	/*if (key == 'd') 
+	{
+		polygonRotation = UpdateRotation(polygonRotation, 2.0f);
+	}
+	else if (key == 'a')
+	{
+		polygonRotation = UpdateRotation(polygonRotation, -2.0f);
+	}*/
 	
 }
 
@@ -218,18 +306,11 @@ float HelloGL::UpdateRotation(float rotation, float rotationSpeed)
 void HelloGL::DrawQuadrilateral(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3, const std::tuple<float, float>& vertex4)
 {
 	glPushMatrix();
-	//glTranslatef(0.0f, 0.0f, 0.0f);
+	//glTranslatef(std::get<0>(translationAxis), std::get<1>(translationAxis), std::get<2>(translationAxis));
 	//begins matrix calculation
 	//glTranslatef(0, 0, 0);
-	float localRotation = polygonRotation;
-	localRotation += polygonRotationSpeed * 1.0f;
 
-	if (localRotation >= 360.0f)
-	{
-		localRotation = polygonRotationSpeed * 1.0f;
-	}
-
-	glRotatef(polygonRotation, std::get<0>(rotationAxis), std::get<1>(rotationAxis), std::get<2>(rotationAxis)); //rotates the drawn polygon
+	//glRotatef(polygonRotation, std::get<0>(rotationAxis), std::get<1>(rotationAxis), std::get<2>(rotationAxis)); //rotates the drawn polygon
 
 	glColor4f(colorCode[0], colorCode[1], colorCode[2], colorCode[3]); //sets brush color
 	glBegin(GL_POLYGON); //starts drawing a polygon (starts listening for instructions)
@@ -398,6 +479,20 @@ void HelloGL::DrawEqualPolygon(std::array<float, 4>& colorCode, const std::tuple
 
 }
 
+void HelloGL::Draw3D()
+{
+	glPushMatrix();
+	glTranslatef(std::get<0>(translationAxis), std::get<1>(translationAxis), std::get<2>(translationAxis));
+	//begins matrix calculation
+	//glTranslatef(0, 0, 0);
+
+	glRotatef(polygonRotation, std::get<0>(rotationAxis), std::get<1>(rotationAxis), std::get<2>(rotationAxis)); //rotates the drawn polygon
+
+	//glColor4f(colorCode[0], colorCode[1], colorCode[2], colorCode[3]); //sets brush color
+	glutWireTeapot(0.1);
+
+	glPopMatrix();
+}
 
 //void HelloGL::RotatePolygon(const std::tuple<float, float, float>& rotationAxis, const float rotationSpeed)
 //{

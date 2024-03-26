@@ -1,6 +1,6 @@
 ﻿  HelloGL.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(109,8): warning C4101: 'triangleCoordinates': unreferenced local variable
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(275,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(386,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(387,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(124,8): warning C4101: 'triangleCoordinates': unreferenced local variable
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(356,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(467,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Tutorial2\HelloGL.cpp(468,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial5\Debug\Tutorial2.exe

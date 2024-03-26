@@ -7,6 +7,8 @@
 #include <array>
 #include <tuple>
 //#define REFRESH_RATE 16
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 800
 
 class HelloGL
 {
@@ -17,17 +19,18 @@ private:
 	float polygonRotationSpeed = 0.7f;
 	float triangleRotation = 0.0f;
 
-public:
-	HelloGL(int argc, char* argv[]);
-	~HelloGL(void); //class destructor
-
 	std::array<float, 4> colorCode = { 1.0f, 0.0f, 0.0f, 0.0f }; //Array of RGBA values for current color
 	std::tuple<float, float> vertex1; //position of 1st vertex of triangle
 	std::tuple<float, float> vertex2; //position of 2nd vertex of triangle
 	std::tuple<float, float> vertex3; //position of 3rd vertex of triangle
 	std::tuple<float, float> vertex4;  //position of 4th vertex of triangle
 
-	std::tuple<float, float, float> rotationAxis;
+	std::tuple<float, float, float> rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
+	std::tuple<float, float, float> translationAxis = std::make_tuple(0.0f, 0.0f, 0.0f);
+
+public:
+	HelloGL(int argc, char* argv[]);
+	~HelloGL(void); //class destructor
 
 	enum colorCodes
 	{
@@ -52,6 +55,7 @@ public:
 
 	void DrawEqualPolygon(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const int numberOfSides, const float sideLength, const std::tuple<float, float, float>& rotationAxis, const float rotationSpeed);
 
+	void Draw3D();
 	void Display();
 	void Update();
 
