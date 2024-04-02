@@ -1,15 +1,28 @@
 #include "HelloGL.h"
 #include "Header.h"
-
+#include <algorithm>
+#include <time.h>
 
 
 HelloGL::HelloGL(int argc, char* argv[])
 {
+	srand(time(0));
+
 	polygonRotation = 0.0f;
 	camera = new Camera();
 
 	camera->eye.z = 1.0f;
 	camera->up.y = 1.0f;
+
+	Vector3D newRotation = Vector3D();
+
+	for (int i = 0; i < 1; i++)
+	{
+		newRotation.z = rand() % 10;
+		polygonList.push_back(new Cube(1.0f, newRotation)); //creates a new cube object
+		polygonList[i]->SetRotationSpeed(newRotation);
+	}
+	
 
 	GLUTCallbacks::Init(this); //sets the current gl instance pointer to this current instance
 	glutInit(&argc, argv);
@@ -32,6 +45,8 @@ HelloGL::HelloGL(int argc, char* argv[])
 
 	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
 	glutMainLoop();
+
+
 }
 
 HelloGL::~HelloGL(void)
@@ -56,54 +71,59 @@ void HelloGL::Display()
 	vertex3 = std::make_tuple(-0.55f, 0.4f);
 	vertex4 = std::make_tuple(-0.75f, 0.4f);
 
+	for (int i = 0; i < polygonList.size(); i++)
+	{
+		polygonList[i]->Draw();
+	}
+
 	//rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
 
 	
 	//glPushMatrix(); //begins matrix calculation
 	
-	glTranslatef(0.0f, 0.0f, -3.0f);
-	//SetColor(RED, colorCode);
-	DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
+	//glTranslatef(0.0f, 0.0f, -3.0f);
+	////SetColor(RED, colorCode);
+	//DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
 
-	//SetColor(YELLOW, colorCode);
-	vertex1 = std::make_tuple(-0.45f, 0.6f);
-	vertex2 = std::make_tuple(-0.15f, 0.6f);
-	vertex3 = std::make_tuple(-0.15f, 0.4f);
-	vertex4 = std::make_tuple(-0.45f, 0.4f);
-	DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
+	////SetColor(YELLOW, colorCode);
+	//vertex1 = std::make_tuple(-0.45f, 0.6f);
+	//vertex2 = std::make_tuple(-0.15f, 0.6f);
+	//vertex3 = std::make_tuple(-0.15f, 0.4f);
+	//vertex4 = std::make_tuple(-0.45f, 0.4f);
+	//DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
 
-	//SetColor(GREEN, colorCode);
-	vertex1 = std::make_tuple(-0.05f, 0.4f);
-	DrawEqualTriangle(colorCode, vertex1, 0.25f);
+	////SetColor(GREEN, colorCode);
+	//vertex1 = std::make_tuple(-0.05f, 0.4f);
+	//DrawEqualTriangle(colorCode, vertex1, 0.25f);
 
 
-	//Drawing a polygon pic
+	////Drawing a polygon pic
 
-	//polygonRotationSpeed = 0.5f;
-	//SetColor(DARKBLUE, colorCode);
-	vertex1 = std::make_tuple(0.0f, 0.0f);
-	DrawEqualPolygon(colorCode, vertex1, 6, 0.5f, rotationAxis, 1); //Draws a hexagon
+	////polygonRotationSpeed = 0.5f;
+	////SetColor(DARKBLUE, colorCode);
+	//vertex1 = std::make_tuple(0.0f, 0.0f);
+	//DrawEqualPolygon(colorCode, vertex1, 6, 0.5f, rotationAxis, 1); //Draws a hexagon
 
-	glutWireCube(0.1);
+	//glutWireCube(0.1);
 
-	//polygonRotationSpeed = 1.0f;
-	//SetColor(PURPLE, colorCode);
-	DrawEqualPolygon(colorCode, vertex1, 4, 0.5f, rotationAxis, 1); //Draws a hexagon
+	////polygonRotationSpeed = 1.0f;
+	////SetColor(PURPLE, colorCode);
+	//DrawEqualPolygon(colorCode, vertex1, 4, 0.5f, rotationAxis, 1); //Draws a hexagon
 
-	//polygonRotationSpeed = 4.0f;
-	//SetColor(WHITE, colorCode);
-	DrawEqualPolygon(colorCode, vertex1, 10, 0.4f, rotationAxis, 1); //Draws a hexagon
+	////polygonRotationSpeed = 4.0f;
+	////SetColor(WHITE, colorCode);
+	//DrawEqualPolygon(colorCode, vertex1, 10, 0.4f, rotationAxis, 1); //Draws a hexagon
 
-	//polygonRotationSpeed = 0.1f;
-	//SetColor(YELLOW, colorCode);
-	DrawEqualPolygon(colorCode, vertex1, 5, 0.3f, rotationAxis, 1); //Draws a hexagon
+	////polygonRotationSpeed = 0.1f;
+	////SetColor(YELLOW, colorCode);
+	//DrawEqualPolygon(colorCode, vertex1, 5, 0.3f, rotationAxis, 1); //Draws a hexagon
 
-	//polygonRotationSpeed = 0.0f;
-	//SetColor(RED, colorCode);
-	DrawEqualPolygon(colorCode, vertex1, 3, 0.15f, rotationAxis, 1); //Draws a hexagon
+	////polygonRotationSpeed = 0.0f;
+	////SetColor(RED, colorCode);
+	//DrawEqualPolygon(colorCode, vertex1, 3, 0.15f, rotationAxis, 1); //Draws a hexagon
 
-	Draw3D();
-	//glPopMatrix();
+	//Draw3D();
+	////glPopMatrix();
 	
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
@@ -120,7 +140,24 @@ void HelloGL::Update()
 
 	glutPostRedisplay(); //forces the scene to redraw itself
 	
-	triangleRotation = UpdateRotation(triangleRotation, 2.0f);
+	//triangleRotation = UpdateRotation(triangleRotation, 2.0f);
+
+	Vector3D polygonRotation = Vector3D();
+
+	for (int i = 0; i < polygonList.size(); i++)
+	{
+		polygonList[i]->Draw();
+		//polygonRotation = polygonList[i]->GetRotation();
+		//printf("%f, %f, %f \n", polygonRotation.x, polygonRotation.y, polygonRotation.z);
+
+		//Vector3D newRotation = polygonRotation + polygonList[i]->GetRotationSpeed();
+		//polygonList[i]->SetRotation(newRotation);
+
+		//glRotatef(10.0f, newRotation.x, newRotation.y, newRotation.z); //rotates the drawn polygon
+		
+		//UpdateRotation(polygonList[i]->GetRotation(), )
+	}
+
 }
 
 void HelloGL::Keyboard(unsigned char key, int x, int y)
@@ -128,27 +165,27 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'k':
-		camera->eye.x -= 0.01f;
+		camera->eye.x -= 1.00f;
 		break;
 
 	case ';':
-		camera->eye.x += 0.01f;
+		camera->eye.x += 1.0f;
 		break;
 
 	case 'o':
-		camera->eye.y += 0.01f;
+		camera->eye.y += 2.0f;
 		break;
 
 	case 'l':
-		camera->eye.y -= 0.02f;
+		camera->eye.y -= 2.0f;
 		break;
 
 	case 'i':
-		camera->eye.z -= 0.03f;
+		camera->eye.z -= 3.0f;
 		break;
 
 	case 'p':
-		camera->eye.z += 0.03f;
+		camera->eye.z += 3.0f;
 		break;
 
 	case 'a':
@@ -222,7 +259,24 @@ float HelloGL::UpdateRotation(float rotation, float rotationSpeed)
 
 }
 
+Vector3D HelloGL::UpdateRotation(Vector3D rotation, Vector3D rotationSpeed)
+{
+	//rotation = rotation + rotationSpeed;
 
+	//if (rotation >= 360.0f)
+	//{
+	//	rotation = 0.1f + (360.0f - rotation);
+	//}
+	//else if (rotation <= 0.0f)
+	//{
+	//	rotation =  rotation + 359.9f;
+	//}
+
+	return rotation;
+
+}
+
+#pragma region Draw2D Functions
 
 /// <summary>
 /// Draws a preset rectangle
@@ -364,6 +418,8 @@ void HelloGL::DrawIsoTriangle(std::array<float, 4>& colorCode, const std::tuple<
 		glEnd(); //stops drawing polygon (stops listening for instructions
 	}
 
+	
+
 }
 
 
@@ -435,3 +491,42 @@ void HelloGL::Draw3D()
 //
 //	glRotatef(polygonRotation, std::get<0>(rotationAxis), std::get<1>(rotationAxis), std::get<2>(rotationAxis)); //rotates the drawn polygon
 //}
+
+#pragma endregion
+
+
+/// <summary>
+/// Returns the vector index of the provided polygon
+/// </summary>
+/// <param name="polygon">The polygon to find</param>
+/// <returns>The index of the polygon (returns -1 if not found)</returns>
+int HelloGL::FindPolygonInList(Polygon3D* polygon)
+{
+	int indexLocation = -1;
+
+	for (int i = 0; i < polygonList.size(); i++)
+	{
+		if (polygonList[i] == polygon)
+		{
+			indexLocation = i;
+		}
+	}
+
+	return indexLocation;
+}
+
+
+/// <summary>
+/// Deletes the given polygon from the system
+/// </summary>
+/// <param name="polygon">The polygon to be deleted</param>
+void HelloGL::DeletePolygon(Polygon3D* polygon)
+{
+	int oldLocation = FindPolygonInList(polygon);
+
+	delete polygon;
+	polygon = nullptr;
+
+	polygonList.erase(polygonList.begin() + oldLocation); //removes the deleted polygon from the vector list
+	
+}

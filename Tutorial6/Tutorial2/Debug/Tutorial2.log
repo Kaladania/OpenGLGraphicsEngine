@@ -1,8 +1,5 @@
 ﻿  Cube.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon.h(57,2): warning C4240: nonstandard extension used: access to 'Polygon::Color' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon.h(47,7): message : see declaration of 'Polygon::Color'
-  Polygon.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon.h(57,2): warning C4240: nonstandard extension used: access to 'Polygon::Color' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon.h(47,7): message : see declaration of 'Polygon::Color'
-  Generating Code...
-  Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(155,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(116,7): message : see declaration of 'Polygon3D::Color'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Cube.cpp(56,20): warning C4018: '<': signed/unsigned mismatch
+  Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
