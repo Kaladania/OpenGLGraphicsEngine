@@ -95,6 +95,59 @@ struct Vector3D
 
 		return temp;
 	}
+
+
+	Vector3D operator - (Vector3D scale)
+	{
+		Vector3D temp;
+		temp.x = this->x;
+		temp.y = this->y;
+		temp.z = this->z;
+
+		temp.x = this->x - scale.x;
+		temp.y = this->y - scale.y;
+		temp.z = this->z - scale.z;
+
+		return temp;
+	}
+
+	Vector3D operator - (float scale)
+	{
+		Vector3D temp;
+		temp.x = this->x;
+		temp.y = this->y;
+		temp.z = this->z;
+
+		temp.x = this->x - scale;
+		temp.y = this->y - scale;
+		temp.z = this->z - scale;
+
+		return temp;
+	}
+
+
+	bool operator > (Vector3D scale)
+	{
+		return (this->x > scale.x && this->y > scale.y && this->z > scale.z);
+	}
+
+	bool operator > (float scale)
+	{
+
+		return (this->x > scale && this->y > scale && this->z > scale);
+	}
+
+
+	bool operator < (Vector3D scale)
+	{
+		return (this->x < scale.x && this->y < scale.y && this->z < scale.z);
+	}
+
+	bool operator < (float scale)
+	{
+
+		return (this->x < scale && this->y < scale && this->z < scale);
+	}
 };
 
 
@@ -111,7 +164,8 @@ protected:
 	Vector3D translation = Vector3D(); //translation vector
 	Vector3D scale = Vector3D(1.0f, 1.0f, 1.0f); //scale vector
 
-	Vector3D rotationSpeed = Vector3D(); //speed of automatic rotation
+	float rotationSpeed = 0; //speed of automatic rotation
+	float translationSpeed = 0;
 
 	enum Color; //forward declarion of enum color
 	Color color = WHITE; //shape color
@@ -121,8 +175,8 @@ protected:
 	bool switchDirection = false;
 
 public:
-	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), Vector3D rotationSpeed = 0);
-	Polygon3D(float scale = 1, Vector3D rotationSpeed = 0);
+	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0);
+	Polygon3D(float scale = 1, float newTranslationSpeed = 0);
 
 	virtual void Draw();
 	virtual void SetUpVertices();
@@ -130,6 +184,7 @@ public:
 	virtual void ScalePolygon(float scale, std::vector<Vector3D>& vertexList);
 
 	virtual void TranslatePolygon(Vector3D translationVector);
+	int chosenTranslationAxis;
 
 	Vector3D GetRotation()
 	{
@@ -141,9 +196,9 @@ public:
 		this->rotation = rotation;
 	}
 
-	void SetRotationSpeed(Vector3D rotationSpeed)
+	void SetRotationSpeed(float translationSpeed)
 	{
-		this->rotationSpeed = rotationSpeed;
+		this->translationSpeed = translationSpeed;
 	}
 
 	Vector3D GetRotationSpeed()

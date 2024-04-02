@@ -23,8 +23,8 @@ protected:
 	}; //polygon vertex locations
 
 public:
-	Cube(Vector3D scale, Vector3D rotationSpeed = 0);
-	Cube(float scale, Vector3D rotationSpeed = 0);
+	Cube(Vector3D scale, float translationSpeed = 0);
+	Cube(float scale, float translationSpeed = 0);
 
 	virtual void Draw() override;
 	void SetUpVertices();

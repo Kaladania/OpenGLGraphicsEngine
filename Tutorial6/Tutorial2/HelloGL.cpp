@@ -8,19 +8,36 @@ HelloGL::HelloGL(int argc, char* argv[])
 {
 	srand(time(0));
 
-	polygonRotation = 0.0f;
 	camera = new Camera();
 
 	camera->eye.z = 1.0f;
 	camera->up.y = 1.0f;
 
-	Vector3D newRotation = Vector3D();
+	float newTranslation = 0;
+	float newScale = 0;
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		newRotation.z = rand() % 10;
-		polygonList.push_back(new Cube(1.0f, newRotation)); //creates a new cube object
-		polygonList[i]->SetRotationSpeed(newRotation);
+		newTranslation = rand() % 10; //random number between 0.001 and 0.1
+		newTranslation /= 1000;
+
+		newScale = rand() % 5; //random number between 0.001 and 0.1
+		newScale /= 100;
+
+		if (newTranslation == 0.000f)
+		{
+			polygonList.push_back(new Cube(newScale, 0.0001f)); //creates a new cube object
+		}
+		else if (newScale == 0.00f)
+		{
+			polygonList.push_back(new Cube(0.01f, newTranslation)); //creates a new cube object
+		}
+		else
+		{
+			polygonList.push_back(new Cube(newScale, newTranslation)); //creates a new cube object
+		}
+		//polygonList.push_back(new Cube(0.1f, newRotation)); //creates a new cube object
+		//polygonList[i]->SetRotationSpeed(newRotation);
 	}
 	
 
@@ -70,6 +87,8 @@ void HelloGL::Display()
 	vertex2 = std::make_tuple(-0.55f, 0.6f);
 	vertex3 = std::make_tuple(-0.55f, 0.4f);
 	vertex4 = std::make_tuple(-0.75f, 0.4f);
+
+	//glPushMatrix();
 
 	for (int i = 0; i < polygonList.size(); i++)
 	{
@@ -123,7 +142,8 @@ void HelloGL::Display()
 	//DrawEqualPolygon(colorCode, vertex1, 3, 0.15f, rotationAxis, 1); //Draws a hexagon
 
 	//Draw3D();
-	////glPopMatrix();
+	
+	//glPopMatrix();
 	
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
@@ -144,19 +164,19 @@ void HelloGL::Update()
 
 	Vector3D polygonRotation = Vector3D();
 
-	for (int i = 0; i < polygonList.size(); i++)
-	{
-		polygonList[i]->Draw();
-		//polygonRotation = polygonList[i]->GetRotation();
-		//printf("%f, %f, %f \n", polygonRotation.x, polygonRotation.y, polygonRotation.z);
+	//for (int i = 0; i < polygonList.size(); i++)
+	//{
+	//	polygonList[i]->Draw();
+	//	//polygonRotation = polygonList[i]->GetRotation();
+	//	//printf("%f, %f, %f \n", polygonRotation.x, polygonRotation.y, polygonRotation.z);
 
-		//Vector3D newRotation = polygonRotation + polygonList[i]->GetRotationSpeed();
-		//polygonList[i]->SetRotation(newRotation);
+	//	//Vector3D newRotation = polygonRotation + polygonList[i]->GetRotationSpeed();
+	//	//polygonList[i]->SetRotation(newRotation);
 
-		//glRotatef(10.0f, newRotation.x, newRotation.y, newRotation.z); //rotates the drawn polygon
-		
-		//UpdateRotation(polygonList[i]->GetRotation(), )
-	}
+	//	//glRotatef(10.0f, newRotation.x, newRotation.y, newRotation.z); //rotates the drawn polygon
+	//	
+	//	//UpdateRotation(polygonList[i]->GetRotation(), )
+	//}
 
 }
 

@@ -1,14 +1,15 @@
 #include "Polygon3D.h"
 #include <iostream>
 
-Polygon3D::Polygon3D(Vector3D scale, Vector3D rotationSpeed)
+Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed)
 {
 	//SetUpVertices();
 }
 
-Polygon3D::Polygon3D(float scale, Vector3D rotationSpeed)
+Polygon3D::Polygon3D(float scale, float newTranslationSpeed)
 {
 	//SetUpVertices();
+	translationSpeed = newTranslationSpeed;
 }
 
 void Polygon3D::Draw()
@@ -131,15 +132,17 @@ void Polygon3D::ScalePolygon(float scale, std::vector<Vector3D>& vertexList)
 
 void Polygon3D::TranslatePolygon(Vector3D translationVector)
 {
-	glTranslatef(0.0f, 0.0f, translationVector.z);
+	glTranslatef(translationVector.x, translationVector.y, translationVector.z);
 
-	if (translationVector.z > 300)
+	if (translation > 0.5f && !switchDirection)
 	{
 		switchDirection = true;
+		chosenTranslationAxis = rand() % 6;
 	}
-	else if (translationVector.z < -300)
+	else if (translation < -0.5f && switchDirection)
 	{
 		switchDirection = false;
+		chosenTranslationAxis = rand() % 6;
 	}
 	
 }

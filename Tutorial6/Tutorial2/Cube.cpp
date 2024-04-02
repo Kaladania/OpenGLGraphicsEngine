@@ -2,34 +2,37 @@
 #include <iostream>
 
 
-Cube::Cube(Vector3D scale, Vector3D rotationSpeed) : Polygon3D(scale, rotationSpeed)
+Cube::Cube(Vector3D scale, float newTranslationSpeed) : Polygon3D(scale, newTranslationSpeed)
 {
 
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
-	this->rotationSpeed = rotationSpeed;
+	translationSpeed = newTranslationSpeed;
 
 	ScalePolygon(scale, vertexList);
 
 }
 
-Cube::Cube(float scale, Vector3D rotationSpeed) : Polygon3D(scale, rotationSpeed)
+Cube::Cube(float scale, float newTranslationSpeed) : Polygon3D(scale, newTranslationSpeed)
 {
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
-	this->rotationSpeed = rotationSpeed;
+	
+
+	std::cout << "Rotation speed: " << translationSpeed << "\n";
 
 	ScalePolygon(scale, vertexList);
 }
 
 void Cube::Draw()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
 	//glRotatef(10.0f, rotation.x, rotation.y, rotation.z); //rotates the drawn polygon
 
 	//polygonRotation = polygonList[i]->GetRotation();
-	printf("%f, %f, %f \n", rotation.x, rotation.y, rotation.z);
+	printf("%f, %f, %f \n", translation.x, translation.y, translation.z);
+
 
 	//rotation = rotation + 0.1f;
 
@@ -37,21 +40,53 @@ void Cube::Draw()
 
 	if (switchDirection)
 	{
-		TranslatePolygon(Vector3D(0.0f, 0.0f, -0.1f));
+		translation = translation - translationSpeed;
 	}
 	else 
 	{
-		TranslatePolygon(Vector3D(0.0f, 0.0f, 0.1f));
+		translation = translation + translationSpeed;
+	}
+
+	
+
+	switch (chosenTranslationAxis)
+	{
+	case(0):
+		TranslatePolygon(Vector3D(translation.x, 0.0f, 0.0f));
+		break;
+
+	case(1):
+		TranslatePolygon(Vector3D(0.0f, translation.y, 0.0f));
+		break;
+
+	case(2):
+		TranslatePolygon(Vector3D(0.0f, 0.0f, translation.z));
+		break;
+
+	case(3):
+		TranslatePolygon(Vector3D(translation.x, translation.y, 0.0f));
+		break;
+
+	case(4):
+		TranslatePolygon(Vector3D(0.0f, translation.y, translation.z));
+		break;
+
+	case(5):
+		TranslatePolygon(Vector3D(translation.x, 0.0f, translation.z));
+		break;
+
+	case(6):
+		TranslatePolygon(Vector3D(translation.x, translation.y, translation.z));
+		break;
 	}
 	
+	glRotatef(rotationSpeed, 0.0f, 0.0f, -0.1f);
+	
+	//glTranslatef(0.0f, 0.0f, rotation.z);
 
 
 	int colorIterator = 0;
 	glBegin(GL_TRIANGLES);
-
-	/*SetColor(RED);
-
-	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]);*/
 
 	for (int i = 0; i < vertexList.size(); i++)
 	{
@@ -79,7 +114,6 @@ void Cube::Draw()
 
 	glEnd();
 	glPopMatrix();
-	glFlush();
 }
 
 
