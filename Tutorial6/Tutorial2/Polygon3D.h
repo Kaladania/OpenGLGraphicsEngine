@@ -160,11 +160,13 @@ protected:
 	int vertexAmount; //number of vertices in polygon
 	std::vector<Vector3D> vertexList; //polygon vertex locations
 	
-	Vector3D rotation = Vector3D(); //rotation vector
+	Vector3D rotationAxis = Vector3D(); //rotation vector
+	Vector3D rotationDirection;
 	Vector3D translation = Vector3D(); //translation vector
 	Vector3D scale = Vector3D(1.0f, 1.0f, 1.0f); //scale vector
 
 	float rotationSpeed = 0; //speed of automatic rotation
+	float rotation = 0;
 	float translationSpeed = 0;
 
 	enum Color; //forward declarion of enum color
@@ -175,8 +177,8 @@ protected:
 	bool switchDirection = false;
 
 public:
-	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0);
-	Polygon3D(float scale = 1, float newTranslationSpeed = 0);
+	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0);
+	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0);
 
 	virtual void Draw();
 	virtual void SetUpVertices();
@@ -186,14 +188,17 @@ public:
 	virtual void TranslatePolygon(Vector3D translationVector);
 	int chosenTranslationAxis;
 
+	virtual void RotatePolygon();
+	int chosenRotationAxis;
+
 	Vector3D GetRotation()
 	{
 		return rotation;
 	}
 
-	void SetRotation(Vector3D rotation)
+	void SetRotation(Vector3D rotationAxis)
 	{
-		this->rotation = rotation;
+		this->rotationAxis = rotationAxis;
 	}
 
 	void SetRotationSpeed(float translationSpeed)

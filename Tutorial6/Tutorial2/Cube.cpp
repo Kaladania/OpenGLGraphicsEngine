@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Cube::Cube(Vector3D scale, float newTranslationSpeed) : Polygon3D(scale, newTranslationSpeed)
+Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed)
 {
 
 	sides = 8; //number of sides in cube
@@ -13,7 +13,7 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed) : Polygon3D(scale, newTran
 
 }
 
-Cube::Cube(float scale, float newTranslationSpeed) : Polygon3D(scale, newTranslationSpeed)
+Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed)
 {
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
@@ -31,7 +31,7 @@ void Cube::Draw()
 	//glRotatef(10.0f, rotation.x, rotation.y, rotation.z); //rotates the drawn polygon
 
 	//polygonRotation = polygonList[i]->GetRotation();
-	printf("%f, %f, %f \n", translation.x, translation.y, translation.z);
+	printf("%f, %f, %f : %f \n", rotationAxis.x, rotationAxis.y, rotationAxis.z, rotationSpeed);
 
 
 	//rotation = rotation + 0.1f;
@@ -41,10 +41,12 @@ void Cube::Draw()
 	if (switchDirection)
 	{
 		translation = translation - translationSpeed;
+		rotation = rotation - rotationSpeed;
 	}
 	else 
 	{
 		translation = translation + translationSpeed;
+		rotation = rotation + rotationSpeed;
 	}
 
 	
@@ -79,8 +81,63 @@ void Cube::Draw()
 		TranslatePolygon(Vector3D(translation.x, translation.y, translation.z));
 		break;
 	}
+
+
+
+
+	switch (chosenRotationAxis)
+	{
+	case(0):
+		rotationDirection = Vector3D(1.0f, 0.0f, 0.0f);
+		break;
+
+	case(1):
+		rotationDirection = Vector3D(0.0f, 1.0f, 0.0f);
+		break;
+
+	case(2):
+		rotationDirection = Vector3D(0.0f, 0.0f, 1.0f);
+		break;
+
+	case(3):
+		rotationDirection = Vector3D(1.0f, 0.0f, 1.0f);
+		break;
+
+	case(4):
+		rotationDirection = Vector3D(0.0f, 1.0f, 1.0f);
+		break;
+
+	case(5):
+		rotationDirection = Vector3D(1.0f, 1.0f, 1.0f);
+		break;
+
+	case(6):
+		rotationDirection = Vector3D(-1.0f, 0.0f, 0.0f);
+		break;
+
+	case(7):
+		rotationDirection = Vector3D(0.0f, -1.0f, 0.0f);
+		break;
+
+	case(8):
+		rotationDirection = Vector3D(0.0f, 0.0f, -1.0f);
+		break;
+
+	case(9):
+		rotationDirection = Vector3D(-1.0f, 0.0f, -1.0f);
+		break;
+
+	case(10):
+		rotationDirection = Vector3D(0.0f, -1.0f, -1.0f);
+		break;
+
+	case(11):
+		rotationDirection = Vector3D(-1.0f, -1.0f, -1.0f);
+		break;
+	}
 	
-	glRotatef(rotationSpeed, 0.0f, 0.0f, -0.1f);
+	RotatePolygon();
+	//glRotatef(rotationSpeed, 0.0f, 0.0f, -0.1f);
 	
 	//glTranslatef(0.0f, 0.0f, rotation.z);
 

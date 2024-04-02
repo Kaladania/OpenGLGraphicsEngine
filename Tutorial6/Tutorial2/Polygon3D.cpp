@@ -1,15 +1,18 @@
 #include "Polygon3D.h"
 #include <iostream>
 
-Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed)
-{
-	//SetUpVertices();
-}
-
-Polygon3D::Polygon3D(float scale, float newTranslationSpeed)
+Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
+	rotationSpeed = newRotationSpeed;
+}
+
+Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed)
+{
+	//SetUpVertices();
+	translationSpeed = newTranslationSpeed;
+	rotationSpeed = newRotationSpeed;
 }
 
 void Polygon3D::Draw()
@@ -145,4 +148,22 @@ void Polygon3D::TranslatePolygon(Vector3D translationVector)
 		chosenTranslationAxis = rand() % 6;
 	}
 	
+}
+
+
+void Polygon3D::RotatePolygon()
+{
+	glRotatef(rotation, rotationDirection.x, rotationDirection.y, rotationDirection.z);
+
+	if (rotation > 360.0f && !switchDirection)
+	{
+		switchDirection = true;
+		chosenRotationAxis = rand() % 11;
+	}
+	else if (rotation < -360.0f && switchDirection)
+	{
+		switchDirection = false;
+		chosenRotationAxis = rand() % 11;
+	}
+
 }

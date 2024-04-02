@@ -15,8 +15,9 @@ HelloGL::HelloGL(int argc, char* argv[])
 
 	float newTranslation = 0;
 	float newScale = 0;
+	float newRotation = 0;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		newTranslation = rand() % 10; //random number between 0.001 and 0.1
 		newTranslation /= 1000;
@@ -24,17 +25,24 @@ HelloGL::HelloGL(int argc, char* argv[])
 		newScale = rand() % 5; //random number between 0.001 and 0.1
 		newScale /= 100;
 
+		newRotation = rand() % 10; //random number between 0.001 and 0.1
+
+
 		if (newTranslation == 0.000f)
 		{
-			polygonList.push_back(new Cube(newScale, 0.0001f)); //creates a new cube object
+			polygonList.push_back(new Cube(newScale, 0.0001f, newRotation)); //creates a new cube object
 		}
 		else if (newScale == 0.00f)
 		{
-			polygonList.push_back(new Cube(0.01f, newTranslation)); //creates a new cube object
+			polygonList.push_back(new Cube(0.01f, newTranslation, newRotation)); //creates a new cube object
+		}
+		else if (newRotation == 0.0f)
+		{
+			polygonList.push_back(new Cube(newScale, newTranslation, 1.0f)); //creates a new cube object
 		}
 		else
 		{
-			polygonList.push_back(new Cube(newScale, newTranslation)); //creates a new cube object
+			polygonList.push_back(new Cube(newScale, newTranslation, newRotation)); //creates a new cube object
 		}
 		//polygonList.push_back(new Cube(0.1f, newRotation)); //creates a new cube object
 		//polygonList[i]->SetRotationSpeed(newRotation);
