@@ -6,10 +6,16 @@
 #include "GLUTCallbacks.h"
 #include <array>
 #include <tuple>
+#include "Polygon3D.h"
+#include "Cube.h"
+#include <vector>
 //#include "Header.h"
 //#define REFRESH_RATE 16
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 800
+
+class Polygon3D;
+class Cube;
 
 class HelloGL
 {
@@ -28,6 +34,10 @@ private:
 
 	std::tuple<float, float, float> rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
 	std::tuple<float, float, float> translationAxis = std::make_tuple(0.0f, 0.0f, 0.0f);
+
+	std::vector<Polygon3D*> polygonList;//list of all drawn polygons
+
+	int polygonIndex = 0;
 
 public:
 	HelloGL(int argc, char* argv[]);
@@ -50,5 +60,9 @@ public:
 
 	void Keyboard(unsigned char key, int x, int y);
 	float UpdateRotation(float rotation, float rotationSpeed);
+	Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
+
+	int FindPolygonInList(Polygon3D* polygon);
+	void DeletePolygon(Polygon3D* polygon);
 };
 

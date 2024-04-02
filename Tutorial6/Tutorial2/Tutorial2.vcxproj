@@ -135,14 +135,14 @@
     <ClInclude Include="GLUTCallbacks.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="HelloGL.h" />
-    <ClInclude Include="Polygon.h" />
+    <ClInclude Include="Polygon3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GLUTCallbacks.cpp" />
     <ClCompile Include="HelloGL.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Polygon3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="freeglut.dll" />

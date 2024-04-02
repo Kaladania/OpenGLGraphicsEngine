@@ -1,20 +1,37 @@
 #pragma once
 #ifndef _CUBE
 #define _CUBE
-#include "Polygon.h"
 
-class Cube : public Polygon
+#include "Polygon3D.h"
+
+class Cube : public Polygon3D
 {
-private:
-	int sides = 8; //number of sides in cube
-	int vertexAmount = 8; //number of vertices in polygon
-	std::array<Vector3D, 8> vertices; //polygon vertex locations
+protected:
+	std::vector<Vector3D> vertexList = {
+		Vector3D(1,1,1), Vector3D(-1, 1, 1), Vector3D(-1, -1, 1),
+		Vector3D(-1, -1, 1), Vector3D(1, -1, 1), Vector3D(1, 1, 1),
+		Vector3D(1, 1, 1), Vector3D(1, -1, 1), Vector3D(1, -1, -1),
+		Vector3D(1, -1, -1), Vector3D(1, 1, -1), Vector3D(1, 1, 1),
+		Vector3D(1, 1, 1), Vector3D(1, 1, -1), Vector3D(-1, 1, -1),
+		Vector3D(-1, 1, -1), Vector3D(-1, 1, 1), Vector3D(1, 1, 1),
+		Vector3D(-1, 1, 1), Vector3D(-1, 1, -1), Vector3D(-1, -1, -1),
+		Vector3D(-1, -1, -1), Vector3D(-1, -1, 1), Vector3D(-1, 1, 1),
+		Vector3D(-1, -1, -1), Vector3D(1, -1, -1), Vector3D(1, -1, 1),
+		Vector3D(1, -1, 1), Vector3D(-1, -1, 1), Vector3D(-1, -1, -1),
+		Vector3D(1, -1, -1), Vector3D(-1, -1, -1), Vector3D(-1, 1, -1),
+		Vector3D(-1, 1, -1), Vector3D(1, 1, -1), Vector3D(1, -1, -1)
+	}; //polygon vertex locations
 
 public:
-	Cube(int sides, int vertices);
+	Cube(Vector3D scale, float translationSpeed = 0, float newRotationSpeed = 0);
+	Cube(float scale, float translationSpeed = 0, float newRotationSpeed = 0);
 
 	virtual void Draw() override;
+	void SetUpVertices();
 	//virtual void AddVertices() override;
+
+	/*void ScalePolygon(Vector3D scale);
+	void ScalePolygon(float scale);*/
 };
 
 #endif // !_CUBE
