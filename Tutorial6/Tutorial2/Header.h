@@ -19,7 +19,7 @@ struct Camera //camera structure
 	Vector3 eye, center, up;
 };
 
-Camera* camera;
+Camera* camera; //current camera view
 
 
 

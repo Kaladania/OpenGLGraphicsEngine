@@ -7,20 +7,7 @@
 class Cube : public Polygon3D
 {
 protected:
-	//std::vector<Vector3D> vertexList = {
-	//	Vector3D(1,1,1), Vector3D(-1, 1, 1), Vector3D(-1, -1, 1),
-	//	Vector3D(-1, -1, 1), Vector3D(1, -1, 1), Vector3D(1, 1, 1),
-	//	Vector3D(1, 1, 1), Vector3D(1, -1, 1), Vector3D(1, -1, -1),
-	//	Vector3D(1, -1, -1), Vector3D(1, 1, -1), Vector3D(1, 1, 1),
-	//	Vector3D(1, 1, 1), Vector3D(1, 1, -1), Vector3D(-1, 1, -1),
-	//	Vector3D(-1, 1, -1), Vector3D(-1, 1, 1), Vector3D(1, 1, 1),
-	//	Vector3D(-1, 1, 1), Vector3D(-1, 1, -1), Vector3D(-1, -1, -1),
-	//	Vector3D(-1, -1, -1), Vector3D(-1, -1, 1), Vector3D(-1, 1, 1),
-	//	Vector3D(-1, -1, -1), Vector3D(1, -1, -1), Vector3D(1, -1, 1),
-	//	Vector3D(1, -1, 1), Vector3D(-1, -1, 1), Vector3D(-1, -1, -1),
-	//	Vector3D(1, -1, -1), Vector3D(-1, -1, -1), Vector3D(-1, 1, -1),
-	//	Vector3D(-1, 1, -1), Vector3D(1, 1, -1), Vector3D(1, -1, -1)
-	//}; //polygon vertex locations
+
 
 public:
 	Cube(Vector3D scale = Vector3D(1, 1, 1), float translationSpeed = 0, float newRotationSpeed = 0);

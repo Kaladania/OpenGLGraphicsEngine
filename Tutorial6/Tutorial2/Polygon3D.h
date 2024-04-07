@@ -163,23 +163,23 @@ protected:
 	//std::string textFileName = "";
 
 	int indices = 0;
-	std::string textFileName = "";
+	std::string textFileName = ""; //name of txt file to pull vertices from
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
-	Vector3D rotationDirection;
+	Vector3D rotationDirection; //current rotation direction
 	Vector3D translation = Vector3D(); //translation vector
 	Vector3D scale = Vector3D(1.0f, 1.0f, 1.0f); //scale vector
 
 	float rotationSpeed = 0; //speed of automatic rotation
-	float rotation = 0;
-	float translationSpeed = 0;
+	float rotation = 0; //current rotation
+	float translationSpeed = 0; //speed of automatic translation
 
 	enum Color; //forward declarion of enum color
 	Color color = WHITE; //shape color
 
 	std::array<float, 4> colorArray = { 1.0f, 1.0f, 1.0f, 0.0f }; //array holding the interger values for the enum colour
 
-	bool switchDirection = false;
+	bool switchDirection = false; //states wheither current rotation/translation should be inverted
 
 public:
 	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0);
@@ -196,26 +196,31 @@ public:
 	virtual void RotatePolygon();
 	int chosenRotationAxis;
 
+	//Returns rotation direction
 	Vector3D GetRotation()
 	{
 		return rotation;
 	}
 
+	//Updates rotation direction
 	void SetRotation(Vector3D rotationAxis)
 	{
 		this->rotationAxis = rotationAxis;
 	}
 
+	//Updates rotation speed
 	void SetRotationSpeed(float translationSpeed)
 	{
 		this->translationSpeed = translationSpeed;
 	}
 
+	//Returns rotation speed
 	Vector3D GetRotationSpeed()
 	{
 		return rotationSpeed;
 	}
 
+	//Enum of current color options
 	enum Color
 	{
 		RED,

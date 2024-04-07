@@ -27,7 +27,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 
 		newRotation = rand() % 10; //random number between 0.001 and 0.1
 
-
+		//Creates a cube with randomised properties
 		if (newTranslation == 0.000f)
 		{
 			//polygonList.push_back(std::make_shared<Cube>(newScale, 0.0001f, newRotation)); //creates a new cube object
@@ -70,6 +70,11 @@ HelloGL::HelloGL(int argc, char* argv[])
 	gluPerspective(45, 1, 0, 1000);
 
 	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
+	
+	//Backwards culling
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	glutMainLoop();
 
 

@@ -2,6 +2,12 @@
 #include <iostream>
 #include <fstream>
 
+/// <summary>
+/// Constructor using a custom vector scale
+/// </summary>
+/// <param name="scale">Scale of the Cube</param>
+/// <param name="newTranslationSpeed">Speed of axis translation</param>
+/// <param name="newRotationSpeed">Speed of object rotation</param>
 Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed)
 {
 	//SetUpVertices();
@@ -9,6 +15,12 @@ Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotatio
 	rotationSpeed = newRotationSpeed;
 }
 
+/// <summary>
+/// Constructor using a uniform float scale
+/// </summary>
+/// <param name="scale">Scale of the Cube</param>
+/// <param name="newTranslationSpeed">Speed of axis translation</param>
+/// <param name="newRotationSpeed">Speed of object rotation</param>
 Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed)
 {
 	//SetUpVertices();
@@ -18,6 +30,9 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 	LoadVerticesFromFile();
 }
 
+/// <summary>
+/// Draws the polygon with random rotation and translation movement
+/// </summary>
 void Polygon3D::Draw()
 {
 
@@ -26,13 +41,14 @@ void Polygon3D::Draw()
 	//glRotatef(10.0f, rotation.x, rotation.y, rotation.z); //rotates the drawn polygon
 
 	//polygonRotation = polygonList[i]->GetRotation();
-	printf("%f, %f, %f : %f \n", rotationAxis.x, rotationAxis.y, rotationAxis.z, rotationSpeed);
+	//printf("%f, %f, %f : %f \n", rotationAxis.x, rotationAxis.y, rotationAxis.z, rotationSpeed);
 
 
 	//rotation = rotation + 0.1f;
 
 	//glRotatef(rotationSpeed.z, 0.0f, 0.0f, 0.0f); //rotates the drawn polygon
 
+	//Inverts the rotation and translation
 	if (switchDirection)
 	{
 		translation = translation - translationSpeed;
@@ -45,7 +61,7 @@ void Polygon3D::Draw()
 	}
 
 
-
+	//Applys a random translation direction
 	switch (chosenTranslationAxis)
 	{
 	case(0):
@@ -79,7 +95,7 @@ void Polygon3D::Draw()
 
 
 
-
+	//Applies a random rotation direction
 	switch (chosenRotationAxis)
 	{
 	case(0):
@@ -142,6 +158,7 @@ void Polygon3D::Draw()
 
 	for (int i = 0; i < vertexList.size(); i++)
 	{
+		//Iterates through colours to ensure each triangle is coloured differently
 		if (i % 3 == 0)
 		{
 			SetColor((Color)colorIterator);
@@ -150,18 +167,20 @@ void Polygon3D::Draw()
 
 			colorIterator++;
 
+			//prevents triangle from being black to ensure it can be seen
 			if (colorIterator == BLACK)
 			{
 				colorIterator++;
 			}
 
+			//loops back to RED
 			if (colorIterator == END_OF_COLOR_ENUM)
 			{
 				colorIterator = 0;
 			}
 		}
 
-		glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z);
+		glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
 	}
 
 	glEnd();
@@ -169,9 +188,13 @@ void Polygon3D::Draw()
 
 }
 
+/// <summary>
+/// Reads vertices from a txt file to store in the object's vertex list
+/// </summary>
+/// <returns></returns>
 bool Polygon3D::LoadVerticesFromFile()
 {
-	std::string filePath = "Cube.txt";
+	std::string filePath = "Polygons/" + textFileName + ".txt";
 
 	std::ifstream inFile;
 
@@ -303,6 +326,10 @@ void Polygon3D::ScalePolygon(float scale, std::vector<Vector3D>& vertexList)
 	}
 }
 
+/// <summary>
+/// Moves the polygon along a given axis
+/// </summary>
+/// <param name="translationVector">The direction of translation</param>
 void Polygon3D::TranslatePolygon(Vector3D translationVector)
 {
 	glTranslatef(translationVector.x, translationVector.y, translationVector.z);
@@ -320,7 +347,9 @@ void Polygon3D::TranslatePolygon(Vector3D translationVector)
 	
 }
 
-
+/// <summary>
+/// Rotates the polygon in a given direction
+/// </summary>
 void Polygon3D::RotatePolygon()
 {
 	glRotatef(rotation, rotationDirection.x, rotationDirection.y, rotationDirection.z);
