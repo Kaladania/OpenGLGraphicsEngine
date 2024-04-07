@@ -27,9 +27,10 @@ HelloGL::HelloGL(int argc, char* argv[])
 
 		newRotation = rand() % 10; //random number between 0.001 and 0.1
 
-
+		//Creates a cube with randomised properties
 		if (newTranslation == 0.000f)
 		{
+			//polygonList.push_back(std::make_shared<Cube>(newScale, 0.0001f, newRotation)); //creates a new cube object
 			polygonList.push_back(new Cube(newScale, 0.0001f, newRotation)); //creates a new cube object
 		}
 		else if (newScale == 0.00f)
@@ -69,6 +70,11 @@ HelloGL::HelloGL(int argc, char* argv[])
 	gluPerspective(45, 1, 0, 1000);
 
 	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
+	
+	//Backwards culling
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	glutMainLoop();
 
 
@@ -534,6 +540,7 @@ int HelloGL::FindPolygonInList(Polygon3D* polygon)
 
 	for (int i = 0; i < polygonList.size(); i++)
 	{
+		//if (polygonList[i].get() == polygon)
 		if (polygonList[i] == polygon)
 		{
 			indexLocation = i;

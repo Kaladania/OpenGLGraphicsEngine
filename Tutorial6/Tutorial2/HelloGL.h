@@ -9,6 +9,7 @@
 #include "Polygon3D.h"
 #include "Cube.h"
 #include <vector>
+#include <memory>
 //#include "Header.h"
 //#define REFRESH_RATE 16
 #define SCREEN_WIDTH 800
@@ -35,7 +36,8 @@ private:
 	std::tuple<float, float, float> rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
 	std::tuple<float, float, float> translationAxis = std::make_tuple(0.0f, 0.0f, 0.0f);
 
-	std::vector<Polygon3D*> polygonList;//list of all drawn polygons
+	//std::vector<std::shared_ptr<Polygon3D>> polygonList;//list of all drawn polygons
+	std::vector<Polygon3D* > polygonList;//list of all drawn polygons
 
 	int polygonIndex = 0;
 
