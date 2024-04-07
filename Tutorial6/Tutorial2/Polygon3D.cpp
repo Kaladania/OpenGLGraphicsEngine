@@ -91,6 +91,22 @@ void Polygon3D::Draw()
 	case(6):
 		TranslatePolygon(Vector3D(translation.x, translation.y, translation.z));
 		break;
+
+	case(7):
+		TranslatePolygon(Vector3D(-(translation.x), 0.0f, 0.0f));
+		break;
+
+	case(8):
+		TranslatePolygon(Vector3D(-(translation.x), translation.y, 0.0f));
+		break;
+
+	case(9):
+		TranslatePolygon(Vector3D(-(translation.x), 0.0f, translation.z));
+		break;
+
+	case(10):
+		TranslatePolygon(Vector3D(-(translation.x), translation.y, translation.z));
+		break;
 	}
 
 
@@ -156,7 +172,7 @@ void Polygon3D::Draw()
 	int colorIterator = 0;
 	glBegin(GL_TRIANGLES);
 
-	for (int i = 0; i < vertexList.size(); i++)
+	for (int i = 0; i < 36; i++)
 	{
 		//Iterates through colours to ensure each triangle is coloured differently
 		if (i % 3 == 0)
@@ -180,7 +196,10 @@ void Polygon3D::Draw()
 			}
 		}
 
-		glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
+		//glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
+		
+
+		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
 	}
 
 	glEnd();
@@ -208,11 +227,77 @@ bool Polygon3D::LoadVerticesFromFile()
 
 	int x, y, z;
 	char c;
-	while ((inFile >> x >> y >> z))
+
+	int numVertices, numColors, numIndices;
+
+	inFile >> numVertices;
+	//indexedVertices = new Vector3D[numVertices];
+
+	for (int i = 0; i < numVertices; i++)
 	{
-		vertexList.push_back(Vector3D(x, y, z));
-		//printf(" %i, %i, %i", x, y, z);
+		inFile >> x >> y >> z;
+		indexedVertices.push_back(Vector3D(x, y, z));
 	}
+
+	inFile >> numColors;
+	//indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numColors; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedColors.push_back(Vector3D(x, y, z));
+	}
+
+	inFile >> numIndices;
+	//indices = new int[numIndices];
+
+	for (int i = 0; i < numIndices; i++)
+	{
+		inFile >> x;
+		indices.push_back(x);
+	}
+
+	/*int numVertices, numColors, numIndices;
+
+	inFile >> numVertices;
+	indexedVertices = new Vector3D[numVertices];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedVertices[i] = Vector3D(x, y, z);
+		printf("%i %i %i", x, y, z);
+	}
+
+	inFile >> numColors;
+	indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numColors; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedColors[i] = Vector3D(x, y, z);
+	}
+
+	inFile >> numIndices;
+	indices = new GLfloat[numIndices];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x;
+		indices[i] = x;
+	}*/
+
+	//while (!inFile.eof())
+	//{
+	//	while ((inFile >> x >> y >> z))
+	//	{
+	//		vertexList.push_back(Vector3D(x, y, z));
+	//		//printf(" %i, %i, %i", x, y, z);
+	//	}
+	//}
+
+
+
 	
 	inFile.close();
 
@@ -337,12 +422,12 @@ void Polygon3D::TranslatePolygon(Vector3D translationVector)
 	if (translation > 0.5f && !switchDirection)
 	{
 		switchDirection = true;
-		chosenTranslationAxis = rand() % 6;
+		chosenTranslationAxis = rand() % 10;
 	}
 	else if (translation < -0.5f && switchDirection)
 	{
 		switchDirection = false;
-		chosenTranslationAxis = rand() % 6;
+		chosenTranslationAxis = rand() % 10;
 	}
 	
 }
