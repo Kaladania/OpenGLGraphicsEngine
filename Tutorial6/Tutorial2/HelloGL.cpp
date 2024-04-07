@@ -30,6 +30,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 
 		if (newTranslation == 0.000f)
 		{
+			//polygonList.push_back(std::make_shared<Cube>(newScale, 0.0001f, newRotation)); //creates a new cube object
 			polygonList.push_back(new Cube(newScale, 0.0001f, newRotation)); //creates a new cube object
 		}
 		else if (newScale == 0.00f)
@@ -534,6 +535,7 @@ int HelloGL::FindPolygonInList(Polygon3D* polygon)
 
 	for (int i = 0; i < polygonList.size(); i++)
 	{
+		//if (polygonList[i].get() == polygon)
 		if (polygonList[i] == polygon)
 		{
 			indexLocation = i;

@@ -7,27 +7,26 @@
 class Cube : public Polygon3D
 {
 protected:
-	std::vector<Vector3D> vertexList = {
-		Vector3D(1,1,1), Vector3D(-1, 1, 1), Vector3D(-1, -1, 1),
-		Vector3D(-1, -1, 1), Vector3D(1, -1, 1), Vector3D(1, 1, 1),
-		Vector3D(1, 1, 1), Vector3D(1, -1, 1), Vector3D(1, -1, -1),
-		Vector3D(1, -1, -1), Vector3D(1, 1, -1), Vector3D(1, 1, 1),
-		Vector3D(1, 1, 1), Vector3D(1, 1, -1), Vector3D(-1, 1, -1),
-		Vector3D(-1, 1, -1), Vector3D(-1, 1, 1), Vector3D(1, 1, 1),
-		Vector3D(-1, 1, 1), Vector3D(-1, 1, -1), Vector3D(-1, -1, -1),
-		Vector3D(-1, -1, -1), Vector3D(-1, -1, 1), Vector3D(-1, 1, 1),
-		Vector3D(-1, -1, -1), Vector3D(1, -1, -1), Vector3D(1, -1, 1),
-		Vector3D(1, -1, 1), Vector3D(-1, -1, 1), Vector3D(-1, -1, -1),
-		Vector3D(1, -1, -1), Vector3D(-1, -1, -1), Vector3D(-1, 1, -1),
-		Vector3D(-1, 1, -1), Vector3D(1, 1, -1), Vector3D(1, -1, -1)
-	}; //polygon vertex locations
+	//std::vector<Vector3D> vertexList = {
+	//	Vector3D(1,1,1), Vector3D(-1, 1, 1), Vector3D(-1, -1, 1),
+	//	Vector3D(-1, -1, 1), Vector3D(1, -1, 1), Vector3D(1, 1, 1),
+	//	Vector3D(1, 1, 1), Vector3D(1, -1, 1), Vector3D(1, -1, -1),
+	//	Vector3D(1, -1, -1), Vector3D(1, 1, -1), Vector3D(1, 1, 1),
+	//	Vector3D(1, 1, 1), Vector3D(1, 1, -1), Vector3D(-1, 1, -1),
+	//	Vector3D(-1, 1, -1), Vector3D(-1, 1, 1), Vector3D(1, 1, 1),
+	//	Vector3D(-1, 1, 1), Vector3D(-1, 1, -1), Vector3D(-1, -1, -1),
+	//	Vector3D(-1, -1, -1), Vector3D(-1, -1, 1), Vector3D(-1, 1, 1),
+	//	Vector3D(-1, -1, -1), Vector3D(1, -1, -1), Vector3D(1, -1, 1),
+	//	Vector3D(1, -1, 1), Vector3D(-1, -1, 1), Vector3D(-1, -1, -1),
+	//	Vector3D(1, -1, -1), Vector3D(-1, -1, -1), Vector3D(-1, 1, -1),
+	//	Vector3D(-1, 1, -1), Vector3D(1, 1, -1), Vector3D(1, -1, -1)
+	//}; //polygon vertex locations
 
 public:
-	Cube(Vector3D scale, float translationSpeed = 0, float newRotationSpeed = 0);
-	Cube(float scale, float translationSpeed = 0, float newRotationSpeed = 0);
+	Cube(Vector3D scale = Vector3D(1, 1, 1), float translationSpeed = 0, float newRotationSpeed = 0);
+	Cube(float scale = 1, float translationSpeed = 0, float newRotationSpeed = 0);
 
-	virtual void Draw() override;
-	void SetUpVertices();
+	//virtual void Draw() override;
 	//virtual void AddVertices() override;
 
 	/*void ScalePolygon(Vector3D scale);

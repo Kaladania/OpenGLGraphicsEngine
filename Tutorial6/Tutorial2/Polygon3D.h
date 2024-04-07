@@ -11,6 +11,7 @@
 #include <array>
 #include <vector>
 #include <tuple>
+#include <string>
 //#include "Header.h"
 
 
@@ -156,9 +157,13 @@ struct Vector3D
 class Polygon3D
 {
 protected:
-	int sides; //number of sides in polygon
-	int vertexAmount; //number of vertices in polygon
+	int sides = 0;; //number of sides in polygon
+	int vertexAmount = 0;; //number of vertices in polygon
 	std::vector<Vector3D> vertexList; //polygon vertex locations
+	//std::string textFileName = "";
+
+	int indices = 0;
+	std::string textFileName = "";
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
 	Vector3D rotationDirection;
@@ -181,7 +186,7 @@ public:
 	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0);
 
 	virtual void Draw();
-	virtual void SetUpVertices();
+	bool LoadVerticesFromFile();
 	virtual void ScalePolygon(Vector3D scale, std::vector<Vector3D>& vertexList);
 	virtual void ScalePolygon(float scale, std::vector<Vector3D>& vertexList);
 
