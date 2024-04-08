@@ -162,7 +162,10 @@ protected:
 	std::vector<Vector3D> vertexList; //polygon vertex locations
 	//std::string textFileName = "";
 
-	int indices = 0;
+	std::vector<Vector3D> indexedVertices;
+	std::vector<Vector3D> indexedColors;
+	std::vector<int> indices;
+
 	std::string textFileName = ""; //name of txt file to pull vertices from
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector

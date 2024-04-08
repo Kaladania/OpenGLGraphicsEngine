@@ -1,14 +1,14 @@
-﻿  HelloGL.cpp
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(225,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(177,7): message : see declaration of 'Polygon3D::Color'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(22,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(25,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(28,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(107,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(98,8): warning C4101: 'triangleCoordinates': unreferenced local variable
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(372,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(485,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(486,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(541,20): warning C4018: '<': signed/unsigned mismatch
+﻿  Polygon3D.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(228,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(180,7): message : see declaration of 'Polygon3D::Color'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(239,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(239,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(239,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(248,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(248,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(248,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(229,7): warning C4101: 'c': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(394,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(407,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(304): warning C4715: 'Polygon3D::LoadVerticesFromFile': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

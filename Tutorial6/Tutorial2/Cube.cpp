@@ -19,7 +19,7 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : 
 	LoadVerticesFromFile();
 	//SetUpVertices(newVertexList);
 
-	ScalePolygon(scale, vertexList);
+	ScalePolygon(scale, indexedVertices);
 
 }
 
@@ -40,7 +40,7 @@ Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed) : Pol
 
 	LoadVerticesFromFile();
 
-	ScalePolygon(scale, vertexList);
+	ScalePolygon(scale, indexedVertices);
 }
 
 
