@@ -1,5 +1,6 @@
 #include "HelloGL.h"
-#include "Header.h"
+#include "Cube.h"
+#include "Polygon3D.h"
 #include <algorithm>
 #include <time.h>
 
@@ -30,7 +31,6 @@ HelloGL::HelloGL(int argc, char* argv[])
 		//Creates a cube with randomised properties
 		if (newTranslation == 0.000f)
 		{
-			//polygonList.push_back(std::make_shared<Cube>(newScale, 0.0001f, newRotation)); //creates a new cube object
 			polygonList.push_back(new Cube(newScale, 0.0001f, newRotation)); //creates a new cube object
 		}
 		else if (newScale == 0.00f)
@@ -45,8 +45,6 @@ HelloGL::HelloGL(int argc, char* argv[])
 		{
 			polygonList.push_back(new Cube(newScale, newTranslation, newRotation)); //creates a new cube object
 		}
-		//polygonList.push_back(new Cube(0.1f, newRotation)); //creates a new cube object
-		//polygonList[i]->SetRotationSpeed(newRotation);
 	}
 	
 
@@ -108,56 +106,6 @@ void HelloGL::Display()
 	{
 		polygonList[i]->Draw();
 	}
-
-	//rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
-
-	
-	//glPushMatrix(); //begins matrix calculation
-	
-	//glTranslatef(0.0f, 0.0f, -3.0f);
-	////SetColor(RED, colorCode);
-	//DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
-
-	////SetColor(YELLOW, colorCode);
-	//vertex1 = std::make_tuple(-0.45f, 0.6f);
-	//vertex2 = std::make_tuple(-0.15f, 0.6f);
-	//vertex3 = std::make_tuple(-0.15f, 0.4f);
-	//vertex4 = std::make_tuple(-0.45f, 0.4f);
-	//DrawQuadrilateral(colorCode, vertex1, vertex2, vertex3, vertex4);
-
-	////SetColor(GREEN, colorCode);
-	//vertex1 = std::make_tuple(-0.05f, 0.4f);
-	//DrawEqualTriangle(colorCode, vertex1, 0.25f);
-
-
-	////Drawing a polygon pic
-
-	////polygonRotationSpeed = 0.5f;
-	////SetColor(DARKBLUE, colorCode);
-	//vertex1 = std::make_tuple(0.0f, 0.0f);
-	//DrawEqualPolygon(colorCode, vertex1, 6, 0.5f, rotationAxis, 1); //Draws a hexagon
-
-	//glutWireCube(0.1);
-
-	////polygonRotationSpeed = 1.0f;
-	////SetColor(PURPLE, colorCode);
-	//DrawEqualPolygon(colorCode, vertex1, 4, 0.5f, rotationAxis, 1); //Draws a hexagon
-
-	////polygonRotationSpeed = 4.0f;
-	////SetColor(WHITE, colorCode);
-	//DrawEqualPolygon(colorCode, vertex1, 10, 0.4f, rotationAxis, 1); //Draws a hexagon
-
-	////polygonRotationSpeed = 0.1f;
-	////SetColor(YELLOW, colorCode);
-	//DrawEqualPolygon(colorCode, vertex1, 5, 0.3f, rotationAxis, 1); //Draws a hexagon
-
-	////polygonRotationSpeed = 0.0f;
-	////SetColor(RED, colorCode);
-	//DrawEqualPolygon(colorCode, vertex1, 3, 0.15f, rotationAxis, 1); //Draws a hexagon
-
-	//Draw3D();
-	
-	//glPopMatrix();
 	
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
@@ -178,22 +126,15 @@ void HelloGL::Update()
 
 	Vector3D polygonRotation = Vector3D();
 
-	//for (int i = 0; i < polygonList.size(); i++)
-	//{
-	//	polygonList[i]->Draw();
-	//	//polygonRotation = polygonList[i]->GetRotation();
-	//	//printf("%f, %f, %f \n", polygonRotation.x, polygonRotation.y, polygonRotation.z);
-
-	//	//Vector3D newRotation = polygonRotation + polygonList[i]->GetRotationSpeed();
-	//	//polygonList[i]->SetRotation(newRotation);
-
-	//	//glRotatef(10.0f, newRotation.x, newRotation.y, newRotation.z); //rotates the drawn polygon
-	//	
-	//	//UpdateRotation(polygonList[i]->GetRotation(), )
-	//}
-
 }
 
+
+/// <summary>
+/// Enables keyboard input for camera controls
+/// </summary>
+/// <param name="key">key being pressed</param>
+/// <param name="x">x co-ordinate</param>
+/// <param name="y">y co-ordinate</param>
 void HelloGL::Keyboard(unsigned char key, int x, int y)
 {    
 	switch (key)
@@ -293,24 +234,24 @@ float HelloGL::UpdateRotation(float rotation, float rotationSpeed)
 
 }
 
-Vector3D HelloGL::UpdateRotation(Vector3D rotation, Vector3D rotationSpeed)
-{
-	//rotation = rotation + rotationSpeed;
+//Vector3D HelloGL::UpdateRotation(Vector3D rotation, Vector3D rotationSpeed)
+//{
+//	//rotation = rotation + rotationSpeed;
+//
+//	//if (rotation >= 360.0f)
+//	//{
+//	//	rotation = 0.1f + (360.0f - rotation);
+//	//}
+//	//else if (rotation <= 0.0f)
+//	//{
+//	//	rotation =  rotation + 359.9f;
+//	//}
+//
+//	return rotation;
+//
+//}
 
-	//if (rotation >= 360.0f)
-	//{
-	//	rotation = 0.1f + (360.0f - rotation);
-	//}
-	//else if (rotation <= 0.0f)
-	//{
-	//	rotation =  rotation + 359.9f;
-	//}
-
-	return rotation;
-
-}
-
-#pragma region Draw2D Functions
+#pragma region Draw2D Functions (UNUSED)
 
 /// <summary>
 /// Draws a preset rectangle

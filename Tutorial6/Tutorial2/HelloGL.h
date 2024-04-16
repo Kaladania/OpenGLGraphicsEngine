@@ -6,8 +6,8 @@
 #include "GLUTCallbacks.h"
 #include <array>
 #include <tuple>
-#include "Polygon3D.h"
-#include "Cube.h"
+
+
 #include <vector>
 #include <memory>
 //#include "Header.h"
@@ -16,7 +16,8 @@
 #define SCREEN_HEIGHT 800
 
 class Polygon3D;
-class Cube;
+struct Camera;
+//class Cube;
 
 class HelloGL
 {
@@ -41,6 +42,8 @@ private:
 
 	int polygonIndex = 0;
 
+	Camera* camera; //current camera view
+
 public:
 	HelloGL(int argc, char* argv[]);
 	~HelloGL(void); //class destructor
@@ -62,7 +65,7 @@ public:
 
 	void Keyboard(unsigned char key, int x, int y);
 	float UpdateRotation(float rotation, float rotationSpeed);
-	Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
+	//Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
 
 	int FindPolygonInList(Polygon3D* polygon);
 	void DeletePolygon(Polygon3D* polygon);
