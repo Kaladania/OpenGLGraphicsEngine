@@ -136,6 +136,8 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="HelloGL.h" />
     <ClInclude Include="Polygon3D.h" />
+    <ClInclude Include="OLDVector3D.h" />
+    <ClInclude Include="Pyramid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cube.cpp" />
@@ -143,6 +145,8 @@
     <ClCompile Include="HelloGL.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Polygon3D.cpp" />
+    <ClCompile Include="OLDVector3D.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="freeglut.dll" />

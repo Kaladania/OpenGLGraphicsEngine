@@ -1,3 +1,9 @@
+#include <Windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
+#include "freeglut.h"
+#include "GLUTCallbacks.h"
+
 #include "Polygon3D.h"
 #include <iostream>
 #include <fstream>
@@ -35,18 +41,7 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 /// </summary>
 void Polygon3D::Draw()
 {
-
-	//glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
-	//glRotatef(10.0f, rotation.x, rotation.y, rotation.z); //rotates the drawn polygon
-
-	//polygonRotation = polygonList[i]->GetRotation();
-	//printf("%f, %f, %f : %f \n", rotationAxis.x, rotationAxis.y, rotationAxis.z, rotationSpeed);
-
-
-	//rotation = rotation + 0.1f;
-
-	//glRotatef(rotationSpeed.z, 0.0f, 0.0f, 0.0f); //rotates the drawn polygon
 
 	//Inverts the rotation and translation
 	if (switchDirection)
@@ -164,10 +159,6 @@ void Polygon3D::Draw()
 	}
 
 	RotatePolygon();
-	//glRotatef(rotationSpeed, 0.0f, 0.0f, -0.1f);
-
-	//glTranslatef(0.0f, 0.0f, rotation.z);
-
 
 	int colorIterator = 0;
 	glBegin(GL_TRIANGLES);
@@ -233,6 +224,7 @@ bool Polygon3D::LoadVerticesFromFile()
 	inFile >> numVertices;
 	//indexedVertices = new Vector3D[numVertices];
 
+	
 	for (int i = 0; i < numVertices; i++)
 	{
 		inFile >> x >> y >> z;
