@@ -46,6 +46,8 @@ protected:
 
 	bool switchDirection = false; //states wheither current rotation/translation should be inverted
 
+	Material material;
+
 public:
 	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0);
 	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0);

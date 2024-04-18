@@ -14,6 +14,13 @@ HelloGL::HelloGL(int argc, char* argv[])
 	camera->eye.z = 1.0f;
 	camera->up.y = 1.0f;
 
+	Lighting lighting;
+
+	lighting.red = { 0.2f, 0.2f, 0.2f, 1.0f };
+	lighting.blue = { 0.7f, 0.7f, 0.7f, 1.0f };
+	lighting.green = { 0.5f, 0.5f, 0.5f, 1.0f };
+	lighting.position = { 1.0f, 1.0f, 1.0f, 0.0f };
+
 	float newTranslation = 0;
 	float newScale = 0;
 	float newRotation = 0;
@@ -58,6 +65,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 	glutTimerFunc(refreshRate, GLUTCallbacks::GameTimer, refreshRate);
 	glutKeyboardFunc(GLUTCallbacks::Keyboard);
 
+	
 	glMatrixMode(GL_PROJECTION); //switches transformation pipeline to 3D matrix
 	glLoadIdentity(); //loads the identity matrix (sets matrix back to 1)
 
@@ -67,12 +75,16 @@ HelloGL::HelloGL(int argc, char* argv[])
 	//field of view, aspect ratio, near clipping distance, far clipping distance
 	gluPerspective(45, 1, 0, 1000);
 
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
 	
 	//Backwards culling
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glEnable(GL_TEXTURE_2D);
+
+	//SetLight(&lighting);
 
 	glutMainLoop();
 
@@ -507,3 +519,18 @@ void HelloGL::DeletePolygon(Polygon3D* polygon)
 	polygonList.erase(polygonList.begin() + oldLocation); //removes the deleted polygon from the vector list
 	
 }
+
+//void HelloGL::SetLight(Lighting* light, int ID)
+//{
+//	switch (ID)
+//	{
+//	case 0:
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->red);
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->green);
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->blue);
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->position);
+//
+//	default:
+//	}
+//	
+//}

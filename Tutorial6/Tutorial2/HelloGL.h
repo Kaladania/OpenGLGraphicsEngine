@@ -69,5 +69,7 @@ public:
 
 	int FindPolygonInList(Polygon3D* polygon);
 	void DeletePolygon(Polygon3D* polygon);
+
+	//void SetLight(Lighting* light, int ID);
 };
 

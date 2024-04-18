@@ -134,7 +134,6 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="GLUTCallbacks.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="Materials.h" />
     <ClInclude Include="HelloGL.h" />
     <ClInclude Include="Polygon3D.h" />
     <ClInclude Include="OLDVector3D.h" />
