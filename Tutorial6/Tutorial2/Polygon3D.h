@@ -23,7 +23,7 @@ protected:
 	std::vector<Vector3D> indexedVertices;
 	std::vector<Vector3D> indexedColors;
 	std::vector<int> indices;
-	std::vector<TexCoord> textureCoordinates;
+	//std::vector<TexCoord> textureCoordinates;
 
 	std::string textFileName = ""; //name of txt file to pull vertices from
 	std::string textureFileName = ""; //name of txt file to pull vertices from
