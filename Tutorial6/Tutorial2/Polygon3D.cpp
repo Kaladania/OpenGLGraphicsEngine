@@ -194,7 +194,7 @@ void Polygon3D::Draw()
 
 		//glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
 		
-		switch (i)
+		/*switch (i)
 		{
 		case 0:
 			glTexCoord2f(0.0f, 0.0f);
@@ -204,9 +204,9 @@ void Polygon3D::Draw()
 
 		case 2:
 			glTexCoord2f(1.0f, 1.0f);
-		}
+		}*/
 		//glTexCoord2f(textureCoordinates[i].u, textureCoordinates[i].v);
-		//glTexCoord2f(0.0f, 0.0f);
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
 	}
 
@@ -316,7 +316,7 @@ bool Polygon3D::LoadTextureFromFile()
 {
 	//loads in a new texture
 	Texture2D* texture = new Texture2D();
-	bool success = texture->Load("Textures/" + textureFileName + ".png", 1714, 1656);
+	bool success = texture->Load("Textures/" + textureFileName + ".png", 512, 512);
 	glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;
