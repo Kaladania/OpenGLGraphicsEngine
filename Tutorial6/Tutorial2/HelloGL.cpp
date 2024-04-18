@@ -72,6 +72,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 	//Backwards culling
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+	glEnable(GL_TEXTURE_2D);
 
 	glutMainLoop();
 

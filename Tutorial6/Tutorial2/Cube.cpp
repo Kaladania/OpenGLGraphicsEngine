@@ -17,6 +17,7 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : 
 	textFileName = "Cube";
 	
 	LoadVerticesFromFile();
+	LoadTextureFromFile();
 	//SetUpVertices(newVertexList);
 
 	ScalePolygon(scale, indexedVertices);
@@ -35,10 +36,12 @@ Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed) : Pol
 	vertexAmount = 8; //number of vertices in polygon
 	
 	textFileName = "Cube";
+	textureFileName = "Cube";
 
 	std::cout << "Rotation speed: " << translationSpeed << "\n";
 
 	LoadVerticesFromFile();
+	LoadTextureFromFile();
 
 	ScalePolygon(scale, indexedVertices);
 }
