@@ -16,6 +16,7 @@ class Polygon3D
 protected:
 	int sides = 0;; //number of sides in polygon
 	int vertexAmount = 0;; //number of vertices in polygon
+	int indiciesAmount = 0;
 	int textCoordAmount = 0;
 	std::vector<Vector3D> vertexList; //polygon vertex locations
 	//std::string textFileName = "";
@@ -25,7 +26,7 @@ protected:
 	std::vector<int> indices;
 	//std::vector<TexCoord> textureCoordinates;
 
-	std::string textFileName = ""; //name of txt file to pull vertices from
+	std::string meshTextFileName = ""; //name of txt file to pull vertices from
 	std::string textureFileName = ""; //name of txt file to pull vertices from
 
 	std::vector<Texture2D> textures;

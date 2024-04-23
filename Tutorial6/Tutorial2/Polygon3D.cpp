@@ -168,7 +168,7 @@ void Polygon3D::Draw()
 	int colorIterator = 0;
 	glBegin(GL_TRIANGLES);
 
-	for (int i = 0; i < 36; i++)
+	for (int i = 0; i < indiciesAmount; i++)
 	{
 		//Iterates through colours to ensure each triangle is coloured differently
 		if (i % 3 == 0)
@@ -221,7 +221,7 @@ void Polygon3D::Draw()
 /// <returns></returns>
 bool Polygon3D::LoadVerticesFromFile()
 {
-	std::string filePath = "Polygons/" + textFileName + ".txt";
+	std::string filePath = "Polygons/" + meshTextFileName + ".txt";
 
 	std::ifstream inFile;
 
@@ -258,6 +258,7 @@ bool Polygon3D::LoadVerticesFromFile()
 	}
 
 	inFile >> numIndices;
+	indiciesAmount = numIndices;
 	//indices = new int[numIndices];
 
 	for (int i = 0; i < numIndices; i++)
@@ -316,7 +317,7 @@ bool Polygon3D::LoadTextureFromFile()
 {
 	//loads in a new texture
 	Texture2D* texture = new Texture2D();
-	bool success = texture->Load("Textures/" + textureFileName + ".png", 1714, 1656);
+	bool success = texture->Load("Textures/" + textureFileName + ".raw", 512, 512);
 	glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;

@@ -18,6 +18,12 @@
 class Polygon3D;
 struct Camera;
 //class Cube;
+struct Transformation
+{
+	float translation;
+	float rotation;
+	float scale;
+};
 
 class HelloGL
 {
@@ -44,11 +50,24 @@ private:
 
 	Camera* camera; //current camera view
 
+
+
 public:
 	HelloGL(int argc, char* argv[]);
 	~HelloGL(void); //class destructor
 
-	
+	//Types of Meshes currently availble to draw
+	enum Meshes
+	{
+		CUBE,
+		PYRAMID,
+		END_OF_MESH_ENUM
+	};
+
+	void InitObjects();
+	void InitGL(int argc, char* argv[]);
+
+	Transformation SanitiseTransformation(Transformation newMeshTransform);
 
 	//void SetColor(std::array<float, 4>& colorArray);
 	void DrawQuadrilateral(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3, const std::tuple<float, float>& vertex4);

@@ -18,7 +18,7 @@ Texture2D::~Texture2D()
 }
 
 /// <summary>
-/// Loads in a new texture (PNG ONLY)
+/// Loads in a new texture (RAW ONLY)
 /// </summary>
 /// <param name="path">file path to texture</param>
 /// <param name="width">texture width</param>
