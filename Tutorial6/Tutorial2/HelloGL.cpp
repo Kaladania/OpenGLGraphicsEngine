@@ -1,5 +1,6 @@
 #include "HelloGL.h"
 #include "Cube.h"
+#include "Pyramid.h"
 #include "Polygon3D.h"
 #include <algorithm>
 #include <time.h>
@@ -8,70 +9,11 @@
 HelloGL::HelloGL(int argc, char* argv[])
 {
 	srand(time(0));
-
-	camera = new Camera();
-
-	camera->eye.z = 1.0f;
-	camera->up.y = 1.0f;
-
-	float newTranslation = 0;
-	float newScale = 0;
-	float newRotation = 0;
-
-	for (int i = 0; i < 20; i++)
-	{
-		newTranslation = rand() % 10; //random number between 0.001 and 0.1
-		newTranslation /= 1000;
-
-		newScale = rand() % 5; //random number between 0.001 and 0.1
-		newScale /= 100;
-
-		newRotation = rand() % 10; //random number between 0.001 and 0.1
-
-		//Creates a cube with randomised properties
-		if (newTranslation == 0.000f)
-		{
-			polygonList.push_back(new Cube(newScale, 0.0001f, newRotation)); //creates a new cube object
-		}
-		else if (newScale == 0.00f)
-		{
-			polygonList.push_back(new Cube(0.01f, newTranslation, newRotation)); //creates a new cube object
-		}
-		else if (newRotation == 0.0f)
-		{
-			polygonList.push_back(new Cube(newScale, newTranslation, 1.0f)); //creates a new cube object
-		}
-		else
-		{
-			polygonList.push_back(new Cube(newScale, newTranslation, newRotation)); //creates a new cube object
-		}
-	}
 	
+	InitGL(argc, argv);
 
-	GLUTCallbacks::Init(this); //sets the current gl instance pointer to this current instance
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE); //enables double buffering
-	glutInitWindowSize(800, 800); // creates a 800x800 window
-	glutInitWindowPosition(100, 100); //alters the window - to - shape - drawing ratio
-	glutCreateWindow("Simple OpenGL Program"); //window title
-	glutDisplayFunc(GLUTCallbacks::Display); //draws window
-	glutTimerFunc(refreshRate, GLUTCallbacks::GameTimer, refreshRate);
-	glutKeyboardFunc(GLUTCallbacks::Keyboard);
-
-	glMatrixMode(GL_PROJECTION); //switches transformation pipeline to 3D matrix
-	glLoadIdentity(); //loads the identity matrix (sets matrix back to 1)
-
-	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); //sets viewport to be entire window
-
-	//sets correct scene perspective
-	//field of view, aspect ratio, near clipping distance, far clipping distance
-	gluPerspective(45, 1, 0, 1000);
-
-	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
+	InitObjects();
 	
-	//Backwards culling
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
 
 	glutMainLoop();
 
@@ -83,7 +25,125 @@ HelloGL::~HelloGL(void)
 	delete camera;
 }
 
+/// <summary>
+/// Setup Objects
+/// </summary>
+void HelloGL::InitObjects()
+{
 
+
+	camera = new Camera();
+
+	camera->eye.z = 1.0f;
+	camera->up.y = 1.0f;
+
+	Lighting lighting;
+
+	lighting.red = { 0.2f, 0.2f, 0.2f, 1.0f };
+	lighting.blue = { 0.7f, 0.7f, 0.7f, 1.0f };
+	lighting.green = { 0.5f, 0.5f, 0.5f, 1.0f };
+	lighting.position = { 1.0f, 1.0f, 1.0f, 0.0f };
+
+	float newTranslation = 0;
+	float newScale = 0;
+	float newRotation = 0;
+
+	Meshes newMesh = CUBE;
+
+	for (int i = 0; i < 20; i++)
+	{
+		newTranslation = rand() % 10; //random number between 0.001 and 0.1
+		newTranslation /= 1000;
+
+		newScale = rand() % 5; //random number between 0.001 and 0.1
+		newScale /= 100;
+
+		newRotation = rand() % 10; //random number between 0.001 and 0.1
+
+		newMesh = Meshes(rand() % END_OF_MESH_ENUM); //chooses a random mesh to load
+		
+		Transformation newMeshTransform;
+		newMeshTransform.translation = newTranslation;
+		newMeshTransform.rotation = newRotation;
+		newMeshTransform.scale = newScale;
+
+		SanitiseTransformation(newMeshTransform);
+
+		switch (newMesh)
+		{
+		case HelloGL::CUBE:
+			polygonList.push_back(new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation));
+			break;
+		case HelloGL::PYRAMID:
+			polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation));
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+/// <summary>
+/// Set up OpenGL
+/// </summary>
+/// <param name="argc"></param>
+/// <param name="argv"></param>
+void HelloGL::InitGL(int argc, char* argv[])
+{
+	GLUTCallbacks::Init(this); //sets the current gl instance pointer to this current instance
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE); //enables double buffering
+	glutInitWindowSize(800, 800); // creates a 800x800 window
+	glutInitWindowPosition(100, 100); //alters the window - to - shape - drawing ratio
+	glutCreateWindow("Simple OpenGL Program"); //window title
+	glutDisplayFunc(GLUTCallbacks::Display); //draws window
+	glutTimerFunc(refreshRate, GLUTCallbacks::GameTimer, refreshRate);
+	glutKeyboardFunc(GLUTCallbacks::Keyboard);
+
+
+	glMatrixMode(GL_PROJECTION); //switches transformation pipeline to 3D matrix
+	glLoadIdentity(); //loads the identity matrix (sets matrix back to 1)
+
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); //sets viewport to be entire window
+
+	//sets correct scene perspective
+	//field of view, aspect ratio, near clipping distance, far clipping distance
+	gluPerspective(45, 1, 0, 1000);
+
+	
+	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
+
+	//glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHT0);
+
+	//Backwards culling
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glEnable(GL_TEXTURE_2D);
+
+	//SetLight(&lighting);
+}
+
+
+Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
+{
+	//Creates a cube with randomised properties
+	if (newMeshTransform.translation == 0.000f)
+	{
+		polygonList.push_back(new Pyramid(newMeshTransform.scale, 0.0001f, newMeshTransform.rotation)); //creates a new cube object
+	}
+	else if (newMeshTransform.scale == 0.00f)
+	{
+		polygonList.push_back(new Pyramid(0.01f, newMeshTransform.translation, newMeshTransform.rotation)); //creates a new cube object
+	}
+	else if (newMeshTransform.rotation == 0.0f)
+	{
+		polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, 1.0f)); //creates a new cube object
+	}
+
+	return newMeshTransform;
+
+}
 
 
 /// <summary>
@@ -506,3 +566,18 @@ void HelloGL::DeletePolygon(Polygon3D* polygon)
 	polygonList.erase(polygonList.begin() + oldLocation); //removes the deleted polygon from the vector list
 	
 }
+
+//void HelloGL::SetLight(Lighting* light, int ID)
+//{
+//	switch (ID)
+//	{
+//	case 0:
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->red);
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->green);
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->blue);
+//		glLightfv(GL_LIGHT0, GL_AMBIENT, light->position);
+//
+//	default:
+//	}
+//	
+//}

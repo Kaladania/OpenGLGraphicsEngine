@@ -1,4 +1,7 @@
 #pragma once
+#include <array>
+
+//#define RED_MATERIAL Materia
 
 struct Vector3D
 {
@@ -145,4 +148,20 @@ struct Camera //camera structure
 	Vector3D eye, center, up;
 };
 
+struct Material
+{
+	std::array<float, 4> ambient = {0.0f, 0.0f, 0.0f, 0.0f};
+	std::array<float, 4> diffuse = { 0.0f, 0.0f, 0.0f, 0.0f };
+	std::array<float, 4> specular = { 0.0f, 0.0f, 0.0f, 0.0f };
 
+	float shininess = 0.0f;
+};
+
+struct Lighting
+{
+	std::array<float, 4> red = { 0.0f, 0.0f, 0.0f, 0.0f };
+	std::array<float, 4> green = { 0.0f, 0.0f, 0.0f, 0.0f };
+	std::array<float, 4> blue = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+	std::array<float, 4> position = { 0.0f, 0.0f, 0.0f, 0.0f };
+};

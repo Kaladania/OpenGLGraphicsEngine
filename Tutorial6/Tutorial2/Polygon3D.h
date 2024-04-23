@@ -7,20 +7,29 @@
 #include <tuple>
 #include <string>
 #include "Header.h"
+#include "Texture2D.h"
+
+class Texture2D;
 
 class Polygon3D
 {
 protected:
 	int sides = 0;; //number of sides in polygon
 	int vertexAmount = 0;; //number of vertices in polygon
+	int indiciesAmount = 0;
+	int textCoordAmount = 0;
 	std::vector<Vector3D> vertexList; //polygon vertex locations
 	//std::string textFileName = "";
 
 	std::vector<Vector3D> indexedVertices;
 	std::vector<Vector3D> indexedColors;
 	std::vector<int> indices;
+	//std::vector<TexCoord> textureCoordinates;
 
-	std::string textFileName = ""; //name of txt file to pull vertices from
+	std::string meshTextFileName = ""; //name of txt file to pull vertices from
+	std::string textureFileName = ""; //name of txt file to pull vertices from
+
+	std::vector<Texture2D> textures;
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
 	Vector3D rotationDirection; //current rotation direction
@@ -38,12 +47,17 @@ protected:
 
 	bool switchDirection = false; //states wheither current rotation/translation should be inverted
 
+	Material material;
+
 public:
 	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0);
 	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0);
 
 	virtual void Draw();
+
 	bool LoadVerticesFromFile();
+	bool LoadTextureFromFile();
+
 	virtual void ScalePolygon(Vector3D scale, std::vector<Vector3D>& vertexList);
 	virtual void ScalePolygon(float scale, std::vector<Vector3D>& vertexList);
 

@@ -15,7 +15,8 @@ Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpe
 	vertexAmount = 8; //number of vertices in polygon
 	translationSpeed = newTranslationSpeed;
 
-	textFileName = "Pyramid";
+	meshTextFileName = "Pyramid";
+	textureFileName = "Penguin";
 
 	LoadVerticesFromFile();
 	//SetUpVertices(newVertexList);
@@ -35,7 +36,8 @@ Pyramid::Pyramid(float scale, float newTranslationSpeed, float newRotationSpeed)
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
 
-	textFileName = "Pyramid";
+	meshTextFileName = "Pyramid";
+	textureFileName = "Penguin";
 
 	LoadVerticesFromFile();
 

@@ -14,9 +14,17 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : 
 	vertexAmount = 8; //number of vertices in polygon
 	translationSpeed = newTranslationSpeed;
 
-	textFileName = "Cube";
+	meshTextFileName = "Cube";
+	textureFileName = "Penguin";
 	
 	LoadVerticesFromFile();
+	LoadTextureFromFile();
+
+	material.ambient = { 0.80f, 0.0f, 0.05f, 1.0f};
+	material.diffuse = { 0.80f, 0.0f, 0.05f, 1.0f };
+	material.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material.shininess = 100.0f;
+
 	//SetUpVertices(newVertexList);
 
 	ScalePolygon(scale, indexedVertices);
@@ -34,11 +42,13 @@ Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed) : Pol
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
 	
-	textFileName = "Cube";
+	meshTextFileName = "Cube";
+	textureFileName = "Penguin";
 
 	std::cout << "Rotation speed: " << translationSpeed << "\n";
 
 	LoadVerticesFromFile();
+	LoadTextureFromFile();
 
 	ScalePolygon(scale, indexedVertices);
 }
