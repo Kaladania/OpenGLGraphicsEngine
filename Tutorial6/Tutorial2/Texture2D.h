@@ -22,7 +22,9 @@ public:
 	Texture2D();
 	~Texture2D();
 
-	bool Load(std::string path, const int width = 0, const int height = 0);
+	bool LoadTexture(std::string path, const int width = 0, const int height = 0);
+	bool LoadRAW(std::string path, const int width = 0, const int height = 0);
+	bool LoadPNG(std::string path, const int width = 0, const int height = 0);
 
 	GLuint GetID() const { return textureID; }
 	int GetWidth() const { return width; }

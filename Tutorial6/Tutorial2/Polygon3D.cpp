@@ -317,7 +317,7 @@ bool Polygon3D::LoadTextureFromFile()
 {
 	//loads in a new texture
 	Texture2D* texture = new Texture2D();
-	bool success = texture->Load("Textures/" + textureFileName + ".raw", 512, 512);
+	bool success = texture->LoadTexture("Textures/" + textureFileName + ".raw", 512, 512);
 	glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;
