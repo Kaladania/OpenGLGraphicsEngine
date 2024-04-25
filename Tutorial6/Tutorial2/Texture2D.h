@@ -8,6 +8,13 @@ struct TexCoord
 {
 	GLfloat u = 0.0f;
 	GLfloat v = 0.0f;
+
+	TexCoord(GLfloat u, GLfloat v)
+	{
+		this->u = u;
+		this->v = v;
+	}
+	
 };
 class Texture2D
 {

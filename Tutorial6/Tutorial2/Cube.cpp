@@ -7,7 +7,7 @@
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed)
+Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, choosenTexture)
 {
 
 	sides = 8; //number of sides in cube
@@ -15,7 +15,7 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : 
 	translationSpeed = newTranslationSpeed;
 
 	meshTextFileName = "Cube";
-	textureFileName = "Penguin";
+	textureFileName = choosenTexture;
 	
 	LoadVerticesFromFile();
 	LoadTextureFromFile();
@@ -37,13 +37,13 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed) : 
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed)
+Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, choosenTexture)
 {
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
 	
 	meshTextFileName = "Cube";
-	textureFileName = "Penguin";
+	textureFileName = choosenTexture;
 
 	std::cout << "Rotation speed: " << translationSpeed << "\n";
 

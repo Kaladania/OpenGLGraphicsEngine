@@ -6,6 +6,8 @@
 #include "GLUTCallbacks.h"
 #include <array>
 #include <tuple>
+#include <map>
+#include <string>
 
 
 #include <vector>
@@ -50,6 +52,10 @@ private:
 
 	Camera* camera; //current camera view
 
+	enum Textures;
+	//std::string textureEnumStrings[END_OF_TEXTURE_ENUM] = { "Penguins, Stars" };
+	std::map <Textures, std::string> textureEnumToString = { {PENGUINS, "Penguins"}, {STARS, "Stars"} };
+
 
 
 public:
@@ -62,6 +68,13 @@ public:
 		CUBE,
 		PYRAMID,
 		END_OF_MESH_ENUM
+	};
+
+	enum Textures
+	{
+		PENGUINS,
+		STARS,
+		END_OF_TEXTURE_ENUM
 	};
 
 	void InitObjects();
