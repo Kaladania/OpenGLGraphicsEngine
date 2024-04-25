@@ -45,7 +45,8 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 /// </summary>
 void Polygon3D::Draw()
 {
-	//glBindTexture(GL_TEXTURE_2D, textures[0]->GetID());
+	textCoordIterator = 0;//resets texcoord iterator each draw call
+	//glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
 	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
@@ -214,16 +215,24 @@ void Polygon3D::Draw()
 		}
 		//glTexCoord2f(textureCoordinates[i].u, textureCoordinates[i].v);
 		//glTexCoord2f(0.0f, 0.0f);
-		if (i <= indexedTextCoords.size() - 1)
+		if (textCoordIterator <= indexedTextCoords.size() - 1)
 		{
-			glTexCoord2f(indexedTextCoords[i].u, indexedTextCoords[i].v);
+			glTexCoord2f(indexedTextCoords[textCoordIterator].u, indexedTextCoords[textCoordIterator].v);
+		}
+		else
+		{
+			textCoordIterator = 0; //loops texCoord iterator to ensure all surfaces are covered
 		}
 		
 		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
+
+		textCoordIterator++;
 	}
 
 	glEnd();
 	glPopMatrix();
+
+
 
 }
 
@@ -436,8 +445,8 @@ bool Polygon3D::LoadTextureFromFile()
 {
 	//loads in a new texture
 	//Texture2D* texture = new Texture2D();
-	textures.push_back(new Texture2D());
-	bool success = textures.back()->LoadTexture("Textures/" + textureFileName + ".raw", 512, 512);
+	texture = new Texture2D();
+	bool success = texture->LoadTexture("Textures/" + textureFileName + ".raw", 512, 512);
 	//glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;

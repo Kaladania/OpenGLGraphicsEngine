@@ -19,7 +19,7 @@ struct TexCoord
 class Texture2D
 {
 private:
-	GLuint textureID;
+	GLuint textureID = 0;
 	int width = 0;
 	int height = 0;
 	char* textureData;
@@ -33,7 +33,7 @@ public:
 	bool LoadRAW(std::string path, const int width = 0, const int height = 0);
 	bool LoadPNG(std::string path, const int width = 0, const int height = 0);
 
-	GLuint GetID() const { return textureID; }
+	GLuint GetID() { return textureID; }
 	int GetWidth() const { return width; }
 	int GetHeight() const { return height;  }
 

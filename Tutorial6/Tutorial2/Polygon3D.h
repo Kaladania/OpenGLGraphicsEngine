@@ -26,11 +26,13 @@ protected:
 	std::vector<Vector3D> indexedColors;
 	std::vector<int> indices;
 	std::vector<TexCoord> indexedTextCoords;
+	int textCoordIterator = 0;
 
 	std::string meshTextFileName = ""; //name of txt file to pull vertices from
 	std::string textureFileName = ""; //name of txt file to pull vertices from
 
-	std::vector<Texture2D*> textures;
+	//std::vector<Texture2D*> textures;
+	Texture2D* texture = nullptr;
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
 	Vector3D rotationDirection; //current rotation direction

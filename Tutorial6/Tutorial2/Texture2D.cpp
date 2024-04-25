@@ -20,10 +20,10 @@ Texture2D::~Texture2D()
 bool Texture2D::LoadTexture(std::string path, const int width, const int height)
 {
 	const int pathLength = path.length();
-	char fileExtention = path[pathLength -3] + path[pathLength - 2] + path[pathLength - 1];
+	std::string fileExtention = path.substr(pathLength - 3, pathLength);//std::to_string(char(path[pathLength - 3])) + std::to_string(char(path[pathLength - 2])) + std::to_string(char(path[pathLength - 1]));
 
 	//runs the correct load function depending on supplied file extention
-	if (std::to_string(fileExtention) == "raw")
+	if (fileExtention == "raw")
 	{
 		return LoadRAW(path, width, height);
 	}
@@ -72,7 +72,7 @@ bool Texture2D::LoadRAW(std::string path, const int width, const int height)
 
 	//generates a new texture
 	glGenTextures(1, &textureID); //generates and assigns a new texture ID
-	//glBindTexture(GL_TEXTURE_2D, textureID); //binds the texture to the new ID
+	glBindTexture(GL_TEXTURE_2D, textureID); //binds the texture to the new ID
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->width, this->height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData); //specifices texture image detail
 	
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //minifaction filter
@@ -122,7 +122,7 @@ bool Texture2D::LoadPNG(std::string path, const int width, const int height)
 
 	//generates a new texture
 	glGenTextures(1, &textureID); //generates and assigns a new texture ID
-	glBindTexture(GL_TEXTURE_2D, textureID); //binds the texture to the new ID
+	//glBindTexture(GL_TEXTURE_2D, textureID); //binds the texture to the new ID
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->width, this->height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData); //specifices texture image detail
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //minifaction filter

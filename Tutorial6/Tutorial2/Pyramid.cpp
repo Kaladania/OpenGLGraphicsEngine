@@ -19,6 +19,7 @@ Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpe
 	textureFileName = choosenTexture;
 
 	LoadVerticesFromFile();
+	LoadTextureFromFile();
 	//SetUpVertices(newVertexList);
 
 	ScalePolygon(scale, indexedVertices);
@@ -40,6 +41,7 @@ Pyramid::Pyramid(float scale, float newTranslationSpeed, float newRotationSpeed,
 	textureFileName = choosenTexture;
 
 	LoadVerticesFromFile();
+	LoadTextureFromFile();
 
 	ScalePolygon(scale, indexedVertices);
 }
