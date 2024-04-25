@@ -56,6 +56,7 @@ public:
 	virtual void Draw();
 
 	bool LoadVerticesFromFile();
+	bool LoadOBJFromFile();
 	bool LoadTextureFromFile();
 
 	virtual void ScalePolygon(Vector3D scale, std::vector<Vector3D>& vertexList);

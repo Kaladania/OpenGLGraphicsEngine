@@ -313,6 +313,104 @@ bool Polygon3D::LoadVerticesFromFile()
 
 }
 
+/// <summary>
+/// Reads vertices from a txt file to store in the object's vertex list
+/// </summary>
+/// <returns></returns>
+bool Polygon3D::LoadOBJFromFile()
+{
+	std::string filePath = "Polygons/" + meshTextFileName + ".obj";
+
+	std::ifstream inFile;
+
+	inFile.open(filePath);
+
+	if (!inFile.good())
+	{
+		std::cerr << "Can't open obj tfile:  " << filePath << std::endl;
+		return false;
+	}
+
+	int x, y, z;
+	char c;
+
+	int numVertices, numColors, numIndices;
+
+	inFile >> numVertices;
+	//indexedVertices = new Vector3D[numVertices];
+
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedVertices.push_back(Vector3D(x, y, z));
+	}
+
+	inFile >> numColors;
+	//indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numColors; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedColors.push_back(Vector3D(x, y, z));
+	}
+
+	inFile >> numIndices;
+	indiciesAmount = numIndices;
+	//indices = new int[numIndices];
+
+	for (int i = 0; i < numIndices; i++)
+	{
+		inFile >> x;
+		indices.push_back(x);
+	}
+
+	/*int numVertices, numColors, numIndices;
+
+	inFile >> numVertices;
+	indexedVertices = new Vector3D[numVertices];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedVertices[i] = Vector3D(x, y, z);
+		printf("%i %i %i", x, y, z);
+	}
+
+	inFile >> numColors;
+	indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numColors; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedColors[i] = Vector3D(x, y, z);
+	}
+
+	inFile >> numIndices;
+	indices = new GLfloat[numIndices];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x;
+		indices[i] = x;
+	}*/
+
+	//while (!inFile.eof())
+	//{
+	//	while ((inFile >> x >> y >> z))
+	//	{
+	//		vertexList.push_back(Vector3D(x, y, z));
+	//		//printf(" %i, %i, %i", x, y, z);
+	//	}
+	//}
+
+
+
+
+	inFile.close();
+
+}
+
 bool Polygon3D::LoadTextureFromFile()
 {
 	//loads in a new texture
