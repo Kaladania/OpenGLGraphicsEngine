@@ -14,7 +14,7 @@
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed)
+Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
@@ -30,7 +30,7 @@ Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotatio
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed)
+Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
@@ -45,7 +45,15 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 /// </summary>
 void Polygon3D::Draw()
 {
+	textCoordIterator = 0;//resets texcoord iterator each draw call
+	//glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
+	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
+	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
+	
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
+
+	
 	glPushMatrix();
 
 	//Inverts the rotation and translation
@@ -207,11 +215,24 @@ void Polygon3D::Draw()
 		}
 		//glTexCoord2f(textureCoordinates[i].u, textureCoordinates[i].v);
 		//glTexCoord2f(0.0f, 0.0f);
+		if (textCoordIterator <= indexedTextCoords.size() - 1)
+		{
+			glTexCoord2f(indexedTextCoords[textCoordIterator].u, indexedTextCoords[textCoordIterator].v);
+		}
+		else
+		{
+			textCoordIterator = 0; //loops texCoord iterator to ensure all surfaces are covered
+		}
+		
 		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
+
+		textCoordIterator++;
 	}
 
 	glEnd();
 	glPopMatrix();
+
+
 
 }
 
@@ -236,12 +257,119 @@ bool Polygon3D::LoadVerticesFromFile()
 	int x, y, z;
 	char c;
 
-	int numVertices, numColors, numIndices;
+	int numVertices, numColors, numTextCoords, numIndices;
 
 	inFile >> numVertices;
 	//indexedVertices = new Vector3D[numVertices];
 
 	
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedVertices.push_back(Vector3D(x, y, z));
+	}
+
+	inFile >> numColors;
+	//indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numColors; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedColors.push_back(Vector3D(x, y, z));
+	}
+
+	inFile >> numTextCoords;
+	//indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numTextCoords; i++)
+	{
+		inFile >> x >> y;
+		indexedTextCoords.push_back(TexCoord(GLfloat(x), GLfloat(y)));
+	}
+
+	inFile >> numIndices;
+	indiciesAmount = numIndices;
+	//indices = new int[numIndices];
+
+	for (int i = 0; i < numIndices; i++)
+	{
+		inFile >> x;
+		indices.push_back(x);
+	}
+
+	/*int numVertices, numColors, numIndices;
+
+	inFile >> numVertices;
+	indexedVertices = new Vector3D[numVertices];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedVertices[i] = Vector3D(x, y, z);
+		printf("%i %i %i", x, y, z);
+	}
+
+	inFile >> numColors;
+	indexedColors = new Vector3D[numColors];
+
+	for (int i = 0; i < numColors; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedColors[i] = Vector3D(x, y, z);
+	}
+
+	inFile >> numIndices;
+	indices = new GLfloat[numIndices];
+
+	for (int i = 0; i < numVertices; i++)
+	{
+		inFile >> x;
+		indices[i] = x;
+	}*/
+
+	//while (!inFile.eof())
+	//{
+	//	while ((inFile >> x >> y >> z))
+	//	{
+	//		vertexList.push_back(Vector3D(x, y, z));
+	//		//printf(" %i, %i, %i", x, y, z);
+	//	}
+	//}
+
+
+
+	
+	inFile.close();
+
+}
+
+/// <summary>
+/// Reads vertices from a txt file to store in the object's vertex list
+/// </summary>
+/// <returns></returns>
+bool Polygon3D::LoadOBJFromFile()
+{
+	std::string filePath = "Polygons/" + meshTextFileName + ".obj";
+
+	std::ifstream inFile;
+
+	inFile.open(filePath);
+
+	if (!inFile.good())
+	{
+		std::cerr << "Can't open obj tfile:  " << filePath << std::endl;
+		return false;
+	}
+
+	int x, y, z;
+	char c;
+
+	int numVertices, numColors, numIndices;
+
+	inFile >> numVertices;
+	//indexedVertices = new Vector3D[numVertices];
+
+
 	for (int i = 0; i < numVertices; i++)
 	{
 		inFile >> x >> y >> z;
@@ -308,7 +436,7 @@ bool Polygon3D::LoadVerticesFromFile()
 
 
 
-	
+
 	inFile.close();
 
 }
@@ -316,12 +444,16 @@ bool Polygon3D::LoadVerticesFromFile()
 bool Polygon3D::LoadTextureFromFile()
 {
 	//loads in a new texture
-	Texture2D* texture = new Texture2D();
-	bool success = texture->Load("Textures/" + textureFileName + ".raw", 512, 512);
-	glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
+	//Texture2D* texture = new Texture2D();
+	texture = new Texture2D();
+	bool success = texture->LoadTexture("Textures/" + textureFileName + ".raw", 512, 512);
+	//glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;
 }
+
+
+
 /// <summary>
 /// Returns an array of color values
 /// </summary>

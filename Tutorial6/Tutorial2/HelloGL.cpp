@@ -1,6 +1,7 @@
 #include "HelloGL.h"
 #include "Cube.h"
 #include "Pyramid.h"
+//#include "Teapot.h"
 #include "Polygon3D.h"
 #include <algorithm>
 #include <time.h>
@@ -49,6 +50,9 @@ void HelloGL::InitObjects()
 	float newRotation = 0;
 
 	Meshes newMesh = CUBE;
+	Textures newTexture = PENGUINS;
+
+	
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -61,6 +65,7 @@ void HelloGL::InitObjects()
 		newRotation = rand() % 10; //random number between 0.001 and 0.1
 
 		newMesh = Meshes(rand() % END_OF_MESH_ENUM); //chooses a random mesh to load
+		newTexture = Textures(rand() % END_OF_TEXTURE_ENUM); //chooses a random mesh to load
 		
 		Transformation newMeshTransform;
 		newMeshTransform.translation = newTranslation;
@@ -72,10 +77,10 @@ void HelloGL::InitObjects()
 		switch (newMesh)
 		{
 		case HelloGL::CUBE:
-			polygonList.push_back(new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation));
+			polygonList.push_back(new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]));
 			break;
 		case HelloGL::PYRAMID:
-			polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation));
+			polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]));
 			break;
 		default:
 			break;
@@ -117,11 +122,17 @@ void HelloGL::InitGL(int argc, char* argv[])
 	//glEnable(GL_LIGHT0);
 
 	//Backwards culling
-	glEnable(GL_CULL_FACE);
+	/*glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);*/
+	
 
 	//SetLight(&lighting);
+
+	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 }
 
 
@@ -130,15 +141,18 @@ Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 	//Creates a cube with randomised properties
 	if (newMeshTransform.translation == 0.000f)
 	{
-		polygonList.push_back(new Pyramid(newMeshTransform.scale, 0.0001f, newMeshTransform.rotation)); //creates a new cube object
+		newMeshTransform.translation = 0.0001f;
+		//polygonList.push_back(new Pyramid(newMeshTransform.scale, 0.0001f, newMeshTransform.rotation)); //creates a new cube object
 	}
 	else if (newMeshTransform.scale == 0.00f)
 	{
-		polygonList.push_back(new Pyramid(0.01f, newMeshTransform.translation, newMeshTransform.rotation)); //creates a new cube object
+		newMeshTransform.scale = 0.01f;
+		//polygonList.push_back(new Pyramid(0.01f, newMeshTransform.translation, newMeshTransform.rotation)); //creates a new cube object
 	}
 	else if (newMeshTransform.rotation == 0.0f)
 	{
-		polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, 1.0f)); //creates a new cube object
+		newMeshTransform.rotation = 1.0f;
+		//polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, 1.0f)); //creates a new cube object
 	}
 
 	return newMeshTransform;
