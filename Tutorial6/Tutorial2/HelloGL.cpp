@@ -34,16 +34,15 @@ void HelloGL::InitObjects()
 
 
 	camera = new Camera();
+	lighting = new Lighting();
 
 	camera->eye.z = 1.0f;
 	camera->up.y = 1.0f;
 
-	Lighting lighting;
-
-	lighting.red = { 0.2f, 0.2f, 0.2f, 1.0f };
-	lighting.blue = { 0.7f, 0.7f, 0.7f, 1.0f };
-	lighting.green = { 0.5f, 0.5f, 0.5f, 1.0f };
-	lighting.position = { 1.0f, 1.0f, 1.0f, 0.0f };
+	lighting->ambient = { 1.2f, 1.2f, 1.2f, 1.0f };
+	lighting->diffuse = { 0.8f, 0.8f, 0.8f, 1.0f };
+	lighting->specular = { 0.2f, 0.2f, 0.2f, 1.0f };
+	lighting->position = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 	float newTranslation = 0;
 	float newScale = 0;
@@ -118,8 +117,8 @@ void HelloGL::InitGL(int argc, char* argv[])
 	
 	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
 
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
 	//Backwards culling
 	/*glEnable(GL_CULL_FACE);
@@ -192,6 +191,10 @@ void HelloGL::Update()
 {
 	glLoadIdentity(); //resets pre-existing matrix transformations
 
+	glLightfv(GL_LIGHT0, GL_AMBIENT, &(lighting->ambient.x));
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, &(lighting->diffuse.x));
+	glLightfv(GL_LIGHT0, GL_SPECULAR, &(lighting->specular.x));
+	glLightfv(GL_LIGHT0, GL_POSITION, &(lighting->position.x));
 	gluLookAt(camera->eye.x, camera->eye.y, camera->eye.z, camera->center.x, camera->center.y, camera->center.z, camera->up.x, camera->up.y, camera->up.z); //moves the camera
 
 	glutPostRedisplay(); //forces the scene to redraw itself

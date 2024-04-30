@@ -23,7 +23,7 @@ protected:
 	//std::string textFileName = "";
 
 	std::vector<Vector3D> indexedVertices;
-	std::vector<Vector3D> indexedColors;
+	std::vector<Vector3D> indexedNormals;
 	std::vector<int> indices;
 	std::vector<TexCoord> indexedTextCoords;
 	int textCoordIterator = 0;
@@ -50,7 +50,7 @@ protected:
 
 	bool switchDirection = false; //states wheither current rotation/translation should be inverted
 
-	Material material;
+	Material* material;
 
 	
 	//std::map <Textures, std::string> textureEnumToString;= { (PENGUINS, "Penguins"), (STARS, "Stars") };

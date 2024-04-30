@@ -19,6 +19,7 @@
 
 class Polygon3D;
 struct Camera;
+struct Lighting;
 //class Cube;
 struct Transformation
 {
@@ -51,6 +52,8 @@ private:
 	int polygonIndex = 0;
 
 	Camera* camera; //current camera view
+
+	Lighting* lighting; //current light source
 
 	enum Textures;
 	//std::string textureEnumStrings[END_OF_TEXTURE_ENUM] = { "Penguins, Stars" };

@@ -18,6 +18,11 @@ Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpe
 	meshTextFileName = "Pyramid";
 	textureFileName = choosenTexture;
 
+	material->ambient = { 1.0f, 0.5f, 0.2f, 1.0f };
+	material->diffuse = { 1.80f, 1.05f, 1.05f, 1.0f };
+	material->specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->shininess = 20.0f;
+
 	LoadVerticesFromFile();
 	LoadTextureFromFile();
 	//SetUpVertices(newVertexList);
@@ -39,6 +44,11 @@ Pyramid::Pyramid(float scale, float newTranslationSpeed, float newRotationSpeed,
 
 	meshTextFileName = "Pyramid";
 	textureFileName = choosenTexture;
+
+	material->ambient = { 1.0f, 0.5f, 0.2f, 1.0f };
+	material->diffuse = { 1.80f, 1.05f, 1.05f, 1.0f };
+	material->specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->shininess = 20.0f;
 
 	LoadVerticesFromFile();
 	LoadTextureFromFile();

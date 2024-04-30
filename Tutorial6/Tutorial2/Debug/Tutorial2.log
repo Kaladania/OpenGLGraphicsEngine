@@ -1,2 +1,4 @@
-﻿  Texture2D.cpp
+﻿  Pyramid.cpp
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(105,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(46,7): message : see declaration of 'Polygon3D::Color'
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
