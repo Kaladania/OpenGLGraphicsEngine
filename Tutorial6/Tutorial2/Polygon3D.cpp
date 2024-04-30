@@ -174,45 +174,60 @@ void Polygon3D::Draw()
 	RotatePolygon();
 
 	int colorIterator = 0;
+	int normalsIterator = 0;
 	glBegin(GL_TRIANGLES);
 
 	for (int i = 0; i < indiciesAmount; i++)
 	{
-		//Iterates through colours to ensure each triangle is coloured differently
-		if (i % 3 == 0)
-		{
-			SetColor((Color)colorIterator);
+		////Iterates through colours to ensure each triangle is coloured differently
+		//if (i % 3 == 0)
+		//{
+		//	SetColor((Color)colorIterator);
 
-			glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]);
+		//	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]);
 
-			colorIterator++;
+		//	colorIterator++;
 
-			//prevents triangle from being black to ensure it can be seen
-			if (colorIterator == BLACK)
-			{
-				colorIterator++;
-			}
+		//	//prevents triangle from being black to ensure it can be seen
+		//	if (colorIterator == BLACK)
+		//	{
+		//		colorIterator++;
+		//	}
 
-			//loops back to RED
-			if (colorIterator == END_OF_COLOR_ENUM)
-			{
-				colorIterator = 0;
-			}
-		}
+		//	//loops back to RED
+		//	if (colorIterator == END_OF_COLOR_ENUM)
+		//	{
+		//		colorIterator = 0;
+		//	}
+		//}
+
+
 
 		//glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
 		
-		switch (i)
+		if (normalsIterator <= indexedNormals.size() - 1)
 		{
-		case 0:
-			glTexCoord2f(0.0f, 0.0f);
-
-		case 1:
-			glTexCoord2f(0.0f, 1.0f);
-
-		case 2:
-			glTexCoord2f(1.0f, 1.0f);
+			glNormal3f(indexedNormals[normalsIterator].x, indexedNormals[normalsIterator].y, indexedNormals[normalsIterator].z);
 		}
+		else
+		{
+			normalsIterator = 0; //loops texCoord iterator to ensure all surfaces are covered
+		}
+
+		normalsIterator++;
+		
+
+		//switch (i)
+		//{
+		//case 0:
+		//	glTexCoord2f(0.0f, 0.0f);
+
+		//case 1:
+		//	glTexCoord2f(0.0f, 1.0f);
+
+		//case 2:
+		//	glTexCoord2f(1.0f, 1.0f);
+		//}
 		//glTexCoord2f(textureCoordinates[i].u, textureCoordinates[i].v);
 		//glTexCoord2f(0.0f, 0.0f);
 		if (textCoordIterator <= indexedTextCoords.size() - 1)
@@ -257,35 +272,35 @@ bool Polygon3D::LoadVerticesFromFile()
 	int x, y, z;
 	char c;
 
-	int numVertices, numColors, numTextCoords, numIndices;
+	int numVertices, numNormals, numTextCoords, numIndices;
 
 	inFile >> numVertices;
 	//indexedVertices = new Vector3D[numVertices];
 
-	
 	for (int i = 0; i < numVertices; i++)
 	{
 		inFile >> x >> y >> z;
 		indexedVertices.push_back(Vector3D(x, y, z));
 	}
 
-	inFile >> numColors;
-	//indexedColors = new Vector3D[numColors];
-
-	for (int i = 0; i < numColors; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedColors.push_back(Vector3D(x, y, z));
-	}
-
 	inFile >> numTextCoords;
-	//indexedColors = new Vector3D[numColors];
+	//indexedNormals = new Vector3D[numNormals];
 
 	for (int i = 0; i < numTextCoords; i++)
 	{
 		inFile >> x >> y;
 		indexedTextCoords.push_back(TexCoord(GLfloat(x), GLfloat(y)));
 	}
+
+	inFile >> numNormals;
+	//indexedNormals = new Vector3D[numNormals];
+
+	for (int i = 0; i < numNormals; i++)
+	{
+		inFile >> x >> y >> z;
+		indexedNormals.push_back(Vector3D(x, y, z));
+	}
+
 
 	inFile >> numIndices;
 	indiciesAmount = numIndices;
@@ -297,7 +312,7 @@ bool Polygon3D::LoadVerticesFromFile()
 		indices.push_back(x);
 	}
 
-	/*int numVertices, numColors, numIndices;
+	/*int numVertices, numNormals, numIndices;
 
 	inFile >> numVertices;
 	indexedVertices = new Vector3D[numVertices];
@@ -309,13 +324,13 @@ bool Polygon3D::LoadVerticesFromFile()
 		printf("%i %i %i", x, y, z);
 	}
 
-	inFile >> numColors;
-	indexedColors = new Vector3D[numColors];
+	inFile >> numNormals;
+	indexedNormals = new Vector3D[numNormals];
 
-	for (int i = 0; i < numColors; i++)
+	for (int i = 0; i < numNormals; i++)
 	{
 		inFile >> x >> y >> z;
-		indexedColors[i] = Vector3D(x, y, z);
+		indexedNormals[i] = Vector3D(x, y, z);
 	}
 
 	inFile >> numIndices;
@@ -364,7 +379,7 @@ bool Polygon3D::LoadOBJFromFile()
 	int x, y, z;
 	char c;
 
-	int numVertices, numColors, numIndices;
+	int numVertices, numNormals, numIndices;
 
 	inFile >> numVertices;
 	//indexedVertices = new Vector3D[numVertices];
@@ -376,13 +391,13 @@ bool Polygon3D::LoadOBJFromFile()
 		indexedVertices.push_back(Vector3D(x, y, z));
 	}
 
-	inFile >> numColors;
-	//indexedColors = new Vector3D[numColors];
+	inFile >> numNormals;
+	//indexedNormals = new Vector3D[numNormals];
 
-	for (int i = 0; i < numColors; i++)
+	for (int i = 0; i < numNormals; i++)
 	{
 		inFile >> x >> y >> z;
-		indexedColors.push_back(Vector3D(x, y, z));
+		indexedNormals.push_back(Vector3D(x, y, z));
 	}
 
 	inFile >> numIndices;
@@ -395,7 +410,7 @@ bool Polygon3D::LoadOBJFromFile()
 		indices.push_back(x);
 	}
 
-	/*int numVertices, numColors, numIndices;
+	/*int numVertices, numNormals, numIndices;
 
 	inFile >> numVertices;
 	indexedVertices = new Vector3D[numVertices];
@@ -407,13 +422,13 @@ bool Polygon3D::LoadOBJFromFile()
 		printf("%i %i %i", x, y, z);
 	}
 
-	inFile >> numColors;
-	indexedColors = new Vector3D[numColors];
+	inFile >> numNormals;
+	indexedNormals = new Vector3D[numNormals];
 
-	for (int i = 0; i < numColors; i++)
+	for (int i = 0; i < numNormals; i++)
 	{
 		inFile >> x >> y >> z;
-		indexedColors[i] = Vector3D(x, y, z);
+		indexedNormals[i] = Vector3D(x, y, z);
 	}
 
 	inFile >> numIndices;
