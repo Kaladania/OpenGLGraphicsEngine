@@ -46,7 +46,7 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 void Polygon3D::Draw()
 {
 	textCoordIterator = 0;//resets texcoord iterator each draw call
-	//glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
+	glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
 	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);

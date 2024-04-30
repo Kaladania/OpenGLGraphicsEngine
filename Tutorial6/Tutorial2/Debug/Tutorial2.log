@@ -1,2 +1,23 @@
-﻿  Texture2D.cpp
+﻿  Polygon3D.cpp
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(105,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(46,7): message : see declaration of 'Polygon3D::Color'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(218,25): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(269,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(269,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(269,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(278,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(278,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(278,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(258,7): warning C4101: 'c': unreferenced local variable
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(376,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(376,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(376,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(385,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(385,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(385,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(365,7): warning C4101: 'c': unreferenced local variable
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(545,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(558,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(344): warning C4715: 'Polygon3D::LoadVerticesFromFile': not all control paths return a value
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(442): warning C4715: 'Polygon3D::LoadOBJFromFile': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
