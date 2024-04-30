@@ -1,16 +1,4 @@
-﻿  HelloGL.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(77,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(58,7): message : see declaration of 'HelloGL::Textures'
+﻿  Pyramid.cpp
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(105,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(46,7): message : see declaration of 'Polygon3D::Color'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(12,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(58,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(61,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(64,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(178,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(169,8): warning C4101: 'triangleCoordinates': unreferenced local variable
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(390,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(503,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(504,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(559,20): warning C4018: '<': signed/unsigned mismatch
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

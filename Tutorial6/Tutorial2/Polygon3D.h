@@ -50,7 +50,7 @@ protected:
 
 	bool switchDirection = false; //states wheither current rotation/translation should be inverted
 
-	Material material;
+	Material* material;
 
 	
 	//std::map <Textures, std::string> textureEnumToString;= { (PENGUINS, "Penguins"), (STARS, "Stars") };

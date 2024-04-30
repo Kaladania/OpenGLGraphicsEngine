@@ -20,10 +20,10 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, st
 	LoadVerticesFromFile();
 	LoadTextureFromFile();
 
-	material.ambient = { 0.80f, 0.0f, 0.05f, 1.0f};
-	material.diffuse = { 0.80f, 0.0f, 0.05f, 1.0f };
-	material.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material.shininess = 100.0f;
+	material->ambient = { 0.8f, 0.05f, 0.05f, 1.0f};
+	material->diffuse = { 0.80f, 0.05f, 0.05f, 1.0f };
+	material->specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->shininess = 100.0f;
 
 	//SetUpVertices(newVertexList);
 
@@ -45,7 +45,10 @@ Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed, std::
 	meshTextFileName = "Cube";
 	textureFileName = choosenTexture;
 
-	std::cout << "Rotation speed: " << translationSpeed << "\n";
+	material->ambient = { 0.8f, 0.05f, 0.05f, 1.0f };
+	material->diffuse = { 0.80f, 0.05f, 0.05f, 1.0f };
+	material->specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->shininess = 100.0f;
 
 	LoadVerticesFromFile();
 	LoadTextureFromFile();

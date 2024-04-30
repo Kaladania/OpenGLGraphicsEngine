@@ -20,6 +20,7 @@ Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotatio
 	translationSpeed = newTranslationSpeed;
 	rotationSpeed = newRotationSpeed;
 
+	material = new Material();
 	/*LoadVerticesFromFile();
 	LoadTextureFromFile();*/
 }
@@ -36,6 +37,7 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 	translationSpeed = newTranslationSpeed;
 	rotationSpeed = newRotationSpeed;
 
+	material = new Material();
 	/*LoadVerticesFromFile();
 	LoadTextureFromFile();*/
 }
@@ -53,6 +55,9 @@ void Polygon3D::Draw()
 	
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
 
+	glMaterialfv(GL_FRONT, GL_AMBIENT, &(material->ambient.x));
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material->diffuse.x));
+	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material->specular.x));
 	
 	glPushMatrix();
 
