@@ -86,6 +86,8 @@ public:
 
 	void PolygonMenu(int option);
 
+	void ToggleMenu(int option);
+
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
 
 	//void SetColor(std::array<float, 4>& colorArray);

@@ -151,16 +151,29 @@ void HelloGL::InitMenu()
 	glutAddMenuEntry("None", -1);
 
 	glutAttachMenu(GLUT_LEFT_BUTTON);
+
+	glutCreateMenu(GLUTCallbacks::ToggleMenu);
+
+	glutAddMenuEntry("Toggle Translation", 0);
+
+	glutSetMenu(0);
+	glutAddSubMenu("Toggle Settings", 1);
+
 }
 
 
 
 void HelloGL::PolygonMenu(int chosenOption)
 {
-	if (chosenOption > -1 && chosenOption <= polygonList.size())
+	if (chosenOption > -1 && chosenOption < polygonList.size())
 	{
 		printf("%s %i is chosen", polygonList[chosenOption]->GetPolygonName().c_str(), chosenOption);
 	}
+}
+
+void HelloGL::ToggleMenu(int chosenOption)
+{
+	printf("Chosen Toggle option: %i", chosenOption);
 }
 
 Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)

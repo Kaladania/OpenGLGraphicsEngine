@@ -1,4 +1,7 @@
-﻿  HelloGL.cpp
+﻿  GLUTCallbacks.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(77,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(58,7): message : see declaration of 'HelloGL::Textures'
+  HelloGL.cpp
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(77,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(58,7): message : see declaration of 'HelloGL::Textures'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(119,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
@@ -8,11 +11,38 @@ C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(60
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(63,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(66,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(145,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(160,40): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(206,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(197,8): warning C4101: 'triangleCoordinates': unreferenced local variable
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(418,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(531,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(532,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(587,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(168,40): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(219,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(210,8): warning C4101: 'triangleCoordinates': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(431,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(544,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(545,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(600,20): warning C4018: '<': signed/unsigned mismatch
+  Polygon3D.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(119,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(53,7): message : see declaration of 'Polygon3D::Color'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(220,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(245,25): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(295,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(295,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(295,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(313,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(313,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(313,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(285,7): warning C4101: 'c': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(403,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(403,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(403,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(412,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(412,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(412,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(392,7): warning C4101: 'c': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(572,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(585,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(77,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(58,7): message : see declaration of 'HelloGL::Textures'
+  Generating Code...
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(469): warning C4715: 'Polygon3D::LoadOBJFromFile': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(371): warning C4715: 'Polygon3D::LoadVerticesFromFile': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
