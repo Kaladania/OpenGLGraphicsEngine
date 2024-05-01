@@ -109,6 +109,11 @@ public:
 		return rotationSpeed;
 	}
 
+	std::string GetPolygonName()
+	{
+		return meshTextFileName;
+	}
+
 	//Enum of current color options
 	enum Color
 	{

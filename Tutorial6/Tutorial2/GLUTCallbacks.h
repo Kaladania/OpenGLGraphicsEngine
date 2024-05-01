@@ -8,4 +8,5 @@ namespace GLUTCallbacks
 	void Display();
 	void GameTimer(int prefferedRefresh);
 	void Keyboard(unsigned char key, int x, int y);
+	void PolygonMenu(int chosenOption);
 }
