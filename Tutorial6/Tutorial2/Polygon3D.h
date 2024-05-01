@@ -12,6 +12,13 @@
 
 class Texture2D;
 
+struct CustomisationToggles
+{
+	bool m_translatePolygon = true;
+	bool m_rotatePolygon = true;
+	bool m_scalePolygon = true;
+};
+
 class Polygon3D
 {
 protected:
@@ -51,6 +58,8 @@ protected:
 	bool switchDirection = false; //states wheither current rotation/translation should be inverted
 
 	Material* material;
+
+	CustomisationToggles m_customisationToggles;
 
 	
 	//std::map <Textures, std::string> textureEnumToString;= { (PENGUINS, "Penguins"), (STARS, "Stars") };
