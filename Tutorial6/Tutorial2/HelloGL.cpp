@@ -14,6 +14,8 @@ HelloGL::HelloGL(int argc, char* argv[])
 	InitGL(argc, argv);
 
 	InitObjects();
+
+	InitMenu();
 	
 
 	glutMainLoop();
@@ -134,6 +136,45 @@ void HelloGL::InitGL(int argc, char* argv[])
 	glCullFace(GL_BACK);
 }
 
+void HelloGL::InitMenu()
+{
+	glutCreateMenu(GLUTCallbacks::PolygonMenu);
+
+	//adds all loaded polygons to the polygon menu
+	std::string polygonName = "";
+	for (int i = 0; i < polygonList.size(); i++)
+	{
+		polygonName = "Shape " + std::to_string(i) + ": " + polygonList[i]->GetPolygonName();
+		glutAddMenuEntry(polygonName.c_str(), i);
+	}
+	
+	glutAddMenuEntry("None", -1);
+
+	glutAttachMenu(GLUT_LEFT_BUTTON);
+
+	glutCreateMenu(GLUTCallbacks::ToggleMenu);
+
+	glutAddMenuEntry("Toggle Translation", 0);
+
+	glutSetMenu(0);
+	glutAddSubMenu("Toggle Settings", 1);
+
+}
+
+
+
+void HelloGL::PolygonMenu(int chosenOption)
+{
+	if (chosenOption > -1 && chosenOption < polygonList.size())
+	{
+		printf("%s %i is chosen", polygonList[chosenOption]->GetPolygonName().c_str(), chosenOption);
+	}
+}
+
+void HelloGL::ToggleMenu(int chosenOption)
+{
+	printf("Chosen Toggle option: %i", chosenOption);
+}
 
 Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 {

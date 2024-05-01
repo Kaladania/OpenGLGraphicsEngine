@@ -33,4 +33,14 @@ namespace GLUTCallbacks //creates free methods wrappers to allow FreeGLUT to acc
 	{
 		helloGL->Keyboard(key, x, y);
 	}
+
+	void PolygonMenu(int chosenOption)
+	{
+		helloGL->PolygonMenu(chosenOption);
+	}
+
+	void ToggleMenu(int chosenOption)
+	{
+		helloGL->ToggleMenu(chosenOption);
+	}
 }

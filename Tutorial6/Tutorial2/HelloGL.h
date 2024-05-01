@@ -82,6 +82,11 @@ public:
 
 	void InitObjects();
 	void InitGL(int argc, char* argv[]);
+	void InitMenu();
+
+	void PolygonMenu(int option);
+
+	void ToggleMenu(int option);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
 
