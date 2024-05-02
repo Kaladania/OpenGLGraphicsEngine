@@ -66,6 +66,28 @@ protected:
 
 public:
 	
+	//Enum of current color options
+	enum Color
+	{
+		RED,
+		ORANGE,
+		YELLOW,
+		GREEN,
+		LIGHTBLUE,
+		DARKBLUE,
+		PURPLE,
+		BLACK,
+		WHITE,
+		END_OF_COLOR_ENUM
+
+	};
+
+	enum Transformations
+	{
+		TRANSLATION,
+		ROTATION,
+		SCALE
+	};
 
 	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
 	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
@@ -109,33 +131,13 @@ public:
 		return rotationSpeed;
 	}
 
-	std::string GetPolygonName()
-	{
-		return meshTextFileName;
-	}
+	std::string GetPolygonName() { return meshTextFileName; }
 
-	//Enum of current color options
-	enum Color
-	{
-		RED,
-		ORANGE,
-		YELLOW,
-		GREEN,
-		LIGHTBLUE,
-		DARKBLUE,
-		PURPLE,
-		BLACK,
-		WHITE,
-		END_OF_COLOR_ENUM
+	bool GetTranslationStatus() { return m_customisationToggles.m_translatePolygon; }
+	bool GetRotationStatus() { return m_customisationToggles.m_rotatePolygon; }
+	bool GetScaleStatus() { return m_customisationToggles.m_scalePolygon; }
 
-	};
-
-	
-
-	
-
-
-
+	void ToggleTranslation(Transformations transformationToToggle);
 	
 	void SetColor(const Color color);
 };
