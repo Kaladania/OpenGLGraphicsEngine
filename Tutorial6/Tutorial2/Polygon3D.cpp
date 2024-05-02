@@ -629,3 +629,21 @@ void Polygon3D::RotatePolygon()
 	}
 
 }
+
+void Polygon3D::ToggleTranslation(Transformations transformationToToggle)
+{
+	switch (transformationToToggle)
+	{
+	case TRANSLATION:
+		m_customisationToggles.m_translatePolygon = !m_customisationToggles.m_translatePolygon;
+		break;
+
+	case ROTATION:
+		m_customisationToggles.m_rotatePolygon = !m_customisationToggles.m_rotatePolygon;
+		break;
+
+	case SCALE:
+		m_customisationToggles.m_scalePolygon = !m_customisationToggles.m_scalePolygon;
+		break;
+	}
+}

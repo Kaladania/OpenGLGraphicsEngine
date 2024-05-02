@@ -1,6 +1,7 @@
 #include "HelloGL.h"
 #include "Cube.h"
 #include "Pyramid.h"
+#include "Header.h"
 //#include "Teapot.h"
 #include "Polygon3D.h"
 #include <algorithm>
@@ -138,7 +139,30 @@ void HelloGL::InitGL(int argc, char* argv[])
 
 void HelloGL::InitMenu()
 {
-	glutCreateMenu(GLUTCallbacks::PolygonMenu);
+	menuIDs[TRANSLATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::TranslationsMenu);
+
+	std::string polygonStatus = "";
+	for (int i = 0; i < polygonList.size(); i++)
+	{
+		glutAddMenuEntry(CreateTranformationMenuText(i, polygonList[i]->GetTranslationStatus()).c_str(), i);
+	}
+
+	menuIDs[TRANSFORMATION_MENU] = glutCreateMenu(GLUTCallbacks::TransformationsMenu);
+
+	/*glutAddMenuEntry("Toggle Auto Translation", 0);
+	glutAddMenuEntry("Toggle Auto Rotation", 1);
+	glutAddMenuEntry("Toggle Auto Scale", 2);*/
+
+	glutAddSubMenu("Toggle Auto Translation", menuIDs[TRANSLATION_STATUS_MENU]);
+
+	
+
+	menuIDs[TOGGLE_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
+
+	glutAddSubMenu("Toggle Auto Transformations", menuIDs[TRANSFORMATION_MENU]);
+
+
+	menuIDs[POLYGON_MENU] = glutCreateMenu(GLUTCallbacks::PolygonMenu);
 
 	//adds all loaded polygons to the polygon menu
 	std::string polygonName = "";
@@ -147,17 +171,12 @@ void HelloGL::InitMenu()
 		polygonName = "Shape " + std::to_string(i) + ": " + polygonList[i]->GetPolygonName();
 		glutAddMenuEntry(polygonName.c_str(), i);
 	}
-	
+
+	//glutSetMenu(0);
+	glutAddSubMenu("Toggle Settings", menuIDs[TOGGLE_MENU]);
+
 	glutAddMenuEntry("None", -1);
-
-	glutAttachMenu(GLUT_LEFT_BUTTON);
-
-	glutCreateMenu(GLUTCallbacks::ToggleMenu);
-
-	glutAddMenuEntry("Toggle Translation", 0);
-
-	glutSetMenu(0);
-	glutAddSubMenu("Toggle Settings", 1);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 }
 
@@ -174,6 +193,40 @@ void HelloGL::PolygonMenu(int chosenOption)
 void HelloGL::ToggleMenu(int chosenOption)
 {
 	printf("Chosen Toggle option: %i", chosenOption);
+}
+
+void HelloGL::TransformationsMenu(int chosenOption)
+{
+	printf("Chosen Transformation option: %i", chosenOption);
+}
+
+void HelloGL::TranslationsMenu(int chosenOption)
+{
+	printf("Chosen Translation option: %i", chosenOption);
+	polygonList[chosenOption]->ToggleTranslation(Polygon3D::TRANSLATION);
+
+	std::string newTranslationStatus = CreateTranformationMenuText(chosenOption, polygonList[chosenOption]->GetTranslationStatus());
+
+	//glutChangeToMenuEntry(menuIDs[TRANSLATION_STATUS_MENU], newTranslationStatus.c_str(), chosenOption);
+	
+}
+
+std::string HelloGL::CreateTranformationMenuText( const int polygonID, const bool isActive)
+{
+	std::string polygonStatus = "";
+
+	switch (isActive)
+	{
+	case true:
+		polygonStatus = "Shape " + std::to_string(polygonID) + ": ON";
+		break;
+
+	case false:
+		polygonStatus = "Shape " + std::to_string(polygonID) + ": OFF";
+		break;
+	}
+
+	return polygonStatus;
 }
 
 Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
@@ -199,6 +252,15 @@ Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 
 }
 
+void HelloGL::DrawTextString(std::string text, Vector3D position, Vector3D color)
+{
+	glPushMatrix();
+	glTranslatef(position.x, position.y, position.z);
+	glRasterPos2f(0.0f, 0.0f);
+	glColor3f(color.x, color.y, color.z);
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str());
+	glPopMatrix();
+}
 
 /// <summary>
 /// Draws objects into the scene
@@ -207,12 +269,12 @@ void HelloGL::Display()
 {
 	glClear(GL_COLOR_BUFFER_BIT); //clears the scene
 
-	float triangleCoordinates[3][2];
+	/*float triangleCoordinates[3][2];
 
 	vertex1 = std::make_tuple(-0.75f, 0.6f);
 	vertex2 = std::make_tuple(-0.55f, 0.6f);
 	vertex3 = std::make_tuple(-0.55f, 0.4f);
-	vertex4 = std::make_tuple(-0.75f, 0.4f);
+	vertex4 = std::make_tuple(-0.75f, 0.4f);*/
 
 	//glPushMatrix();
 
@@ -221,6 +283,8 @@ void HelloGL::Display()
 		polygonList[i]->Draw();
 	}
 	
+	DrawTextString("TEST STRING", { -1.4f, 0.7f, -1.0f }, { 0.0f, 1.0f, 0.0f });
+
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
 }

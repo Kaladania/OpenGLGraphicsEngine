@@ -20,6 +20,7 @@
 class Polygon3D;
 struct Camera;
 struct Lighting;
+struct Vector3D;
 //class Cube;
 struct Transformation
 {
@@ -56,8 +57,12 @@ private:
 	Lighting* lighting; //current light source
 
 	enum Textures;
+	
 	//std::string textureEnumStrings[END_OF_TEXTURE_ENUM] = { "Penguins, Stars" };
 	std::map <Textures, std::string> textureEnumToString = { {PENGUINS, "Penguins"}, {STARS, "Stars"} };
+
+	enum Menus;
+	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 
 
 
@@ -80,6 +85,17 @@ public:
 		END_OF_TEXTURE_ENUM
 	};
 
+	enum Menus
+	{
+		POLYGON_MENU,
+		TOGGLE_MENU,
+		TRANSFORMATION_MENU,
+		TRANSLATION_STATUS_MENU,
+		ROTATION_STATUS_MENU,
+		SCALING_STATUS_MENU,
+		END_OF_MENU_ENUM
+	};
+
 	void InitObjects();
 	void InitGL(int argc, char* argv[]);
 	void InitMenu();
@@ -87,8 +103,14 @@ public:
 	void PolygonMenu(int option);
 
 	void ToggleMenu(int option);
+	void TransformationsMenu(int option);
+	void TranslationsMenu(int option);
+
+	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
+
+	void DrawTextString(std::string text, Vector3D position, Vector3D color);
 
 	//void SetColor(std::array<float, 4>& colorArray);
 	void DrawQuadrilateral(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3, const std::tuple<float, float>& vertex4);
