@@ -99,6 +99,12 @@ void HelloGL::InitObjects()
 		}
 	}
 
+	//sets all menu values to -1
+	for (auto& menu : menusToUpdate)
+	{
+		menu.second = -1;
+	}
+
 
 }
 
@@ -149,6 +155,7 @@ void HelloGL::InitGL(int argc, char* argv[])
 	glCullFace(GL_BACK);
 }
 
+int test = 0;
 void HelloGL::InitMenu()
 {
 	menuIDs[TRANSLATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::TranslationsMenu);
@@ -157,6 +164,7 @@ void HelloGL::InitMenu()
 	for (int i = 0; i < polygonList.size(); i++)
 	{
 		glutAddMenuEntry(CreateTranformationMenuText(i, polygonList[i]->GetTranslationStatus()).c_str(), i);
+
 	}
 
 	menuIDs[TRANSFORMATION_MENU] = glutCreateMenu(GLUTCallbacks::TransformationsMenu);
@@ -166,7 +174,7 @@ void HelloGL::InitMenu()
 	glutAddMenuEntry("Toggle Auto Scale", 2);*/
 
 	glutAddSubMenu("Toggle Auto Translation", menuIDs[TRANSLATION_STATUS_MENU]);
-	glutAddSubMenu("Toggle Auto Translation 2", menuIDs[TRANSLATION_STATUS_MENU]);
+	//glutAddSubMenu("Toggle Auto Translation 2", menuIDs[TRANSLATION_STATUS_MENU]);
 
 	
 
@@ -191,6 +199,8 @@ void HelloGL::InitMenu()
 	glutAddMenuEntry("None", -1);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
+	//glutMenuStatusFunc()//GLUT_MENU_NOT_IN_USE 
+
 }
 
 
@@ -213,17 +223,27 @@ void HelloGL::TransformationsMenu(int chosenOption)
 	printf("Chosen Transformation option: %i", chosenOption);
 }
 
+/// <summary>
+/// Toggles the choosen polygon's state and sets a flag to update the menu entry
+/// </summary>
+/// <param name="chosenOption">Polygon to update</param>
 void HelloGL::TranslationsMenu(int chosenOption)
 {
 	printf("Chosen Translation option: %i", chosenOption);
 	polygonList[chosenOption]->ToggleTranslation(Polygon3D::TRANSLATION);
 
-	std::string newTranslationStatus = CreateTranformationMenuText(chosenOption, polygonList[chosenOption]->GetTranslationStatus());
-
-	//glutChangeToMenuEntry(menuIDs[TRANSLATION_STATUS_MENU], newTranslationStatus.c_str(), chosenOption);
+	//changes the value of the menu update map to reflect that the choosen polygon needs its entry changed
+	menusToUpdate[TRANSLATION_STATUS_MENU] = chosenOption;
+	
 	
 }
 
+/// <summary>
+/// Creates a new title for the menu entry depending on the passed in state
+/// </summary>
+/// <param name="polygonID">The polygon assigned to the entry</param>
+/// <param name="isActive">The current state to reflect</param>
+/// <returns>The formated text stating the current state of the passed in polygon index</returns>
 std::string HelloGL::CreateTranformationMenuText( const int polygonID, const bool isActive)
 {
 	std::string polygonStatus = "";
@@ -240,6 +260,20 @@ std::string HelloGL::CreateTranformationMenuText( const int polygonID, const boo
 	}
 
 	return polygonStatus;
+}
+
+
+/// <summary>
+/// Updates the translation menu to show the current translation status of the polygon
+/// </summary>
+/// <param name="polygonID">Polygon item to update</param>
+void HelloGL::ChangeMenuStatus(const int polygonID)
+{
+	std::string newTranslationStatus = CreateTranformationMenuText(polygonID, polygonList[polygonID]->GetTranslationStatus());
+
+	//changes the menu pointer to point to the translation menu and updates the text of the desired polygon menu entry
+	glutSetMenu(menuIDs[TRANSLATION_STATUS_MENU]);
+	glutChangeToMenuEntry(polygonID + 1, newTranslationStatus.c_str(), polygonID);
 }
 
 Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
@@ -312,6 +346,15 @@ void HelloGL::Update()
 	//triangleRotation = UpdateRotation(triangleRotation, 2.0f);
 
 	Vector3D polygonRotation = Vector3D();
+
+	for (auto& menu : menusToUpdate)
+	{
+		if (menu.second != -1)
+		{
+			ChangeMenuStatus(menu.second);
+			menu.second = -1;
+		}
+	}
 
 }
 

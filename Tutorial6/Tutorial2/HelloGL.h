@@ -32,6 +32,24 @@ struct Transformation
 	float scale;
 };
 
+//struct MenuUpdateNeed
+//{
+//	//union { //allows iterative access to axises
+//	//	struct {
+//	//		int TranslationMenu = -1;; //rotation on x axis
+//	//		//float y; //rotation on y axis
+//	//		//float z; //rotation on z axis
+//	//	};
+//	//	float menus[1];
+//	//};
+//	//
+//	int translationMenu = -1;; //rotation on x axis
+//	int maxNumOfMenus = 1;
+//	//		//float y; //rotation on y axis
+//	//		//float z; //rotation on z axis
+//
+//};
+
 class HelloGL
 {
 private:
@@ -68,6 +86,10 @@ private:
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 	
 	Text* bottomText = new Text;
+
+
+	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
+	
 
 
 
@@ -113,6 +135,7 @@ public:
 	void TranslationsMenu(int option);
 
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
+	void ChangeMenuStatus(const int polygonID);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
 
