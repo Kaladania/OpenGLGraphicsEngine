@@ -137,7 +137,8 @@ public:
 	bool GetRotationStatus() { return m_customisationToggles.m_rotatePolygon; }
 	bool GetScaleStatus() { return m_customisationToggles.m_scalePolygon; }
 
-	void ToggleTranslation(Transformations transformationToToggle);
+	void ToggleTranformation(Transformations transformationToToggle);
+	//void ToggleTranslation(Transformations transformationToToggle);
 	
 	void SetColor(const Color color);
 };

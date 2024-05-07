@@ -4,6 +4,8 @@
 #include <gl/GLU.h>
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
+#include "Text.h"
+#include "Text.h";
 #include <array>
 #include <tuple>
 #include <map>
@@ -17,6 +19,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 800
 
+//class Material;
 class Polygon3D;
 struct Camera;
 struct Lighting;
@@ -28,6 +31,24 @@ struct Transformation
 	float rotation;
 	float scale;
 };
+
+//struct MenuUpdateNeed
+//{
+//	//union { //allows iterative access to axises
+//	//	struct {
+//	//		int TranslationMenu = -1;; //rotation on x axis
+//	//		//float y; //rotation on y axis
+//	//		//float z; //rotation on z axis
+//	//	};
+//	//	float menus[1];
+//	//};
+//	//
+//	int translationMenu = -1;; //rotation on x axis
+//	int maxNumOfMenus = 1;
+//	//		//float y; //rotation on y axis
+//	//		//float z; //rotation on z axis
+//
+//};
 
 class HelloGL
 {
@@ -63,6 +84,16 @@ private:
 
 	enum Menus;
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
+	
+	Text* bottomText = new Text;
+	Text* annoucementText = new Text;
+
+	std::string newAnnouncement = "";
+
+
+	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
+	
+
 
 
 
@@ -105,13 +136,14 @@ public:
 	void ToggleMenu(int option);
 	void TransformationsMenu(int option);
 	void TranslationsMenu(int option);
+	void RotationsMenu(int option);
 
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
+	void ChangeMenuStatus(const Menus menu, const int polygonID);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
 
-	void DrawTextString(std::string text, Vector3D position, Vector3D color);
-
+	
 	//void SetColor(std::array<float, 4>& colorArray);
 	void DrawQuadrilateral(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3, const std::tuple<float, float>& vertex4);
 	void DrawFreeTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3);

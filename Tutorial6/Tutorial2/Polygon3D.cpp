@@ -1,6 +1,4 @@
 #include <Windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
 
@@ -630,7 +628,7 @@ void Polygon3D::RotatePolygon()
 
 }
 
-void Polygon3D::ToggleTranslation(Transformations transformationToToggle)
+void Polygon3D::ToggleTranformation(Transformations transformationToToggle)
 {
 	switch (transformationToToggle)
 	{

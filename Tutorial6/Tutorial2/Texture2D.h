@@ -1,6 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include <gl/GL.h>
+#include "freeglut.h"
 #include <string>
 //#include <gl/GLU.h>
 //#include "freeglut.h"
