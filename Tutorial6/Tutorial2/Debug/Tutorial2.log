@@ -1,20 +1,22 @@
 ﻿  HelloGL.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(82,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(59,7): message : see declaration of 'HelloGL::Textures'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(89,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(64,7): message : see declaration of 'HelloGL::Menus'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(21,15): warning C4099: 'Material': type name first seen using 'struct' now seen using 'class'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(308,8): message : see declaration of 'Material'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(87,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(61,7): message : see declaration of 'HelloGL::Textures'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(94,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(66,7): message : see declaration of 'HelloGL::Menus'
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(71,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(53,7): message : see declaration of 'Polygon3D::Color'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(13,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(61,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(64,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(67,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(145,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(169,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(187,40): warning C4018: '<': signed/unsigned mismatch
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(281,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(495,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(608,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(609,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(664,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(67,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(70,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(73,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(153,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(178,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(196,40): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(294,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(510,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(623,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(624,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(679,20): warning C4018: '<': signed/unsigned mismatch
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

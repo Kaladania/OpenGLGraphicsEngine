@@ -4,6 +4,7 @@
 #include "Header.h"
 //#include "Teapot.h"
 #include "Polygon3D.h"
+
 #include <algorithm>
 #include <time.h>
 
@@ -47,6 +48,11 @@ void HelloGL::InitObjects()
 	lighting->specular = { 0.2f, 0.2f, 0.2f, 1.0f };
 	lighting->position = { 0.0f, 0.0f, 0.0f, 1.0f };
 
+	material->ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material->shininess = 100.0f;
+
 	float newTranslation = 0;
 	float newScale = 0;
 	float newRotation = 0;
@@ -88,6 +94,8 @@ void HelloGL::InitObjects()
 			break;
 		}
 	}
+
+
 }
 
 /// <summary>
@@ -154,6 +162,7 @@ void HelloGL::InitMenu()
 	glutAddMenuEntry("Toggle Auto Scale", 2);*/
 
 	glutAddSubMenu("Toggle Auto Translation", menuIDs[TRANSLATION_STATUS_MENU]);
+	glutAddSubMenu("Toggle Auto Translation 2", menuIDs[TRANSLATION_STATUS_MENU]);
 
 	
 
@@ -252,13 +261,17 @@ Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 
 }
 
-void HelloGL::DrawTextString(std::string text, Vector3D position, Vector3D color)
+void HelloGL::DrawTextString(const char* text, Vector3D position, Vector3D color)
 {
+	glMaterialfv(GL_FRONT, GL_AMBIENT, &(material->ambient.x));
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material->diffuse.x));
+	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material->specular.x));
+
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
 	glRasterPos2f(0.0f, 0.0f);
 	glColor3f(color.x, color.y, color.z);
-	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str());
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text);
 	glPopMatrix();
 }
 
@@ -283,7 +296,9 @@ void HelloGL::Display()
 		polygonList[i]->Draw();
 	}
 	
-	DrawTextString("TEST STRING", { -1.4f, 0.7f, -1.0f }, { 0.0f, 1.0f, 0.0f });
+	std::string test = "Number of Polygons Loaded: " + std::to_string(polygonList.size());
+
+	DrawTextString(test.c_str(), {-0.4f, -0.4f, 0.0f}, {1.0f, 0.0f, 0.0f});
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
