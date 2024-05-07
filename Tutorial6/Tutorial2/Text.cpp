@@ -7,10 +7,10 @@
 
 Text::Text()
 {
-	material.ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material.diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material.specular = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material.shininess = 100.0f;
+	material.ambient = { 1.4f, 1.4f, 1.4f, 1.4f };
+	material.diffuse = { 1.4f, 1.4f, 1.4f, 1.4f };
+	material.specular = { 1.4f, 1.4f, 1.4f, 1.4f };
+	material.shininess = 400.0f;
 }
 
 Text::~Text()

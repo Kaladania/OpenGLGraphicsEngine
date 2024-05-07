@@ -86,6 +86,9 @@ private:
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 	
 	Text* bottomText = new Text;
+	Text* annoucementText = new Text;
+
+	std::string newAnnouncement = "";
 
 
 	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
@@ -133,9 +136,10 @@ public:
 	void ToggleMenu(int option);
 	void TransformationsMenu(int option);
 	void TranslationsMenu(int option);
+	void RotationsMenu(int option);
 
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
-	void ChangeMenuStatus(const int polygonID);
+	void ChangeMenuStatus(const Menus menu, const int polygonID);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
 

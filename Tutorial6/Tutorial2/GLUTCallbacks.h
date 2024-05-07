@@ -13,4 +13,5 @@ namespace GLUTCallbacks
 	void ToggleMenu(int chosenOption);
 	void TransformationsMenu(int chosenOption);
 	void TranslationsMenu(int chosenOption);
+	void RotationsMenu(int chosenOption);
 }

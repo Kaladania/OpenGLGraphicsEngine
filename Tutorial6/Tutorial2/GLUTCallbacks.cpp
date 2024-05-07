@@ -54,4 +54,11 @@ namespace GLUTCallbacks //creates free methods wrappers to allow FreeGLUT to acc
 		helloGL->TranslationsMenu(chosenOption);
 		//helloGL->ChangeMenuStatus(chosenOption);
 	}
+
+	void RotationsMenu(int chosenOption)
+	{
+		helloGL->RotationsMenu(chosenOption);
+		//helloGL->ChangeMenuStatus(chosenOption);
+	}
+
 }
