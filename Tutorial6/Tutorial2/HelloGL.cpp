@@ -28,6 +28,13 @@ HelloGL::HelloGL(int argc, char* argv[])
 HelloGL::~HelloGL(void)
 {
 	delete camera;
+	camera = nullptr;
+
+	delete lighting;
+	lighting = nullptr;
+
+	delete bottomText;
+	bottomText = nullptr;
 }
 
 /// <summary>
@@ -48,10 +55,7 @@ void HelloGL::InitObjects()
 	lighting->specular = { 0.2f, 0.2f, 0.2f, 1.0f };
 	lighting->position = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-	material->ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material->diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material->specular = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material->shininess = 100.0f;
+	
 
 	float newTranslation = 0;
 	float newScale = 0;
@@ -261,20 +265,6 @@ Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 
 }
 
-void HelloGL::DrawTextString(const char* text, Vector3D position, Vector3D color)
-{
-	glMaterialfv(GL_FRONT, GL_AMBIENT, &(material->ambient.x));
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material->diffuse.x));
-	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material->specular.x));
-
-	glPushMatrix();
-	glTranslatef(position.x, position.y, position.z);
-	glRasterPos2f(0.0f, 0.0f);
-	glColor3f(color.x, color.y, color.z);
-	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text);
-	glPopMatrix();
-}
-
 /// <summary>
 /// Draws objects into the scene
 /// </summary>
@@ -298,7 +288,7 @@ void HelloGL::Display()
 	
 	std::string test = "Number of Polygons Loaded: " + std::to_string(polygonList.size());
 
-	DrawTextString(test.c_str(), {-0.4f, -0.4f, 0.0f}, {1.0f, 0.0f, 0.0f});
+	bottomText->DrawString(test, {-0.4f, -0.4f, 0.0f});
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();

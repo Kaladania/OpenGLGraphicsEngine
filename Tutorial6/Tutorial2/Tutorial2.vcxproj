@@ -139,6 +139,7 @@
     <ClInclude Include="OLDVector3D.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Teapot.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClCompile Include="OLDVector3D.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Teapot.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
