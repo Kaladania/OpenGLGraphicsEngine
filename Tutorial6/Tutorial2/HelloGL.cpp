@@ -112,7 +112,30 @@ void HelloGL::InitObjects()
 
 	newAnnouncement = "Number of Polygons Loaded: " + std::to_string(polygonList.size());
 
+	linkedPolygonList->MakeNode(&head, polygonList[0]);
+	linkedPolygonList->PrintList(head);
 
+	head = linkedPolygonList->InsertFirst(&head, polygonList[1]);
+	linkedPolygonList->PrintList(head);
+
+	linkedPolygonList->InsertAfter(head, polygonList[3]);
+	linkedPolygonList->PrintList(head);
+
+	/*linkedPolygonList->DeleteAfter(head->nextNode);
+	linkedPolygonList->PrintList(head);*/
+
+	linkedPolygonList->GetNode(head, 1);
+	linkedPolygonList->GetNode(head, 0);
+	linkedPolygonList->GetNode(head, 4);
+
+	linkedPolygonList->Find(head, polygonList[3]);
+	linkedPolygonList->Find(head, polygonList[4]);
+
+	linkedPolygonList->DeleteAt(head, 1);
+	linkedPolygonList->PrintList(head);
+
+	linkedPolygonList->DeleteList(&head);
+	linkedPolygonList->PrintList(head);
 }
 
 /// <summary>

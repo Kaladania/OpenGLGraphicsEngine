@@ -135,6 +135,8 @@
     <ClInclude Include="GLUTCallbacks.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="HelloGL.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="ListNode.h" />
     <ClInclude Include="Polygon3D.h" />
     <ClInclude Include="OLDVector3D.h" />
     <ClInclude Include="Pyramid.h" />
@@ -146,6 +148,8 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GLUTCallbacks.cpp" />
     <ClCompile Include="HelloGL.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Polygon3D.cpp" />
     <ClCompile Include="OLDVector3D.cpp" />
