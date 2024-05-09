@@ -4,14 +4,15 @@
 #include <gl/GLU.h>
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
+
 #include "Text.h"
-#include "Text.h";
+#include "LinkedList.h"
+
+
 #include <array>
 #include <tuple>
 #include <map>
 #include <string>
-
-
 #include <vector>
 #include <memory>
 //#include "Header.h"
@@ -93,7 +94,8 @@ private:
 
 	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
 	
-
+	LinkedList* linkedPolygonList = new LinkedList();
+	ListNode* head = nullptr;
 
 
 

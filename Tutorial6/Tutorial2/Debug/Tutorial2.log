@@ -1,2 +1,27 @@
-﻿  Text.cpp
+﻿  HelloGL.cpp
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(115,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(81,7): message : see declaration of 'HelloGL::Textures'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(122,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(86,7): message : see declaration of 'HelloGL::Menus'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(71,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(53,7): message : see declaration of 'Polygon3D::Color'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(71,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(74,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(77,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(194,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(206,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(229,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(249,40): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(388,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(445,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(464,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(668,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(781,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(782,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(837,20): warning C4018: '<': signed/unsigned mismatch
+  LinkedList.cpp
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(71,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(53,7): message : see declaration of 'Polygon3D::Color'
+  Generating Code...
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
