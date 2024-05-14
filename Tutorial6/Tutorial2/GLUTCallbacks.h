@@ -14,4 +14,7 @@ namespace GLUTCallbacks
 	void TransformationsMenu(int chosenOption);
 	void TranslationsMenu(int chosenOption);
 	void RotationsMenu(int chosenOption);
+	void AddRemoveMenu(int chosenOption);
+	void AddPolygonMenu(int chosenOption);
+	void RemovePolygonMenu(int chosenOption);
 }

@@ -100,6 +100,8 @@ private:
 	LinkedList* linkedPolygonList = new LinkedList();
 	ListNode* head = nullptr;
 
+	int polygonMenuAmount = 0; //holds the amount of polygons current being shown in Polygon Menu
+
 
 
 public:
@@ -127,6 +129,9 @@ public:
 		POLYGON_MENU,
 		TOGGLE_MENU,
 		TRANSFORMATION_MENU,
+		ADD_REMOVE_MENU,
+		ADD_SHAPE_MENU,
+		REMOVE_SHAPE_MENU,
 		TRANSLATION_STATUS_MENU,
 		ROTATION_STATUS_MENU,
 		SCALING_STATUS_MENU,
@@ -137,12 +142,16 @@ public:
 	void InitGL(int argc, char* argv[]);
 	void InitMenu();
 
+	Polygon3D* CreateNewPolygon(Meshes newPolygon);
+
 	void PolygonMenu(int option);
 
 	void ToggleMenu(int option);
 	void TransformationsMenu(int option);
 	void TranslationsMenu(int option);
 	void RotationsMenu(int option);
+
+	void AddPolygon(Meshes newPolygon);
 
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
 	void ChangeMenuStatus(const Menus menu, const int polygonID);

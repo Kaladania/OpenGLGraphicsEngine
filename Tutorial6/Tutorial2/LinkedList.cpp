@@ -33,6 +33,7 @@ ListNode* LinkedList::MakeNode(ListNode** head, Polygon3D* data)
 	if (*head == nullptr)
 	{
 		*head = newNode;
+		m_size++;
 		return newNode;
 	}
 
