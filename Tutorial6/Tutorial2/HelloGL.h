@@ -72,6 +72,8 @@ private:
 	//std::vector<std::shared_ptr<Polygon3D>> polygonList;//list of all drawn polygons
 	//std::vector<Polygon3D* > polygonList;//list of all drawn polygons
 
+	Polygon3D* selectedPolygon = nullptr;
+
 	int polygonIndex = 0;
 
 	Camera* camera; //current camera view
@@ -120,6 +122,7 @@ public:
 
 	enum Menus
 	{
+		MAIN_MENU,
 		POLYGON_MENU,
 		TOGGLE_MENU,
 		TRANSFORMATION_MENU,

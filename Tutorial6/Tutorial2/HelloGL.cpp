@@ -89,11 +89,11 @@ void HelloGL::InitObjects()
 		switch (newMesh)
 		{
 		case HelloGL::CUBE:
-			//polygonList.push_back(new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]));
+			
 			linkedPolygonList->MakeNode(&head, new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]));
 			break;
 		case HelloGL::PYRAMID:
-			//polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]));
+			
 			linkedPolygonList->MakeNode(&head, new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]));
 			break;
 		default:
@@ -187,34 +187,43 @@ void HelloGL::InitGL(int argc, char* argv[])
 	glCullFace(GL_BACK);
 }
 
-int test = 0;
+//int test = 0;
 void HelloGL::InitMenu()
 {
-	menuIDs[TRANSLATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::TranslationsMenu);
+	//menuIDs[TRANSLATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::TranslationsMenu);
 
-	std::string polygonStatus = "";
-	for (int i = 0; i < linkedPolygonList->Size(); i++)
-	{
-		glutAddMenuEntry(CreateTranformationMenuText(i, linkedPolygonList->GetNode(head, i)->data->GetTranslationStatus()).c_str(), i);
+	////std::string polygonStatus = "";
+	///*for (int i = 0; i < linkedPolygonList->Size(); i++)
+	//{
+	//	polygonStatus = "Auto Translation: " + CreateTranformationMenuText(i, linkedPolygonList->GetNode(head, i)->data->GetTranslationStatus());
+	//	glutAddMenuEntry(polygonStatus.c_str(), i);
 
-	}
+	//}*/
 
-	
-	//glutAddSubMenu("Toggle Auto Translation 2", menuIDs[TRANSLATION_STATUS_MENU]);
+	//glutAddMenuEntry("Turn Transformation ON", 0);
+	//glutAddMenuEntry("Turn Transformation OFF", 1);
 
-	menuIDs[ROTATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::RotationsMenu);
+	//
+	////glutAddSubMenu("Toggle Auto Translation 2", menuIDs[TRANSLATION_STATUS_MENU]);
+
+	//
+	//menuIDs[ROTATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::RotationsMenu);
+
+	//glutAddMenuEntry("Turn Rotation ON", 0);
+	//glutAddMenuEntry("Turn Rotation OFF", 1);
 
 	//std::string polygonStatus = "";
-	for (int i = 0; i < linkedPolygonList->Size(); i++)
-	{
-		glutAddMenuEntry(CreateTranformationMenuText(i, linkedPolygonList->GetNode(head, i)->data->GetTranslationStatus()).c_str(), i);
+	//for (int i = 0; i < linkedPolygonList->Size(); i++)
+	//{
+	//	//polygonStatus = "Auto Rotation: " + CreateTranformationMenuText(i, linkedPolygonList->GetNode(head, i)->data->GetTranslationStatus());
+	//	//glutAddMenuEntry(polygonStatus.c_str(), i);
 
-	}
+	//}
 
 	menuIDs[TRANSFORMATION_MENU] = glutCreateMenu(GLUTCallbacks::TransformationsMenu);
 	
-	glutAddSubMenu("Toggle Auto Translation", menuIDs[TRANSLATION_STATUS_MENU]);
-	glutAddSubMenu("Toggle Auto Rotation", menuIDs[ROTATION_STATUS_MENU]);
+	glutAddMenuEntry("Toggle Auto Translation", 0);
+	glutAddMenuEntry("Toggle Auto Rotation", 1);
 	
 
 	
@@ -231,11 +240,14 @@ void HelloGL::InitMenu()
 	for (int i = 0; i < linkedPolygonList->Size(); i++)
 	{
 		polygonName = "Shape " + std::to_string(i) + ": " + linkedPolygonList->GetNode(head, i)->data->GetPolygonName();
+		//glutAddSubMenu(polygonName.c_str(), menuIDs[TRANSFORMATION_MENU]);
 		glutAddMenuEntry(polygonName.c_str(), i);
 	}
 
+	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::PolygonMenu);
 	//glutSetMenu(0);
-	glutAddSubMenu("Toggle Settings", menuIDs[TOGGLE_MENU]);
+	glutAddSubMenu("Select Shape", menuIDs[POLYGON_MENU]);
+	glutAddSubMenu("Toggle Automatic Transformations", menuIDs[TRANSFORMATION_MENU]);
 
 	glutAddMenuEntry("None", -1);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
@@ -250,7 +262,9 @@ void HelloGL::PolygonMenu(int chosenOption)
 {
 	if (chosenOption > -1 && chosenOption < linkedPolygonList->Size())
 	{
-		printf("%s %i is chosen", linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName().c_str(), chosenOption);
+		newAnnouncement = "Shape " + std::to_string(chosenOption) + ": " + linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName() + " was chosen";
+		selectedPolygon = linkedPolygonList->GetNode(head, chosenOption)->data;
+		//printf("%s %i is chosen", linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName().c_str(), chosenOption);
 	}
 }
 
@@ -261,7 +275,22 @@ void HelloGL::ToggleMenu(int chosenOption)
 
 void HelloGL::TransformationsMenu(int chosenOption)
 {
-	printf("Chosen Transformation option: %i", chosenOption);
+	switch (chosenOption)
+	{
+	case 0:
+
+		TranslationsMenu(chosenOption);
+		break;
+
+	case 1:
+		
+		RotationsMenu(chosenOption);
+		break;
+
+	default:
+		break;
+	}
+	//printf("Chosen Transformation option: %i", chosenOption);
 }
 
 /// <summary>
@@ -270,11 +299,19 @@ void HelloGL::TransformationsMenu(int chosenOption)
 /// <param name="chosenOption">Polygon to update</param>
 void HelloGL::TranslationsMenu(int chosenOption)
 {
-	printf("Chosen Translation option: %i", chosenOption);
-	linkedPolygonList->GetNode(head, chosenOption)->data->ToggleTranformation(Polygon3D::TRANSLATION);
+	//printf("Chosen Translation option: %i", chosenOption);
+
+	if (selectedPolygon != nullptr)
+	{
+		selectedPolygon->ToggleTranformation(Polygon3D::TRANSLATION);
+		menusToUpdate[TRANSLATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
+	}
+
+	//linkedPolygonList->fin
+	
 
 	//changes the value of the menu update map to reflect that the choosen polygon needs its entry changed
-	menusToUpdate[TRANSLATION_STATUS_MENU] = chosenOption;
+	
 	
 	
 }
@@ -285,11 +322,17 @@ void HelloGL::TranslationsMenu(int chosenOption)
 /// <param name="chosenOption">Polygon to update</param>
 void HelloGL::RotationsMenu(int chosenOption)
 {
-	printf("Chosen Translation option: %i", chosenOption);
-	linkedPolygonList->GetNode(head, chosenOption)->data->ToggleTranformation(Polygon3D::ROTATION);
+	//printf("Chosen Translation option: %i", chosenOption);
+	//linkedPolygonList->GetNode(head, chosenOption)->data->ToggleTranformation(Polygon3D::ROTATION);
 
-	//changes the value of the menu update map to reflect that the choosen polygon needs its entry changed
-	menusToUpdate[ROTATION_STATUS_MENU] = chosenOption;
+	////changes the value of the menu update map to reflect that the choosen polygon needs its entry changed
+	
+
+	if (selectedPolygon != nullptr)
+	{
+		selectedPolygon->ToggleTranformation(Polygon3D::ROTATION);
+		menusToUpdate[ROTATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
+	}
 
 
 }
@@ -304,7 +347,7 @@ std::string HelloGL::CreateTranformationMenuText( const int polygonID, const boo
 {
 	std::string polygonStatus = "";
 
-	switch (isActive)
+	/*switch (isActive)
 	{
 	case true:
 		polygonStatus = "Shape " + std::to_string(polygonID) + ": ON";
@@ -313,9 +356,16 @@ std::string HelloGL::CreateTranformationMenuText( const int polygonID, const boo
 	case false:
 		polygonStatus = "Shape " + std::to_string(polygonID) + ": OFF";
 		break;
-	}
+	}*/
 
-	return polygonStatus;
+	switch (isActive)
+	{
+	case true:
+		return "ON";
+
+	case false:
+		return "OFF";
+	}
 }
 
 
@@ -432,7 +482,7 @@ void HelloGL::Update()
 			switch (menu.first)
 			{
 			case TRANSLATION_STATUS_MENU:
-				newUpdateText += std::to_string(menu.second) + " : " + linkedPolygonList->GetNode(head, menu.second)->data->GetPolygonName() + "'s Auto Translation is now ";
+				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Auto Translation is now ";
 				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetTranslationStatus())
 				{
 				case true:
@@ -450,7 +500,7 @@ void HelloGL::Update()
 				break;
 
 			case ROTATION_STATUS_MENU:
-				newUpdateText += std::to_string(menu.second) + " : " + linkedPolygonList->GetNode(head, menu.second)->data->GetPolygonName() + "'s Auto Rotation is now ";
+				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Auto Rotation is now ";
 
 				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetTranslationStatus())
 				{
@@ -473,7 +523,7 @@ void HelloGL::Update()
 
 			
 
-			ChangeMenuStatus(menu.first, menu.second);
+			//ChangeMenuStatus(menu.first, menu.second);
 			menu.second = -1;
 		}
 

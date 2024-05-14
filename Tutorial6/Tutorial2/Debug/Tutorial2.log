@@ -1,25 +1,15 @@
-﻿  GLUTCallbacks.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(115,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(81,7): message : see declaration of 'HelloGL::Textures'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(122,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(86,7): message : see declaration of 'HelloGL::Menus'
-  HelloGL.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(115,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(81,7): message : see declaration of 'HelloGL::Textures'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(122,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(86,7): message : see declaration of 'HelloGL::Menus'
+﻿  HelloGL.cpp
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(117,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(83,7): message : see declaration of 'HelloGL::Textures'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(124,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(88,7): message : see declaration of 'HelloGL::Menus'
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(71,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(53,7): message : see declaration of 'Polygon3D::Color'
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(71,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(74,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(77,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(448,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(467,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-  main.cpp
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(115,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(81,7): message : see declaration of 'HelloGL::Textures'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(122,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(86,7): message : see declaration of 'HelloGL::Menus'
-  Generating Code...
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(498,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(517,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(369): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\a018073n\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
