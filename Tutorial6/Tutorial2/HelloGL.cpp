@@ -658,10 +658,19 @@ float HelloGL::UpdateRotation(float rotation, float rotationSpeed)
 
 }
 
-void HelloGL::ShowAllShapeData()
-{
-
-}
+//void HelloGL::ShowAllShapeData()
+//{
+//	dataToShow = "";
+//
+//	Polygon3D originalSelected
+//
+//	for (int i = 0; i < linkedPolygonList->Size(); i++)
+//	{
+//		dataToShow = "Shape " + std::to_string(polygonLocation) + ": " + linkedPolygonList->GetNode(head, polygonLocation)->data->GetPolygonName()
+//			+ "\nAuto Translate: " + CreateTranformationMenuText(0, selectedPolygon->GetTranslationStatus())
+//			+ "\nAuto Rotate: " + CreateTranformationMenuText(0, selectedPolygon->GetRotationStatus());
+//	}
+//}
 
 void HelloGL::UpdateShapeDataText()
 {

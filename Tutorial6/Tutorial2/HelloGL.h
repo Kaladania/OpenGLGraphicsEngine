@@ -166,7 +166,7 @@ public:
 	void Keyboard(unsigned char key, int x, int y);
 	float UpdateRotation(float rotation, float rotationSpeed);
 
-	void ShowAllShapeData();
+	//void ShowAllShapeData();
 	void UpdateShapeDataText();
 	//Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
 
