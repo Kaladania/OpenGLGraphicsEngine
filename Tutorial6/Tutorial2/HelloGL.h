@@ -88,10 +88,11 @@ private:
 	enum Menus;
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 	
-	Text* bottomText = new Text;
-	Text* annoucementText = new Text;
+	Text* updateText = new Text;
+	Text* dataText = new Text;
 
 	std::string newAnnouncement = "";
+	std::string dataToShow = "";
 
 
 	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
@@ -149,25 +150,28 @@ public:
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
 
 	
-	//void SetColor(std::array<float, 4>& colorArray);
-	void DrawQuadrilateral(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3, const std::tuple<float, float>& vertex4);
-	void DrawFreeTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3);
-	void DrawEqualTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const float sideLength);
-	void DrawRightTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const float sideLength);
-	void DrawIsoTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const float sideLength, const float bottomLength);
+	////void SetColor(std::array<float, 4>& colorArray);
+	//void DrawQuadrilateral(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3, const std::tuple<float, float>& vertex4);
+	//void DrawFreeTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const std::tuple<float, float>& vertex2, const std::tuple<float, float>& vertex3);
+	//void DrawEqualTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const float sideLength);
+	//void DrawRightTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const float sideLength);
+	//void DrawIsoTriangle(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const float sideLength, const float bottomLength);
 
-	void DrawEqualPolygon(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const int numberOfSides, const float sideLength, const std::tuple<float, float, float>& rotationAxis, const float rotationSpeed);
+	//void DrawEqualPolygon(std::array<float, 4>& colorCode, const std::tuple<float, float>& vertex1, const int numberOfSides, const float sideLength, const std::tuple<float, float, float>& rotationAxis, const float rotationSpeed);
 
-	void Draw3D();
+	//void Draw3D();
 	void Display();
 	void Update();
 
 	void Keyboard(unsigned char key, int x, int y);
 	float UpdateRotation(float rotation, float rotationSpeed);
+
+	void ShowAllShapeData();
+	void UpdateShapeDataText();
 	//Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
 
-	int FindPolygonInList(Polygon3D* polygon);
-	void DeletePolygon(Polygon3D* polygon);
+	//int FindPolygonInList(Polygon3D* polygon);
+	//void DeletePolygon(Polygon3D* polygon);
 
 	//void SetLight(Lighting* light, int ID);
 };

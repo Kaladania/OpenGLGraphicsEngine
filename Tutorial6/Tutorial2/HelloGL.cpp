@@ -33,8 +33,11 @@ HelloGL::~HelloGL(void)
 	delete lighting;
 	lighting = nullptr;
 
-	delete bottomText;
-	bottomText = nullptr;
+	delete updateText;
+	updateText = nullptr;
+
+	delete selectedPolygon;
+	selectedPolygon = nullptr;
 }
 
 /// <summary>
@@ -264,6 +267,9 @@ void HelloGL::PolygonMenu(int chosenOption)
 	{
 		newAnnouncement = "Shape " + std::to_string(chosenOption) + ": " + linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName() + " was chosen";
 		selectedPolygon = linkedPolygonList->GetNode(head, chosenOption)->data;
+
+		UpdateShapeDataText();
+
 		//printf("%s %i is chosen", linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName().c_str(), chosenOption);
 	}
 }
@@ -444,7 +450,9 @@ void HelloGL::Display()
 	}
 	
 	
-	bottomText->DrawString(newAnnouncement, {-0.4f, -0.4f, 0.0f});
+	updateText->DrawString(newAnnouncement, {-0.4f, -0.4f, 0.0f});
+
+	dataText->DrawString(dataToShow, { -0.4f, 0.38f, 0.0f });
 	//annoucementText->DrawString(newAnnouncement, { 0.0f, 0.0f, 0.0f });
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
@@ -471,6 +479,7 @@ void HelloGL::Update()
 	Vector3D polygonRotation = Vector3D();
 
 	std::string newUpdateText = "Shape ";
+	std::string newDataText = "Shape ";
 	int index = 0;
 	bool hasStateBeenChanged = false;
 
@@ -483,14 +492,17 @@ void HelloGL::Update()
 			{
 			case TRANSLATION_STATUS_MENU:
 				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Auto Translation is now ";
+				newDataText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "\nAuto Translation: ";
 				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetTranslationStatus())
 				{
 				case true:
 					newUpdateText += "ON.";
+					newDataText += "ON";
 					break;
 
 				case false:
 					newUpdateText += "OFF.";
+					newDataText += "OFF";
 					break;
 
 				default:
@@ -501,15 +513,18 @@ void HelloGL::Update()
 
 			case ROTATION_STATUS_MENU:
 				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Auto Rotation is now ";
+				newDataText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "\nAuto Rotation: ";
 
 				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetTranslationStatus())
 				{
 				case true:
 					newUpdateText += "ON.";
+					newDataText += "ON";
 					break;
 
 				case false:
 					newUpdateText += "OFF.";
+					newDataText += "OFF";
 					break;
 
 				default:
@@ -533,6 +548,7 @@ void HelloGL::Update()
 	if (hasStateBeenChanged)
 	{
 		newAnnouncement = newUpdateText;
+		UpdateShapeDataText();
 	}
 }
 
@@ -640,6 +656,20 @@ float HelloGL::UpdateRotation(float rotation, float rotationSpeed)
 
 	return rotation;
 
+}
+
+void HelloGL::ShowAllShapeData()
+{
+
+}
+
+void HelloGL::UpdateShapeDataText()
+{
+	int polygonLocation = linkedPolygonList->Find(head, selectedPolygon);
+
+	dataToShow = "Shape " + std::to_string(polygonLocation) + ": " + linkedPolygonList->GetNode(head, polygonLocation)->data->GetPolygonName()
+		+ "\nAuto Translate: " + CreateTranformationMenuText(0, selectedPolygon->GetTranslationStatus())
+		+ "\nAuto Rotate: " + CreateTranformationMenuText(0, selectedPolygon->GetRotationStatus());
 }
 
 ///// <summary>
