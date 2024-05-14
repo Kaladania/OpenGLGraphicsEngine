@@ -45,6 +45,7 @@ ListNode* LinkedList::MakeNode(ListNode** head, Polygon3D* data)
 	//adds the newly created node to the last node's next pointer - making the newly created node the new last node in the list
 	last->nextNode = newNode;
 
+	m_size++;
 	return newNode;
 }
 
@@ -64,6 +65,7 @@ ListNode* LinkedList::InsertFirst(ListNode** head, Polygon3D* data)
 	//replaces the old head as the new head of the list
 	*head = newNode;
 
+	m_size++;
 	return newNode;
 }
 
@@ -76,6 +78,8 @@ void LinkedList::InsertAfter(ListNode* lastNode, Polygon3D* data)
 	//sets the newly create node's nextNode to be the previous node's next node (is placed right after the currently passed in node
 	newNode->nextNode = lastNode->nextNode;
 	lastNode->nextNode = newNode;
+
+	m_size++;
 }
 
 /// <summary>
@@ -103,6 +107,8 @@ void LinkedList::DeleteList(ListNode** node)
 	//cleans up by deleting the temp pointers
 	delete pTemp;
 	delete next;
+
+	m_size = 0;
 }
 
 /// <summary>
@@ -122,6 +128,7 @@ void LinkedList::DeleteAfter(ListNode* node)
 		delete pTemp; //deletes the current node
 	}
 
+	m_size--;
 }
 
 /// <summary>
@@ -140,7 +147,7 @@ ListNode* LinkedList::GetNode(ListNode* node, int position)
 		//returns the node at the passed in position
 		if (count == position)
 		{
-			std::cout << "Data stored at Position: " << position << " is: " << node->data->GetPolygonName() << std::endl;
+			//std::cout << "Data stored at Position: " << position << " is: " << node->data->GetPolygonName() << std::endl;
 			return node;
 		}
 
@@ -170,7 +177,7 @@ int LinkedList::Find(ListNode* node, Polygon3D* index)
 		//returns the node at the passed in position
 		if (node->data == index)
 		{
-			std::cout << "Node has been found at Position: " << count << std::endl;
+			//std::cout << "Node has been found at Position: " << count << std::endl;
 			return count;
 		}
 
@@ -263,4 +270,5 @@ void LinkedList::DeleteAt(ListNode* node, int position)
 		node = node->nextNode;
 	}
 
+	m_size--;
 }

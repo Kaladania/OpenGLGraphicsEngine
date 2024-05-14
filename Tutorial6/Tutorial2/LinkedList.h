@@ -16,7 +16,8 @@ class LinkedList
 {
 private:
 
-	
+	int m_size = 0; //amount of nodes in list
+
 public:
 	LinkedList();
 	~LinkedList();
@@ -30,6 +31,7 @@ public:
 	ListNode* GetNode(ListNode* node, int position);
 	int Find(ListNode* node, Polygon3D* data);
 	void PrintList(ListNode* node);
+	int Size() { return m_size; }
 
 };
 

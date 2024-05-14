@@ -70,7 +70,7 @@ private:
 	std::tuple<float, float, float> translationAxis = std::make_tuple(0.0f, 0.0f, 0.0f);
 
 	//std::vector<std::shared_ptr<Polygon3D>> polygonList;//list of all drawn polygons
-	std::vector<Polygon3D* > polygonList;//list of all drawn polygons
+	//std::vector<Polygon3D* > polygonList;//list of all drawn polygons
 
 	int polygonIndex = 0;
 
