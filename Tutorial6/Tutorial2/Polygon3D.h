@@ -11,12 +11,15 @@
 #include "Texture2D.h"
 
 class Texture2D;
+class Vector3D;
+class Vector4D;
 
 struct CustomisationToggles
 {
 	bool m_translatePolygon = true;
 	bool m_rotatePolygon = true;
 	bool m_scalePolygon = true;
+	bool isVisible = true;
 };
 
 class Polygon3D
@@ -50,8 +53,8 @@ protected:
 	float rotation = 0; //current rotation
 	float translationSpeed = 0; //speed of automatic translation
 
-	enum Color; //forward declarion of enum color
-	Color color = WHITE; //shape color
+	//enum Color; //forward declarion of enum color
+	//Color color = WHITE; //shape color
 
 	std::array<float, 4> colorArray = { 1.0f, 1.0f, 1.0f, 0.0f }; //array holding the interger values for the enum colour
 
@@ -67,7 +70,7 @@ protected:
 public:
 	
 	//Enum of current color options
-	enum Color
+	/*enum Color
 	{
 		RED,
 		ORANGE,
@@ -80,13 +83,16 @@ public:
 		WHITE,
 		END_OF_COLOR_ENUM
 
-	};
+	};*/
 
-	enum Transformations
+	enum ToggleStates
 	{
 		TRANSLATION,
 		ROTATION,
-		SCALE
+		SCALE,
+		MATERIAL,
+		LIGHTING,
+		VISIBILITY
 	};
 
 	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
@@ -136,11 +142,12 @@ public:
 	bool GetTranslationStatus() { return m_customisationToggles.m_translatePolygon; }
 	bool GetRotationStatus() { return m_customisationToggles.m_rotatePolygon; }
 	bool GetScaleStatus() { return m_customisationToggles.m_scalePolygon; }
+	bool GetToggleStatus(ToggleStates transformationToToggle);
 
-	void ToggleTranformation(Transformations transformationToToggle);
+	void ToggleTranformation(ToggleStates transformationToToggle);
 	//void ToggleTranslation(Transformations transformationToToggle);
 	
-	void SetColor(const Color color);
+	//void SetColor(const Color color);
 };
 
 #endif // !_POLYGON

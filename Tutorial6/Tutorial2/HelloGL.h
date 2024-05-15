@@ -100,6 +100,13 @@ private:
 	LinkedList* linkedPolygonList = new LinkedList();
 	ListNode* head = nullptr;
 
+	int polygonMenuAmount = 0; //holds the amount of polygons current being shown in Polygon Menu
+
+	/*std::map<Color, std::array<float, 4>> enumToColorArray =
+	{ {RED, {1.0f, 0.0f, 0.0f, 0.0f}}, {ORANGE, {1.0f, 0.5f, 0.0f, 0.0f}}, {BLACK, {0.0f, 0.0f, 0.0f, 0.0f}} };*/
+
+	std::array<float, 4> backgroundColorArray;
+
 
 
 public:
@@ -127,15 +134,38 @@ public:
 		POLYGON_MENU,
 		TOGGLE_MENU,
 		TRANSFORMATION_MENU,
+		ADD_REMOVE_MENU,
+		ADD_SHAPE_MENU,
+		REMOVE_SHAPE_MENU,
 		TRANSLATION_STATUS_MENU,
 		ROTATION_STATUS_MENU,
 		SCALING_STATUS_MENU,
+		VISIBILITY_STATUS_MENU,
+		BACKGROUND_COLOUR_MENU,
 		END_OF_MENU_ENUM
+	};
+
+
+	enum Color
+	{
+		RED,
+		ORANGE,
+		YELLOW,
+		GREEN,
+		LIGHTBLUE,
+		DARKBLUE,
+		PURPLE,
+		BLACK,
+		WHITE,
+		END_OF_COLOR_ENUM
+
 	};
 
 	void InitObjects();
 	void InitGL(int argc, char* argv[]);
 	void InitMenu();
+
+	Polygon3D* CreateNewPolygon(Meshes newPolygon);
 
 	void PolygonMenu(int option);
 
@@ -144,10 +174,16 @@ public:
 	void TranslationsMenu(int option);
 	void RotationsMenu(int option);
 
+	void AddPolygon(Meshes newPolygon);
+
+	void ChangeBackgroundColour(Color chosenColor);
+
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
 	void ChangeMenuStatus(const Menus menu, const int polygonID);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
+
+	void SetColor(const Color color, std::array<float, 4>& colorArray);
 
 	
 	////void SetColor(std::array<float, 4>& colorArray);

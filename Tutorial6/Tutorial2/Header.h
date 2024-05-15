@@ -322,3 +322,4 @@ struct Lighting
 
 	Vector4D position; //position of light
 };
+
