@@ -5,12 +5,14 @@
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
 
-Text::Text()
+Text::Text(void* attribute)
 {
 	material.ambient = { 1.4f, 1.4f, 1.4f, 1.4f };
 	material.diffuse = { 1.4f, 1.4f, 1.4f, 1.4f };
 	material.specular = { 1.4f, 1.4f, 1.4f, 1.4f };
 	material.shininess = 400.0f;
+
+	textAttribute = attribute;
 }
 
 Text::~Text()
@@ -26,9 +28,9 @@ void Text::DrawString(std::string text, Vector3D position)
 
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
-	glRasterPos2f(0.0f, 0.0f);
+	glRasterPos3f(0.0f, 0.0f, 0.0f);
 	//glColor3f(color.x, color.y, color.z);
-	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str());
+	glutBitmapString(textAttribute, (unsigned char*)text.c_str());
 	glPopMatrix();
 }
 

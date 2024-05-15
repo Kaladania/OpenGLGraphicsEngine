@@ -6,7 +6,7 @@
 /// </summary>
 Texture2D::Texture2D()
 {
-
+	
 }
 
 /// <summary>
@@ -14,9 +14,17 @@ Texture2D::Texture2D()
 /// </summary>
 Texture2D::~Texture2D()
 {
-
+	delete textureData;
+	textureData = nullptr;
 }
 
+/// <summary>
+/// Chooses weither to run the RAW or PNG loader based on texture file extension
+/// </summary>
+/// <param name="path">filepath</param>
+/// <param name="width">texture width</param>
+/// <param name="height">texture height</param>
+/// <returns>if the load was successful</returns>
 bool Texture2D::LoadTexture(std::string path, const int width, const int height)
 {
 	const int pathLength = path.length();
@@ -41,7 +49,7 @@ bool Texture2D::LoadTexture(std::string path, const int width, const int height)
 /// <param name="path">file path to texture</param>
 /// <param name="width">texture width</param>
 /// <param name="height">texture height</param>
-/// <returns></returns>
+/// <returns>if the load was successful</returns>
 bool Texture2D::LoadRAW(std::string path, const int width, const int height)
 {
 	int fileSize = 0;
@@ -86,12 +94,12 @@ bool Texture2D::LoadRAW(std::string path, const int width, const int height)
 
 
 /// <summary>
-/// Loads in a new texture (RAW ONLY)
+/// Loads in a new texture (PNG ONLY)
 /// </summary>
 /// <param name="path">file path to texture</param>
 /// <param name="width">texture width</param>
 /// <param name="height">texture height</param>
-/// <returns></returns>
+/// <returns>if the load was successful</returns>
 bool Texture2D::LoadPNG(std::string path, const int width, const int height)
 {
 	int fileSize = 0;

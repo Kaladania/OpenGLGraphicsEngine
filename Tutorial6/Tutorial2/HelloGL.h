@@ -33,6 +33,12 @@ struct Transformation
 	float scale;
 };
 
+//struct CameraParent
+//{
+//	bool isParented = false;
+//	Vector3D parentPosition;
+//};
+
 //struct MenuUpdateNeed
 //{
 //	//union { //allows iterative access to axises
@@ -80,19 +86,19 @@ private:
 
 	Lighting* lighting; //current light source
 
-	enum Textures;
-	
 	//std::string textureEnumStrings[END_OF_TEXTURE_ENUM] = { "Penguins, Stars" };
-	std::map <Textures, std::string> textureEnumToString = { {PENGUINS, "Penguins"}, {STARS, "Stars"} };
+	//std::map <Textures, std::string> textureEnumToString = { {PENGUINS, "Penguins"}, {STARS, "Stars"} };
 
 	enum Menus;
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 	
-	Text* updateText = new Text;
-	Text* dataText = new Text;
+	Text* updateText = new Text(GLUT_BITMAP_TIMES_ROMAN_24);
+	Text* dataText = new Text(GLUT_BITMAP_HELVETICA_18);
+	Text* cameraPosText = new Text(GLUT_BITMAP_HELVETICA_18);
 
 	std::string newAnnouncement = "";
 	std::string dataToShow = "";
+	std::string newCameraPosition = "";
 
 
 	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
@@ -101,6 +107,10 @@ private:
 	ListNode* head = nullptr;
 
 	int polygonMenuAmount = 0; //holds the amount of polygons current being shown in Polygon Menu
+
+	//CameraParent cameraParent;
+
+	Polygon3D* cameraParent = nullptr;
 
 	/*std::map<Color, std::array<float, 4>> enumToColorArray =
 	{ {RED, {1.0f, 0.0f, 0.0f, 0.0f}}, {ORANGE, {1.0f, 0.5f, 0.0f, 0.0f}}, {BLACK, {0.0f, 0.0f, 0.0f, 0.0f}} };*/
@@ -118,15 +128,11 @@ public:
 	{
 		CUBE,
 		PYRAMID,
+		TEAPOT,
 		END_OF_MESH_ENUM
 	};
 
-	enum Textures
-	{
-		PENGUINS,
-		STARS,
-		END_OF_TEXTURE_ENUM
-	};
+	
 
 	enum Menus
 	{
@@ -137,11 +143,14 @@ public:
 		ADD_REMOVE_MENU,
 		ADD_SHAPE_MENU,
 		REMOVE_SHAPE_MENU,
+		MATERIAL_MENU,
 		TRANSLATION_STATUS_MENU,
 		ROTATION_STATUS_MENU,
 		SCALING_STATUS_MENU,
 		VISIBILITY_STATUS_MENU,
 		BACKGROUND_COLOUR_MENU,
+		TRACKING_MENU,
+		
 		END_OF_MENU_ENUM
 	};
 
@@ -173,10 +182,13 @@ public:
 	void TransformationsMenu(int option);
 	void TranslationsMenu(int option);
 	void RotationsMenu(int option);
+	void MaterialMenu(int chosenOption);
 
 	void AddPolygon(Meshes newPolygon);
 
 	void ChangeBackgroundColour(Color chosenColor);
+
+	void SetObjectTracking(int chosenOption);
 
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
 	void ChangeMenuStatus(const Menus menu, const int polygonID);
@@ -204,6 +216,8 @@ public:
 
 	//void ShowAllShapeData();
 	void UpdateShapeDataText();
+	void UpdateCameraPosText();
+	//void UpdateCameraPosition();
 	//Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
 
 	//int FindPolygonInList(Polygon3D* polygon);

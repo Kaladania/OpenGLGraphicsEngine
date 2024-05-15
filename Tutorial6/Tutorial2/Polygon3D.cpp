@@ -13,7 +13,7 @@
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture)
+Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
@@ -30,7 +30,7 @@ Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotatio
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture)
+Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
@@ -47,7 +47,11 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 void Polygon3D::Draw()
 {
 	textCoordIterator = 0;//resets texcoord iterator each draw call
-	glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
+
+	if (texture != nullptr)
+	{
+		glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
+	}
 	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
@@ -121,6 +125,11 @@ void Polygon3D::Draw()
 			TranslatePolygon(Vector3D(-(translation.x), translation.y, translation.z));
 			break;
 		}
+	}
+	else if (m_customisationToggles.manualControl)
+	{
+		//sets translation to update based on objects position for manual control
+		TranslatePolygon(position);
 	}
 	
 
@@ -369,110 +378,43 @@ bool Polygon3D::LoadVerticesFromFile()
 
 }
 
-/// <summary>
-/// Reads vertices from a txt file to store in the object's vertex list
-/// </summary>
-/// <returns></returns>
-bool Polygon3D::LoadOBJFromFile()
-{
-	std::string filePath = "Polygons/" + meshTextFileName + ".obj";
 
-	std::ifstream inFile;
-
-	inFile.open(filePath);
-
-	if (!inFile.good())
-	{
-		std::cerr << "Can't open obj tfile:  " << filePath << std::endl;
-		return false;
-	}
-
-	int x, y, z;
-	char c;
-
-	int numVertices, numNormals, numIndices;
-
-	inFile >> numVertices;
-	//indexedVertices = new Vector3D[numVertices];
-
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedVertices.push_back(Vector3D(x, y, z));
-	}
-
-	inFile >> numNormals;
-	//indexedNormals = new Vector3D[numNormals];
-
-	for (int i = 0; i < numNormals; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedNormals.push_back(Vector3D(x, y, z));
-	}
-
-	inFile >> numIndices;
-	indiciesAmount = numIndices;
-	//indices = new int[numIndices];
-
-	for (int i = 0; i < numIndices; i++)
-	{
-		inFile >> x;
-		indices.push_back(x);
-	}
-
-	/*int numVertices, numNormals, numIndices;
-
-	inFile >> numVertices;
-	indexedVertices = new Vector3D[numVertices];
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedVertices[i] = Vector3D(x, y, z);
-		printf("%i %i %i", x, y, z);
-	}
-
-	inFile >> numNormals;
-	indexedNormals = new Vector3D[numNormals];
-
-	for (int i = 0; i < numNormals; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedNormals[i] = Vector3D(x, y, z);
-	}
-
-	inFile >> numIndices;
-	indices = new GLfloat[numIndices];
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x;
-		indices[i] = x;
-	}*/
-
-	//while (!inFile.eof())
-	//{
-	//	while ((inFile >> x >> y >> z))
-	//	{
-	//		vertexList.push_back(Vector3D(x, y, z));
-	//		//printf(" %i, %i, %i", x, y, z);
-	//	}
-	//}
-
-
-
-
-	inFile.close();
-
-}
-
-bool Polygon3D::LoadTextureFromFile()
+bool Polygon3D::LoadTextureFromFile(Textures newTexture)
 {
 	//loads in a new texture
 	//Texture2D* texture = new Texture2D();
+
+	if (texture != nullptr)
+	{
+		delete texture;
+		texture = nullptr;
+	}
+
 	texture = new Texture2D();
-	bool success = texture->LoadTexture("Textures/" + textureFileName + ".raw", 512, 512);
+	std::string filePath = "";
+	int tileSize = 0;
+
+	switch (newTexture)
+	{
+	case Polygon3D::PENGUINS:
+
+		filePath = "Textures/Penguins.raw";
+		tileSize = 512;
+		break;
+
+	case Polygon3D::STARS:
+
+		filePath = "Textures/Stars.raw";
+		tileSize = 512;
+		break;
+
+	case Polygon3D::END_OF_TEXTURE_ENUM:
+		break;
+	default:
+		break;
+	}
+
+	bool success = texture->LoadTexture(filePath, tileSize, tileSize);
 	//glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;
@@ -596,6 +538,8 @@ void Polygon3D::TranslatePolygon(Vector3D translationVector)
 {
 	glTranslatef(translationVector.x, translationVector.y, translationVector.z);
 
+	position = translationVector;
+
 	if (translation > 0.5f && !switchDirection)
 	{
 		switchDirection = true;
@@ -647,6 +591,10 @@ void Polygon3D::ToggleTranformation(ToggleStates transformationToToggle)
 
 	case VISIBILITY:
 		m_customisationToggles.isVisible = !m_customisationToggles.isVisible;
+		break;
+
+	case MANUAL:
+		m_customisationToggles.manualControl = !m_customisationToggles.manualControl;
 		break;
 	}
 }

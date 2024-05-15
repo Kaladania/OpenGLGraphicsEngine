@@ -20,7 +20,10 @@ struct CustomisationToggles
 	bool m_rotatePolygon = true;
 	bool m_scalePolygon = true;
 	bool isVisible = true;
+	bool manualControl = false;
 };
+
+enum Textures;
 
 class Polygon3D
 {
@@ -43,10 +46,12 @@ protected:
 
 	//std::vector<Texture2D*> textures;
 	Texture2D* texture = nullptr;
+	Textures currentTexture;
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
-	Vector3D rotationDirection; //current rotation direction
+	Vector3D rotationDirection = Vector3D(); //current rotation direction
 	Vector3D translation = Vector3D(); //translation vector
+	Vector3D position = Vector3D();
 	Vector3D scale = Vector3D(1.0f, 1.0f, 1.0f); //scale vector
 
 	float rotationSpeed = 0; //speed of automatic rotation
@@ -92,17 +97,25 @@ public:
 		SCALE,
 		MATERIAL,
 		LIGHTING,
-		VISIBILITY
+		VISIBILITY,
+		MANUAL
 	};
 
-	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
-	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
+	enum Textures
+	{
+		PENGUINS,
+		STARS,
+		END_OF_TEXTURE_ENUM
+	};
+
+	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, Textures chosenTexture = PENGUINS);
+	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0, Textures chosenTexture = PENGUINS);
 
 	virtual void Draw();
 
 	bool LoadVerticesFromFile();
-	bool LoadOBJFromFile();
-	bool LoadTextureFromFile();
+	
+	bool LoadTextureFromFile(Textures newTexture);
 
 	virtual void ScalePolygon(Vector3D scale, std::vector<Vector3D>& vertexList);
 	virtual void ScalePolygon(float scale, std::vector<Vector3D>& vertexList);
@@ -118,6 +131,9 @@ public:
 	{
 		return rotation;
 	}
+
+	Vector3D GetPosition() { return position;}
+	void SetPosition(Vector3D newPosition) { position = newPosition; }
 
 	//Updates rotation direction
 	void SetRotation(Vector3D rotationAxis)
