@@ -17,6 +17,7 @@ struct CustomisationToggles
 	bool m_translatePolygon = true;
 	bool m_rotatePolygon = true;
 	bool m_scalePolygon = true;
+	bool isVisible = true;
 };
 
 class Polygon3D
@@ -82,11 +83,14 @@ public:
 
 	};
 
-	enum Transformations
+	enum ToggleStates
 	{
 		TRANSLATION,
 		ROTATION,
-		SCALE
+		SCALE,
+		MATERIAL,
+		LIGHTING,
+		VISIBILITY
 	};
 
 	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
@@ -136,8 +140,9 @@ public:
 	bool GetTranslationStatus() { return m_customisationToggles.m_translatePolygon; }
 	bool GetRotationStatus() { return m_customisationToggles.m_rotatePolygon; }
 	bool GetScaleStatus() { return m_customisationToggles.m_scalePolygon; }
+	bool GetToggleStatus(ToggleStates transformationToToggle);
 
-	void ToggleTranformation(Transformations transformationToToggle);
+	void ToggleTranformation(ToggleStates transformationToToggle);
 	//void ToggleTranslation(Transformations transformationToToggle);
 	
 	void SetColor(const Color color);

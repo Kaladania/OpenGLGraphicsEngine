@@ -3,14 +3,15 @@ C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(120,
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(83,7): message : see declaration of 'HelloGL::Textures'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(127,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(88,7): message : see declaration of 'HelloGL::Menus'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(71,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(53,7): message : see declaration of 'Polygon3D::Color'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(72,2): warning C4240: nonstandard extension used: access to 'Polygon3D::Color' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(54,7): message : see declaration of 'Polygon3D::Color'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(245,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(248,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(251,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(598,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(620,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(284): warning C4715: 'HelloGL::CreateNewPolygon': not all control paths return a value
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(423): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(246,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(249,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(252,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(606,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(625,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(643,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(285): warning C4715: 'HelloGL::CreateNewPolygon': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(439): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

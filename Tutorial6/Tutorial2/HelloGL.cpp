@@ -191,6 +191,7 @@ void HelloGL::InitMenu()
 	
 	glutAddMenuEntry("Toggle Auto Translation", 0);
 	glutAddMenuEntry("Toggle Auto Rotation", 1);
+	glutAddMenuEntry("Toggle Visibility", 2);
 	
 
 	menuIDs[ADD_SHAPE_MENU] = glutCreateMenu(GLUTCallbacks::AddPolygonMenu);
@@ -303,20 +304,35 @@ void HelloGL::ToggleMenu(int chosenOption)
 
 void HelloGL::TransformationsMenu(int chosenOption)
 {
-	switch (chosenOption)
+	if (selectedPolygon != nullptr)
 	{
-	case 0:
+		switch (chosenOption)
+		{
+		case 0:
 
-		TranslationsMenu(chosenOption);
-		break;
+			//TranslationsMenu(chosenOption);
 
-	case 1:
-		
-		RotationsMenu(chosenOption);
-		break;
+			selectedPolygon->ToggleTranformation(Polygon3D::TRANSLATION);
+			menusToUpdate[TRANSLATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
+			break;
 
-	default:
-		break;
+		case 1:
+
+			//RotationsMenu(chosenOption);
+
+			selectedPolygon->ToggleTranformation(Polygon3D::ROTATION);
+			menusToUpdate[ROTATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
+			break;
+
+		case 2:
+
+			selectedPolygon->ToggleTranformation(Polygon3D::VISIBILITY);
+			menusToUpdate[VISIBILITY_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
+			break;
+
+		default:
+			break;
+		}
 	}
 	//printf("Chosen Transformation option: %i", chosenOption);
 }
@@ -511,18 +527,14 @@ void HelloGL::Display()
 {
 	glClear(GL_COLOR_BUFFER_BIT); //clears the scene
 
-	/*float triangleCoordinates[3][2];
-
-	vertex1 = std::make_tuple(-0.75f, 0.6f);
-	vertex2 = std::make_tuple(-0.55f, 0.6f);
-	vertex3 = std::make_tuple(-0.55f, 0.4f);
-	vertex4 = std::make_tuple(-0.75f, 0.4f);*/
-
-	//glPushMatrix();
-
 	for (int i = 0; i < linkedPolygonList->Size(); i++)
 	{
-		linkedPolygonList->GetNode(head, i)->data->Draw();
+		//draws polygon if its visibility is enabled
+		if (linkedPolygonList->GetNode(head, i)->data->GetToggleStatus(Polygon3D::VISIBILITY))
+		{
+			linkedPolygonList->GetNode(head, i)->data->Draw();
+		}
+		
 		//polygonList[i]->Draw();
 	}
 	
@@ -530,7 +542,6 @@ void HelloGL::Display()
 	updateText->DrawString(newAnnouncement, {-0.4f, -0.4f, 0.0f});
 
 	dataText->DrawString(dataToShow, { -0.4f, 0.38f, 0.0f });
-	//annoucementText->DrawString(newAnnouncement, { 0.0f, 0.0f, 0.0f });
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
@@ -580,17 +591,14 @@ void HelloGL::Update()
 
 			case TRANSLATION_STATUS_MENU:
 				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Auto Translation is now ";
-				//newDataText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "\nAuto Translation: ";
-				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetTranslationStatus())
+				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetToggleStatus(Polygon3D::TRANSLATION))
 				{
 				case true:
 					newUpdateText += "ON.";
-					//newDataText += "ON";
 					break;
 
 				case false:
 					newUpdateText += "OFF.";
-					//newDataText += "OFF";
 					break;
 
 				default:
@@ -601,18 +609,33 @@ void HelloGL::Update()
 
 			case ROTATION_STATUS_MENU:
 				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Auto Rotation is now ";
-				//newDataText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "\nAuto Rotation: ";
-
-				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetTranslationStatus())
+	
+				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetToggleStatus(Polygon3D::ROTATION))
 				{
 				case true:
 					newUpdateText += "ON.";
-					//newDataText += "ON";
 					break;
 
 				case false:
 					newUpdateText += "OFF.";
-					//newDataText += "OFF";
+					break;
+
+				default:
+					break;
+				}
+				break;
+
+			case VISIBILITY_STATUS_MENU:
+				newUpdateText += std::to_string(menu.second) + " : " + selectedPolygon->GetPolygonName() + "'s Visibility is now ";
+
+				switch (linkedPolygonList->GetNode(head, menu.second)->data->GetToggleStatus(Polygon3D::VISIBILITY))
+				{
+				case true:
+					newUpdateText += "ON.";
+					break;
+
+				case false:
+					newUpdateText += "OFF.";
 					break;
 
 				default:
@@ -752,6 +775,7 @@ void HelloGL::UpdateShapeDataText()
 	int polygonLocation = linkedPolygonList->Find(head, selectedPolygon);
 
 	dataToShow = "Shape " + std::to_string(polygonLocation) + ": " + linkedPolygonList->GetNode(head, polygonLocation)->data->GetPolygonName()
-		+ "\nAuto Translate: " + CreateTranformationMenuText(0, selectedPolygon->GetTranslationStatus())
-		+ "\nAuto Rotate: " + CreateTranformationMenuText(0, selectedPolygon->GetRotationStatus());
+		+ "\nAuto Translate: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::TRANSLATION))
+		+ "\nAuto Rotate: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::ROTATION))
+		+ "\nVisibility: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::VISIBILITY));
 }

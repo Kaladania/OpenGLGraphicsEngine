@@ -628,7 +628,7 @@ void Polygon3D::RotatePolygon()
 
 }
 
-void Polygon3D::ToggleTranformation(Transformations transformationToToggle)
+void Polygon3D::ToggleTranformation(ToggleStates transformationToToggle)
 {
 	switch (transformationToToggle)
 	{
@@ -643,5 +643,38 @@ void Polygon3D::ToggleTranformation(Transformations transformationToToggle)
 	case SCALE:
 		m_customisationToggles.m_scalePolygon = !m_customisationToggles.m_scalePolygon;
 		break;
+
+	case VISIBILITY:
+		m_customisationToggles.isVisible = !m_customisationToggles.isVisible;
+		break;
 	}
+}
+
+bool Polygon3D::GetToggleStatus(ToggleStates toggleRequest)
+{
+	switch (toggleRequest)
+	{
+	case Polygon3D::TRANSLATION:
+		return m_customisationToggles.m_translatePolygon;
+
+	case Polygon3D::ROTATION:
+		return m_customisationToggles.m_rotatePolygon;
+
+	case Polygon3D::SCALE:
+		return m_customisationToggles.m_scalePolygon;
+
+	case Polygon3D::MATERIAL:
+		break;
+
+	case Polygon3D::LIGHTING:
+		break;
+
+	case Polygon3D::VISIBILITY:
+		return m_customisationToggles.isVisible;
+
+	default:
+		break;
+	}
+
+	return true;
 }
