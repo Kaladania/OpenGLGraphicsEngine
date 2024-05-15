@@ -128,6 +128,7 @@ public:
 	{
 		CUBE,
 		PYRAMID,
+		TEAPOT,
 		END_OF_MESH_ENUM
 	};
 

@@ -47,7 +47,11 @@ Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSp
 void Polygon3D::Draw()
 {
 	textCoordIterator = 0;//resets texcoord iterator each draw call
-	glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
+
+	if (texture != nullptr)
+	{
+		glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
+	}
 	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
@@ -387,39 +391,75 @@ bool Polygon3D::LoadOBJFromFile()
 		return false;
 	}
 
-	int x, y, z;
+	float x, y, z;
 	char c;
 
+	char identifier, signX, signY, signZ;
 	int numVertices, numNormals, numIndices;
 
-	inFile >> numVertices;
+	inFile >> identifier;
+
+	std::string float1, float2, float3;
+	Vector3D tempVector;
 	//indexedVertices = new Vector3D[numVertices];
 
-
-	for (int i = 0; i < numVertices; i++)
+	while (true)
 	{
-		inFile >> x >> y >> z;
-		indexedVertices.push_back(Vector3D(x, y, z));
+		inFile >> float1;
+		inFile >> float2;
+		inFile >> float3;
+		//float test = std::stof(line);
+		//printf("%f\n\n%f", test, std::stof(line));
+		indexedVertices.push_back(Vector3D(std::stof(float1), std::stof(float2), std::stof(float3)));
+
+		inFile >> identifier;
+
+		if (identifier != 'v')
+		{
+			break;
+		}
 	}
 
-	inFile >> numNormals;
+	while (inFile.peek() != EOF)
+	{
+		inFile >> float1;
+		inFile >> float2;
+		inFile >> float3;
+		//float test = std::stof(line);
+		//printf("%f\n\n%f", test, std::stof(line));
+		indices.push_back(std::stof(float1) - 1);
+		indices.push_back(std::stof(float2) - 1);
+		indices.push_back(std::stof(float3) - 1);
+
+		inFile >> identifier;
+	}
+
+	indiciesAmount = indices.size();
+
+	/*for (int i = 1; i < numVertices; i++)
+	{
+		inFile >> w >> x >> y >> z;
+		indexedVertices.push_back(Vector3D(x, y, z));
+	}*/
+
+	//inFile >> numNormals;
 	//indexedNormals = new Vector3D[numNormals];
 
-	for (int i = 0; i < numNormals; i++)
+	/*for (int i = 1; i < numNormals; i++)
 	{
 		inFile >> x >> y >> z;
 		indexedNormals.push_back(Vector3D(x, y, z));
-	}
+	}*/
 
-	inFile >> numIndices;
-	indiciesAmount = numIndices;
-	//indices = new int[numIndices];
+	//inFile >> numIndices;
+	//indiciesAmount = numIndices;
+	////indices = new int[numIndices];
 
-	for (int i = 0; i < numIndices; i++)
-	{
-		inFile >> x;
-		indices.push_back(x);
-	}
+	//for (int i = 1; i < numIndices; i++)
+	//{
+	//	inFile >> x;
+	//	indices.push_back(x);
+	//}
 
 	/*int numVertices, numNormals, numIndices;
 

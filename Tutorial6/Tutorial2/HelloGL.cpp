@@ -2,7 +2,7 @@
 #include "Cube.h"
 #include "Pyramid.h"
 #include "Header.h"
-//#include "Teapot.h"
+#include "Teapot.h"
 #include "Polygon3D.h"
 
 #include <algorithm>
@@ -228,6 +228,7 @@ void HelloGL::InitMenu()
 	//adds new menu entries with the menu value of each entry corrisponding to the enum value for accurate conversion
 	glutAddMenuEntry("Add New Cube", int(CUBE));
 	glutAddMenuEntry("Add New Pyramid", int(PYRAMID));
+	glutAddMenuEntry("Add New Teapot", int(TEAPOT));
 
 
 	menuIDs[ADD_REMOVE_MENU] = glutCreateMenu(GLUTCallbacks::AddRemoveMenu);
@@ -322,6 +323,11 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 
 		return linkedPolygonList->MakeNode(&head, new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, newTexture))->data;
 		//break;
+
+	case HelloGL::TEAPOT:
+
+		return linkedPolygonList->MakeNode(&head, new Teapot(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation))->data;
+
 
 	default:
 		break;

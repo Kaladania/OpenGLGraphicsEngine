@@ -1,2 +1,6 @@
-﻿  Texture2D.cpp
+﻿  Teapot.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(6,8): message : see declaration of 'Vector3D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(146,8): message : see declaration of 'Vector4D'
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe
