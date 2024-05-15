@@ -2,6 +2,7 @@
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
 
+
 #include "Polygon3D.h"
 #include <iostream>
 #include <fstream>
@@ -479,87 +480,87 @@ bool Polygon3D::LoadTextureFromFile()
 
 
 
-/// <summary>
-/// Returns an array of color values
-/// </summary>
-/// <param name="color">The color being requested</param>
-/// <param name="colorArray">Array of float values representing R, G, B and A</param>
-void Polygon3D::SetColor(const Color color)
-{
-	this->color = color;
-	switch (color)
-	{
-	case RED:
-		colorArray[0] = 1.0f;
-		colorArray[1] = 0.0f;
-		colorArray[2] = 0.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case ORANGE:
-		colorArray[0] = 1.0f;
-		colorArray[1] = 0.5f;
-		colorArray[2] = 0.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case YELLOW:
-		colorArray[0] = 1.0f;
-		colorArray[1] = 1.0f;
-		colorArray[2] = 0.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case GREEN:
-		colorArray[0] = 0.0f;
-		colorArray[1] = 1.0f;
-		colorArray[2] = 0.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case LIGHTBLUE:
-		colorArray[0] = 0.0f;
-		colorArray[1] = 1.0f;
-		colorArray[2] = 1.0f;
-		colorArray[3] = 1.0f;
-		break;
-
-	case DARKBLUE:
-		colorArray[0] = 0.0f;
-		colorArray[1] = 0.0f;
-		colorArray[2] = 1.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case PURPLE:
-		colorArray[0] = 1.0f;
-		colorArray[1] = 0.0f;
-		colorArray[2] = 1.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case BLACK:
-		colorArray[0] = 0.0f;
-		colorArray[1] = 0.0f;
-		colorArray[2] = 0.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	case WHITE:
-		colorArray[0] = 1.0f;
-		colorArray[1] = 1.0f;
-		colorArray[2] = 1.0f;
-		colorArray[3] = 0.0f;
-		break;
-
-	default: //returns white if current color is not supported
-		colorArray[0] = 1.0f;
-		colorArray[1] = 1.0f;
-		colorArray[2] = 1.0f;
-		colorArray[3] = 0.0f;
-		break;
-	}
-}
+///// <summary>
+///// Returns an array of color values
+///// </summary>
+///// <param name="color">The color being requested</param>
+///// <param name="colorArray">Array of float values representing R, G, B and A</param>
+//void Polygon3D::SetColor(const Color color)
+//{
+//	this->color = color;
+//	switch (color)
+//	{
+//	case RED:
+//		colorArray[0] = 1.0f;
+//		colorArray[1] = 0.0f;
+//		colorArray[2] = 0.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case ORANGE:
+//		colorArray[0] = 1.0f;
+//		colorArray[1] = 0.5f;
+//		colorArray[2] = 0.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case YELLOW:
+//		colorArray[0] = 1.0f;
+//		colorArray[1] = 1.0f;
+//		colorArray[2] = 0.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case GREEN:
+//		colorArray[0] = 0.0f;
+//		colorArray[1] = 1.0f;
+//		colorArray[2] = 0.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case LIGHTBLUE:
+//		colorArray[0] = 0.0f;
+//		colorArray[1] = 1.0f;
+//		colorArray[2] = 1.0f;
+//		colorArray[3] = 1.0f;
+//		break;
+//
+//	case DARKBLUE:
+//		colorArray[0] = 0.0f;
+//		colorArray[1] = 0.0f;
+//		colorArray[2] = 1.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case PURPLE:
+//		colorArray[0] = 1.0f;
+//		colorArray[1] = 0.0f;
+//		colorArray[2] = 1.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case BLACK:
+//		colorArray[0] = 0.0f;
+//		colorArray[1] = 0.0f;
+//		colorArray[2] = 0.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	case WHITE:
+//		colorArray[0] = 1.0f;
+//		colorArray[1] = 1.0f;
+//		colorArray[2] = 1.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//
+//	default: //returns white if current color is not supported
+//		colorArray[0] = 1.0f;
+//		colorArray[1] = 1.0f;
+//		colorArray[2] = 1.0f;
+//		colorArray[3] = 0.0f;
+//		break;
+//	}
+//}
 
 /// <summary>
 /// Scales the Polygon by the given vector

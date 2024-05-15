@@ -76,4 +76,9 @@ namespace GLUTCallbacks //creates free methods wrappers to allow FreeGLUT to acc
 	{
 		//helloGL->R
 	}
+
+	void BackgroundColourMenu(int chosenOption)
+	{
+		helloGL->ChangeBackgroundColour(HelloGL::Color(chosenOption));
+	}
 }

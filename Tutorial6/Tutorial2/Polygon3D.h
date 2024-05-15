@@ -11,6 +11,8 @@
 #include "Texture2D.h"
 
 class Texture2D;
+class Vector3D;
+class Vector4D;
 
 struct CustomisationToggles
 {
@@ -51,8 +53,8 @@ protected:
 	float rotation = 0; //current rotation
 	float translationSpeed = 0; //speed of automatic translation
 
-	enum Color; //forward declarion of enum color
-	Color color = WHITE; //shape color
+	//enum Color; //forward declarion of enum color
+	//Color color = WHITE; //shape color
 
 	std::array<float, 4> colorArray = { 1.0f, 1.0f, 1.0f, 0.0f }; //array holding the interger values for the enum colour
 
@@ -68,7 +70,7 @@ protected:
 public:
 	
 	//Enum of current color options
-	enum Color
+	/*enum Color
 	{
 		RED,
 		ORANGE,
@@ -81,7 +83,7 @@ public:
 		WHITE,
 		END_OF_COLOR_ENUM
 
-	};
+	};*/
 
 	enum ToggleStates
 	{
@@ -145,7 +147,7 @@ public:
 	void ToggleTranformation(ToggleStates transformationToToggle);
 	//void ToggleTranslation(Transformations transformationToToggle);
 	
-	void SetColor(const Color color);
+	//void SetColor(const Color color);
 };
 
 #endif // !_POLYGON

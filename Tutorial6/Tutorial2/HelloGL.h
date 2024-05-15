@@ -102,6 +102,11 @@ private:
 
 	int polygonMenuAmount = 0; //holds the amount of polygons current being shown in Polygon Menu
 
+	/*std::map<Color, std::array<float, 4>> enumToColorArray =
+	{ {RED, {1.0f, 0.0f, 0.0f, 0.0f}}, {ORANGE, {1.0f, 0.5f, 0.0f, 0.0f}}, {BLACK, {0.0f, 0.0f, 0.0f, 0.0f}} };*/
+
+	std::array<float, 4> backgroundColorArray;
+
 
 
 public:
@@ -136,7 +141,24 @@ public:
 		ROTATION_STATUS_MENU,
 		SCALING_STATUS_MENU,
 		VISIBILITY_STATUS_MENU,
+		BACKGROUND_COLOUR_MENU,
 		END_OF_MENU_ENUM
+	};
+
+
+	enum Color
+	{
+		RED,
+		ORANGE,
+		YELLOW,
+		GREEN,
+		LIGHTBLUE,
+		DARKBLUE,
+		PURPLE,
+		BLACK,
+		WHITE,
+		END_OF_COLOR_ENUM
+
 	};
 
 	void InitObjects();
@@ -154,10 +176,14 @@ public:
 
 	void AddPolygon(Meshes newPolygon);
 
+	void ChangeBackgroundColour(Color chosenColor);
+
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
 	void ChangeMenuStatus(const Menus menu, const int polygonID);
 
 	Transformation SanitiseTransformation(Transformation newMeshTransform);
+
+	void SetColor(const Color color, std::array<float, 4>& colorArray);
 
 	
 	////void SetColor(std::array<float, 4>& colorArray);

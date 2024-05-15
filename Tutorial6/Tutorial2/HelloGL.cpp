@@ -157,6 +157,18 @@ void HelloGL::InitGL(int argc, char* argv[])
 //int test = 0;
 void HelloGL::InitMenu()
 {
+	menuIDs[BACKGROUND_COLOUR_MENU] = glutCreateMenu(GLUTCallbacks::BackgroundColourMenu);
+
+	glutAddMenuEntry("Red", int(RED));
+	glutAddMenuEntry("Orange", int(ORANGE));
+	glutAddMenuEntry("Yellow", int(YELLOW));
+	glutAddMenuEntry("Green", int(GREEN));
+	glutAddMenuEntry("Light Blue", int(LIGHTBLUE));
+	glutAddMenuEntry("Dark Blue", int(DARKBLUE));
+	glutAddMenuEntry("Purple", int(PURPLE));
+	glutAddMenuEntry("Black", int(BLACK));
+	glutAddMenuEntry("White", int(WHITE));
+
 	//menuIDs[TRANSLATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::TranslationsMenu);
 
 	////std::string polygonStatus = "";
@@ -226,10 +238,12 @@ void HelloGL::InitMenu()
 	}
 
 	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::PolygonMenu);
+
 	//glutSetMenu(0);
 	glutAddSubMenu("Select Shape", menuIDs[POLYGON_MENU]);
 	glutAddSubMenu("Toggle Automatic Transformations", menuIDs[TRANSFORMATION_MENU]);
 	glutAddSubMenu("Add/Remove Shape", menuIDs[ADD_REMOVE_MENU]);
+	glutAddSubMenu("Change Background Color", menuIDs[BACKGROUND_COLOUR_MENU]);
 
 	glutAddMenuEntry("None", -1);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
@@ -405,6 +419,13 @@ void HelloGL::AddPolygon(Meshes newPolygon)
 	//sets the selected polygon as the newly created polygon
 	//selectedPolygon = linkedPolygonList->GetNode(head, linkedPolygonList->Size())->data;
 	menusToUpdate[POLYGON_MENU] = 0;
+}
+
+
+void HelloGL::ChangeBackgroundColour(Color chosenColor)
+{
+	SetColor(Color(chosenColor), backgroundColorArray);
+	glClearColor(backgroundColorArray[0], backgroundColorArray[1], backgroundColorArray[2], backgroundColorArray[3]);
 }
 
 /// <summary>
@@ -737,6 +758,15 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 		polygonRotation = UpdateRotation(polygonRotation, 2.0f);
 		break;
 
+	case 'g':
+
+		glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+		break;
+
+	case 'h':
+
+		glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+		break;
 	
 	}
 
@@ -778,4 +808,87 @@ void HelloGL::UpdateShapeDataText()
 		+ "\nAuto Translate: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::TRANSLATION))
 		+ "\nAuto Rotate: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::ROTATION))
 		+ "\nVisibility: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::VISIBILITY));
+}
+
+
+
+/// <summary>
+/// Returns an array of color values
+/// </summary>
+/// <param name="color">The color being requested</param>
+/// <param name="colorArray">Array of float values representing R, G, B and A</param>
+void HelloGL::SetColor(const Color color, std::array<float, 4>& colorArray)
+{
+	switch (color)
+	{
+	case RED:
+		colorArray[0] = 1.0f;
+		colorArray[1] = 0.0f;
+		colorArray[2] = 0.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case ORANGE:
+		colorArray[0] = 1.0f;
+		colorArray[1] = 0.5f;
+		colorArray[2] = 0.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case YELLOW:
+		colorArray[0] = 1.0f;
+		colorArray[1] = 1.0f;
+		colorArray[2] = 0.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case GREEN:
+		colorArray[0] = 0.0f;
+		colorArray[1] = 1.0f;
+		colorArray[2] = 0.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case LIGHTBLUE:
+		colorArray[0] = 0.0f;
+		colorArray[1] = 1.0f;
+		colorArray[2] = 1.0f;
+		colorArray[3] = 1.0f;
+		break;
+
+	case DARKBLUE:
+		colorArray[0] = 0.0f;
+		colorArray[1] = 0.0f;
+		colorArray[2] = 1.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case PURPLE:
+		colorArray[0] = 1.0f;
+		colorArray[1] = 0.0f;
+		colorArray[2] = 1.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case BLACK:
+		colorArray[0] = 0.0f;
+		colorArray[1] = 0.0f;
+		colorArray[2] = 0.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	case WHITE:
+		colorArray[0] = 1.0f;
+		colorArray[1] = 1.0f;
+		colorArray[2] = 1.0f;
+		colorArray[3] = 0.0f;
+		break;
+
+	default: //returns white if current color is not supported
+		colorArray[0] = 1.0f;
+		colorArray[1] = 1.0f;
+		colorArray[2] = 1.0f;
+		colorArray[3] = 0.0f;
+		break;
+	}
 }
