@@ -1,6 +1,81 @@
-﻿  Teapot.cpp
+﻿  Cube.cpp
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(6,8): message : see declaration of 'Vector3D'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(146,8): message : see declaration of 'Vector4D'
+  HelloGL.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(138,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(92,7): message : see declaration of 'HelloGL::Menus'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(27,8): message : see declaration of 'Vector3D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Text.h(8,8): message : see declaration of 'Vector4D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(291,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(294,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(297,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(723,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(742,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(760,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+  LinkedList.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(6,8): message : see declaration of 'Vector3D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(146,8): message : see declaration of 'Vector4D'
+  Polygon3D.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(6,8): message : see declaration of 'Vector3D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(146,8): message : see declaration of 'Vector4D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(223,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(248,25): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(298,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(298,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(298,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(316,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(316,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(316,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(288,7): warning C4101: 'c': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(508,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(521,20): warning C4018: '<': signed/unsigned mismatch
+  Pyramid.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(6,8): message : see declaration of 'Vector3D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(146,8): message : see declaration of 'Vector4D'
+  Teapot.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(6,8): message : see declaration of 'Vector3D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Header.h(146,8): message : see declaration of 'Vector4D'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(322,39): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(323,39): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(324,39): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(289,33): warning C4101: 'signZ': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(286,14): warning C4101: 'z': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(289,26): warning C4101: 'signY': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(286,11): warning C4101: 'y': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(290,31): warning C4101: 'numIndices': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(289,19): warning C4101: 'signX': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(287,7): warning C4101: 'c': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(286,8): warning C4101: 'x': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(290,19): warning C4101: 'numNormals': unreferenced local variable
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(290,6): warning C4101: 'numVertices': unreferenced local variable
+  Generating Code...
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Teapot.cpp(400): warning C4715: 'Teapot::LoadOBJFromFile': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.cpp(374): warning C4715: 'Polygon3D::LoadVerticesFromFile': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(335): warning C4715: 'HelloGL::CreateNewPolygon': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(552): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

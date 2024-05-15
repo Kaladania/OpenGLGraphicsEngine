@@ -10,5 +10,6 @@ public:
 	~Teapot();
 
 	void Draw() override;
+	bool LoadOBJFromFile();
 };
 
