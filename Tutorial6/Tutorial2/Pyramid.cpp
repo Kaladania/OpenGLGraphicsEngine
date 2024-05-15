@@ -8,7 +8,7 @@
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, choosenTexture)
+Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, chosenTexture)
 {
 
 	sides = 8; //number of sides in cube
@@ -16,7 +16,7 @@ Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpe
 	translationSpeed = newTranslationSpeed;
 
 	meshTextFileName = "Pyramid";
-	textureFileName = choosenTexture;
+	//textureFileName = choosenTexture;
 
 	material->ambient = { 1.0f, 0.5f, 0.2f, 1.0f };
 	material->diffuse = { 1.80f, 1.05f, 1.05f, 1.0f };
@@ -24,7 +24,7 @@ Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpe
 	material->shininess = 20.0f;
 
 	LoadVerticesFromFile();
-	LoadTextureFromFile();
+	LoadTextureFromFile(chosenTexture);
 	//SetUpVertices(newVertexList);
 
 	ScalePolygon(scale, indexedVertices);
@@ -37,13 +37,13 @@ Pyramid::Pyramid(Vector3D scale, float newTranslationSpeed, float newRotationSpe
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Pyramid::Pyramid(float scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, choosenTexture)
+Pyramid::Pyramid(float scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, chosenTexture)
 {
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
 
 	meshTextFileName = "Pyramid";
-	textureFileName = choosenTexture;
+	//textureFileName = choosenTexture;
 
 	material->ambient = { 1.0f, 0.5f, 0.2f, 1.0f };
 	material->diffuse = { 1.80f, 1.05f, 1.05f, 1.0f };
@@ -51,7 +51,7 @@ Pyramid::Pyramid(float scale, float newTranslationSpeed, float newRotationSpeed,
 	material->shininess = 20.0f;
 
 	LoadVerticesFromFile();
-	LoadTextureFromFile();
+	LoadTextureFromFile(chosenTexture);
 
 	ScalePolygon(scale, indexedVertices);
 }

@@ -19,4 +19,5 @@ namespace GLUTCallbacks
 	void RemovePolygonMenu(int chosenOption);
 	void BackgroundColourMenu(int chosenOption);
 	void TrackingMenu(int chosenOption);
+	void MaterialMenu(int chosenOption);
 }

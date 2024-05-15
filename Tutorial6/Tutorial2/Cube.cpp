@@ -7,7 +7,7 @@
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, choosenTexture)
+Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, chosenTexture)
 {
 
 	sides = 8; //number of sides in cube
@@ -15,10 +15,10 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, st
 	translationSpeed = newTranslationSpeed;
 
 	meshTextFileName = "Cube";
-	textureFileName = choosenTexture;
+	//textureFileName = choosenTexture;
 	
 	LoadVerticesFromFile();
-	LoadTextureFromFile();
+	LoadTextureFromFile(chosenTexture);
 
 	material->ambient = { 0.8f, 0.05f, 0.05f, 1.0f};
 	material->diffuse = { 0.80f, 0.05f, 0.05f, 1.0f };
@@ -37,13 +37,13 @@ Cube::Cube(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, st
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, choosenTexture)
+Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture) : Polygon3D(scale, newTranslationSpeed, newRotationSpeed, chosenTexture)
 {
 	sides = 8; //number of sides in cube
 	vertexAmount = 8; //number of vertices in polygon
 	
 	meshTextFileName = "Cube";
-	textureFileName = choosenTexture;
+	//textureFileName = choosenTexture;
 
 	material->ambient = { 0.8f, 0.05f, 0.05f, 1.0f };
 	material->diffuse = { 0.80f, 0.05f, 0.05f, 1.0f };
@@ -51,7 +51,7 @@ Cube::Cube(float scale, float newTranslationSpeed, float newRotationSpeed, std::
 	material->shininess = 100.0f;
 
 	LoadVerticesFromFile();
-	LoadTextureFromFile();
+	LoadTextureFromFile(chosenTexture);
 
 	ScalePolygon(scale, indexedVertices);
 }

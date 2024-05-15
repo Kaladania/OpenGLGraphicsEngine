@@ -10,8 +10,8 @@ protected:
 
 
 public:
-	Cube(Vector3D scale = Vector3D(1, 1, 1), float translationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
-	Cube(float scale = 1, float translationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
+	Cube(Vector3D scale = Vector3D(1, 1, 1), float translationSpeed = 0, float newRotationSpeed = 0, Textures chosenTexture = PENGUINS);
+	Cube(float scale = 1, float translationSpeed = 0, float newRotationSpeed = 0, Textures chosenTexture = PENGUINS);
 
 };
 

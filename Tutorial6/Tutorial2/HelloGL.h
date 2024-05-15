@@ -86,10 +86,8 @@ private:
 
 	Lighting* lighting; //current light source
 
-	enum Textures;
-	
 	//std::string textureEnumStrings[END_OF_TEXTURE_ENUM] = { "Penguins, Stars" };
-	std::map <Textures, std::string> textureEnumToString = { {PENGUINS, "Penguins"}, {STARS, "Stars"} };
+	//std::map <Textures, std::string> textureEnumToString = { {PENGUINS, "Penguins"}, {STARS, "Stars"} };
 
 	enum Menus;
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
@@ -133,12 +131,7 @@ public:
 		END_OF_MESH_ENUM
 	};
 
-	enum Textures
-	{
-		PENGUINS,
-		STARS,
-		END_OF_TEXTURE_ENUM
-	};
+	
 
 	enum Menus
 	{
@@ -149,12 +142,14 @@ public:
 		ADD_REMOVE_MENU,
 		ADD_SHAPE_MENU,
 		REMOVE_SHAPE_MENU,
+		MATERIAL_MENU,
 		TRANSLATION_STATUS_MENU,
 		ROTATION_STATUS_MENU,
 		SCALING_STATUS_MENU,
 		VISIBILITY_STATUS_MENU,
 		BACKGROUND_COLOUR_MENU,
 		TRACKING_MENU,
+		
 		END_OF_MENU_ENUM
 	};
 
@@ -186,6 +181,7 @@ public:
 	void TransformationsMenu(int option);
 	void TranslationsMenu(int option);
 	void RotationsMenu(int option);
+	void MaterialMenu(int chosenOption);
 
 	void AddPolygon(Meshes newPolygon);
 

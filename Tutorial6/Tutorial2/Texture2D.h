@@ -2,8 +2,8 @@
 #include <Windows.h>
 #include "freeglut.h"
 #include <string>
-//#include <gl/GLU.h>
-//#include "freeglut.h"
+
+//Texture Co-ordinate Structure
 struct TexCoord
 {
 	GLfloat u = 0.0f;
@@ -19,11 +19,11 @@ struct TexCoord
 class Texture2D
 {
 private:
-	GLuint textureID = 0;
-	int width = 0;
-	int height = 0;
-	char* textureData;
-	//std::string textureName = "";
+	GLuint textureID = 0; //texture ID assigned by GLUT
+	int width = 0; //texture width
+	int height = 0; //texture heigh
+	char* textureData = nullptr; //data read from texture file
+
 
 public:
 	Texture2D();

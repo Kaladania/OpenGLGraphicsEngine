@@ -1,19 +1,2 @@
-﻿  HelloGL.cpp
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(137,2): warning C4240: nonstandard extension used: access to 'HelloGL::Textures' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(89,7): message : see declaration of 'HelloGL::Textures'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(144,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(94,7): message : see declaration of 'HelloGL::Menus'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(27,8): message : see declaration of 'Vector3D'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Text.h(8,8): message : see declaration of 'Vector4D'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(284,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(287,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(290,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(686,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(705,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(723,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(323): warning C4715: 'HelloGL::CreateNewPolygon': not all control paths return a value
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(515): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
+﻿  Texture2D.cpp
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

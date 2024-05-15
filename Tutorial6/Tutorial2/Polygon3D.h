@@ -22,6 +22,8 @@ struct CustomisationToggles
 	bool isVisible = true;
 };
 
+enum Textures;
+
 class Polygon3D
 {
 protected:
@@ -43,6 +45,7 @@ protected:
 
 	//std::vector<Texture2D*> textures;
 	Texture2D* texture = nullptr;
+	Textures currentTexture;
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
 	Vector3D rotationDirection = Vector3D(); //current rotation direction
@@ -96,14 +99,21 @@ public:
 		VISIBILITY
 	};
 
-	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
-	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0, std::string choosenTexture = "");
+	enum Textures
+	{
+		PENGUINS,
+		STARS,
+		END_OF_TEXTURE_ENUM
+	};
+
+	Polygon3D(Vector3D scale = Vector3D(1, 1, 1), float newTranslationSpeed = 0, float newRotationSpeed = 0, Textures chosenTexture = PENGUINS);
+	Polygon3D(float scale = 1, float newTranslationSpeed = 0, float newRotationSpeed = 0, Textures chosenTexture = PENGUINS);
 
 	virtual void Draw();
 
 	bool LoadVerticesFromFile();
 	bool LoadOBJFromFile();
-	bool LoadTextureFromFile();
+	bool LoadTextureFromFile(Textures newTexture);
 
 	virtual void ScalePolygon(Vector3D scale, std::vector<Vector3D>& vertexList);
 	virtual void ScalePolygon(float scale, std::vector<Vector3D>& vertexList);

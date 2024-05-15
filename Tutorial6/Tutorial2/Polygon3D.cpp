@@ -13,7 +13,7 @@
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture)
+Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
@@ -30,7 +30,7 @@ Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotatio
 /// <param name="scale">Scale of the Cube</param>
 /// <param name="newTranslationSpeed">Speed of axis translation</param>
 /// <param name="newRotationSpeed">Speed of object rotation</param>
-Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed, std::string choosenTexture)
+Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture)
 {
 	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
@@ -467,12 +467,42 @@ bool Polygon3D::LoadOBJFromFile()
 
 }
 
-bool Polygon3D::LoadTextureFromFile()
+bool Polygon3D::LoadTextureFromFile(Textures newTexture)
 {
 	//loads in a new texture
 	//Texture2D* texture = new Texture2D();
+
+	if (texture != nullptr)
+	{
+		delete texture;
+		texture = nullptr;
+	}
+
 	texture = new Texture2D();
-	bool success = texture->LoadTexture("Textures/" + textureFileName + ".raw", 512, 512);
+	std::string filePath = "";
+	int tileSize = 0;
+
+	switch (newTexture)
+	{
+	case Polygon3D::PENGUINS:
+
+		filePath = "Textures/Penguins.raw";
+		tileSize = 512;
+		break;
+
+	case Polygon3D::STARS:
+
+		filePath = "Textures/Stars.raw";
+		tileSize = 512;
+		break;
+
+	case Polygon3D::END_OF_TEXTURE_ENUM:
+		break;
+	default:
+		break;
+	}
+
+	bool success = texture->LoadTexture(filePath, tileSize, tileSize);
 	//glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;

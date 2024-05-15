@@ -77,12 +77,12 @@ void HelloGL::InitObjects()
 
 	
 
-	float newTranslation = 0;
-	float newScale = 0;
-	float newRotation = 0;
+	//float newTranslation = 0;
+	//float newScale = 0;
+	//float newRotation = 0;
 
-	Meshes newMesh = CUBE;
-	Textures newTexture = PENGUINS;
+	//Meshes newMesh = CUBE;
+	//Polygon3D::Textures newTexture = Polygon3D::PENGUINS;
 
 	
 
@@ -260,12 +260,18 @@ void HelloGL::InitMenu()
 		polygonMenuAmount++;
 	}
 
+	menuIDs[MATERIAL_MENU] = glutCreateMenu(GLUTCallbacks::MaterialMenu);
+
+	glutAddMenuEntry("Penguins", int(Polygon3D::PENGUINS));
+	glutAddMenuEntry("Stars", int(Polygon3D::STARS));
+
 	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
 
 	//glutSetMenu(0);
 	glutAddSubMenu("Select Shape", menuIDs[POLYGON_MENU]);
 	glutAddSubMenu("Toggle Automatic Transformations", menuIDs[TRANSFORMATION_MENU]);
 	glutAddSubMenu("Add/Remove Shape", menuIDs[ADD_REMOVE_MENU]);
+	glutAddSubMenu("Change Shape Material", menuIDs[MATERIAL_MENU]);
 	glutAddSubMenu("Change Background Color", menuIDs[BACKGROUND_COLOUR_MENU]);
 	glutAddSubMenu("Track Selected Object", menuIDs[TRACKING_MENU]);
 
@@ -279,7 +285,7 @@ void HelloGL::InitMenu()
 Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 {
 
-	Textures newTexture = PENGUINS;
+	Polygon3D::Textures newTexture = Polygon3D::PENGUINS;
 
 	float newTranslation = rand() % 10; //random number between 0.001 and 0.1
 	newTranslation /= 1000;
@@ -296,7 +302,7 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 		newPolygon = Meshes(rand() % END_OF_MESH_ENUM); //chooses a random mesh to load
 	}
 
-	newTexture = Textures(rand() % END_OF_TEXTURE_ENUM); //chooses a random mesh to load
+	newTexture = Polygon3D::Textures(rand() % Polygon3D::END_OF_TEXTURE_ENUM); //chooses a random mesh to load
 
 	Transformation newMeshTransform;
 	newMeshTransform.translation = newTranslation;
@@ -309,12 +315,12 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 	{
 	case HelloGL::CUBE:
 
-		return linkedPolygonList->MakeNode(&head, new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]))->data;
+		return linkedPolygonList->MakeNode(&head, new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, newTexture))->data;
 		//break;
 
 	case HelloGL::PYRAMID:
 
-		return linkedPolygonList->MakeNode(&head, new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, textureEnumToString[newTexture]))->data;
+		return linkedPolygonList->MakeNode(&head, new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, newTexture))->data;
 		//break;
 
 	default:
@@ -480,6 +486,31 @@ void HelloGL::SetObjectTracking(int chosenOption)
 
 	default:
 		break;
+	}
+}
+
+
+void HelloGL::MaterialMenu(int chosenOption)
+{
+	if (selectedPolygon != nullptr)
+	{
+		switch (Polygon3D::Textures(chosenOption))
+		{
+		case Polygon3D::PENGUINS:
+
+			selectedPolygon->LoadTextureFromFile(Polygon3D::PENGUINS);
+			break;
+
+		case Polygon3D::STARS:
+
+			selectedPolygon->LoadTextureFromFile(Polygon3D::STARS);
+			break;
+
+		case Polygon3D::END_OF_TEXTURE_ENUM:
+			break;
+		default:
+			break;
+		}
 	}
 }
 
