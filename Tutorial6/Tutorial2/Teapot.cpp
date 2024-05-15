@@ -66,18 +66,7 @@ Teapot::~Teapot()
 /// </summary>
 void Teapot::Draw()
 {
-	textCoordIterator = 0;//resets texcoord iterator each draw call
-
-	if (texture != nullptr)
-	{
-		glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
-	}
-	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
-
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
-
+	//renders material properties
 	glMaterialfv(GL_FRONT, GL_AMBIENT, &(material->ambient.x));
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material->diffuse.x));
 	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material->specular.x));
@@ -206,119 +195,78 @@ void Teapot::Draw()
 	}
 
 
-
-
-	int colorIterator = 0;
-	int normalsIterator = 0;
 	glBegin(GL_TRIANGLES);
 
+	//loops through vertex list and draws the polygon face according to the layout specified by the indicies
+	//as no normals or text co-ords are specified, only the vertices are drawn
 	for (int i = 0; i < indiciesAmount; i++)
 	{
-
-		//glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
-
-		//if (normalsIterator <= indexedNormals.size() - 1)
-		//{
-		//	glNormal3f(indexedNormals[normalsIterator].x, indexedNormals[normalsIterator].y, indexedNormals[normalsIterator].z);
-		//}
-		//else
-		//{
-		//	normalsIterator = 0; //loops texCoord iterator to ensure all surfaces are covered
-		//}
-
-		//normalsIterator++;
-
-
-		//switch (i)
-		//{
-		//case 0:
-		//	glTexCoord2f(0.0f, 0.0f);
-
-		//case 1:
-		//	glTexCoord2f(0.0f, 1.0f);
-
-		//case 2:
-		//	glTexCoord2f(1.0f, 1.0f);
-		//}
-		//glTexCoord2f(textureCoordinates[i].u, textureCoordinates[i].v);
-		//glTexCoord2f(0.0f, 0.0f);
-		//if (textCoordIterator <= indexedTextCoords.size() - 1)
-		//{
-		//	glTexCoord2f(indexedTextCoords[textCoordIterator].u, indexedTextCoords[textCoordIterator].v);
-		//}
-		//else
-		//{
-		//	textCoordIterator = 0; //loops texCoord iterator to ensure all surfaces are covered
-		//}
-
 		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
-
-		//textCoordIterator++;
 	}
 
 	glEnd();
 	glPopMatrix();
-
-
 
 }
 
 
 
 /// <summary>
-/// Reads vertices from a txt file to store in the object's vertex list
+/// Reads vertices from an obj file to store in the object's vertex and indicies list
 /// </summary>
-/// <returns></returns>
+/// <returns>if the load was succecssful</returns>
 bool Teapot::LoadOBJFromFile()
 {
+	//opens the file corrisponding to the corret mesh title
 	std::string filePath = "Polygons/" + meshTextFileName + ".obj";
 
 	std::ifstream inFile;
 
 	inFile.open(filePath);
 
+	//returns an error if the file is unable to be opened
 	if (!inFile.good())
 	{
 		std::cerr << "Can't open obj tfile:  " << filePath << std::endl;
 		return false;
 	}
 
-	float x, y, z;
-	char c;
-
-	char identifier, signX, signY, signZ;
-	int numVertices, numNormals, numIndices;
+	char identifier; //holds the current identifier of the line in the obj
 
 	inFile >> identifier;
 
-	std::string float1, float2, float3;
-	Vector3D tempVector;
-	//indexedVertices = new Vector3D[numVertices];
+	std::string float1, float2, float3; //holds the vertices found in the current line 
 
-	while (true)
+	//loops continously through the file
+	while (inFile.peek() != EOF)
 	{
+		//stores the 3 floats as strings so that their signs stay intact
 		inFile >> float1;
 		inFile >> float2;
 		inFile >> float3;
-		//float test = std::stof(line);
-		//printf("%f\n\n%f", test, std::stof(line));
+		
+		//converts the strings to floats before adding them to the indexed Vertcies
 		indexedVertices.push_back(Vector3D(std::stof(float1), std::stof(float2), std::stof(float3)));
 
+		//gets the next identifier
 		inFile >> identifier;
 
+		//breaks the moment the identifier switches from 'v' to 'f'
 		if (identifier != 'v')
 		{
 			break;
 		}
 	}
 
+	//runs for the remainder of the file
 	while (inFile.peek() != EOF)
 	{
+		//explicitly stores the 3 float indices in the line in order to make it easier to access the next identifer
 		inFile >> float1;
 		inFile >> float2;
 		inFile >> float3;
-		//float test = std::stof(line);
-		//printf("%f\n\n%f", test, std::stof(line));
+
+		//converts each string to a signed float and converts said float to a 0-indexed value before storing it as an index
 		indices.push_back(std::stof(float1) - 1);
 		indices.push_back(std::stof(float2) - 1);
 		indices.push_back(std::stof(float3) - 1);
@@ -326,74 +274,8 @@ bool Teapot::LoadOBJFromFile()
 		inFile >> identifier;
 	}
 
+	//gets the total index amount from the vector size
 	indiciesAmount = indices.size();
-
-	/*for (int i = 1; i < numVertices; i++)
-	{
-		inFile >> w >> x >> y >> z;
-		indexedVertices.push_back(Vector3D(x, y, z));
-	}*/
-
-	//inFile >> numNormals;
-	//indexedNormals = new Vector3D[numNormals];
-
-	/*for (int i = 1; i < numNormals; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedNormals.push_back(Vector3D(x, y, z));
-	}*/
-
-	//inFile >> numIndices;
-	//indiciesAmount = numIndices;
-	////indices = new int[numIndices];
-
-	//for (int i = 1; i < numIndices; i++)
-	//{
-	//	inFile >> x;
-	//	indices.push_back(x);
-	//}
-
-	/*int numVertices, numNormals, numIndices;
-
-	inFile >> numVertices;
-	indexedVertices = new Vector3D[numVertices];
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedVertices[i] = Vector3D(x, y, z);
-		printf("%i %i %i", x, y, z);
-	}
-
-	inFile >> numNormals;
-	indexedNormals = new Vector3D[numNormals];
-
-	for (int i = 0; i < numNormals; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedNormals[i] = Vector3D(x, y, z);
-	}
-
-	inFile >> numIndices;
-	indices = new GLfloat[numIndices];
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x;
-		indices[i] = x;
-	}*/
-
-	//while (!inFile.eof())
-	//{
-	//	while ((inFile >> x >> y >> z))
-	//	{
-	//		vertexList.push_back(Vector3D(x, y, z));
-	//		//printf(" %i, %i, %i", x, y, z);
-	//	}
-	//}
-
-
-
 
 	inFile.close();
 

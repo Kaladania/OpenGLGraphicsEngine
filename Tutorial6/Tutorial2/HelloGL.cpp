@@ -21,8 +21,6 @@ HelloGL::HelloGL(int argc, char* argv[])
 	
 
 	glutMainLoop();
-
-
 }
 
 HelloGL::~HelloGL(void)
@@ -98,25 +96,6 @@ void HelloGL::InitObjects()
 
 	newAnnouncement = "Number of Polygons Loaded: " + std::to_string(linkedPolygonList->Size());
 
-	//linkedPolygonList->MakeNode(&head, polygonList[0]);
-	//linkedPolygonList->PrintList(head);
-
-	//head = linkedPolygonList->InsertFirst(&head, polygonList[1]);
-	//linkedPolygonList->PrintList(head);
-
-	//linkedPolygonList->InsertAfter(head, polygonList[3]);
-	//linkedPolygonList->PrintList(head);
-
-	///*linkedPolygonList->DeleteAfter(head->nextNode);
-	//linkedPolygonList->PrintList(head);*/
-
-	//linkedPolygonList->GetNode(head, 1);
-	//linkedPolygonList->GetNode(head, 0);
-	//linkedPolygonList->GetNode(head, 4);
-
-	//linkedPolygonList->Find(head, polygonList[3]);
-	//linkedPolygonList->Find(head, polygonList[4]);
-
 	//linkedPolygonList->DeleteAt(head, 1);
 	//linkedPolygonList->PrintList(head);
 
@@ -154,28 +133,24 @@ void HelloGL::InitGL(int argc, char* argv[])
 	
 	glMatrixMode(GL_MODELVIEW); //switches pipeline to model view to work with models
 
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING); //enables lighting
+	glEnable(GL_LIGHT0); //sets up 1st light
 
-	//Backwards culling
-	/*glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glEnable(GL_TEXTURE_2D);*/
-	
-
-	//SetLight(&lighting);
-
-	glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	glEnable(GL_TEXTURE_2D); //enables texture loading
+	glEnable(GL_CULL_FACE); //enables backwards culling
+	glCullFace(GL_BACK); //sets culling mode to backwards culling
 }
 
-//int test = 0;
+/// <summary>
+/// Initialises the simulation menu.
+/// For enum menu entries, each entry is converted from the corrisponding enum value for accurate conversion
+/// </summary>
 void HelloGL::InitMenu()
 {
+	//creates a new menu to change the background colour
 	menuIDs[BACKGROUND_COLOUR_MENU] = glutCreateMenu(GLUTCallbacks::BackgroundColourMenu);
 
+	//adds menu entries providing options for the new background colour
 	glutAddMenuEntry("Red", int(RED));
 	glutAddMenuEntry("Orange", int(ORANGE));
 	glutAddMenuEntry("Yellow", int(YELLOW));
@@ -186,89 +161,79 @@ void HelloGL::InitMenu()
 	glutAddMenuEntry("Black", int(BLACK));
 	glutAddMenuEntry("White", int(WHITE));
 
-	//menuIDs[TRANSLATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::TranslationsMenu);
-
-	////std::string polygonStatus = "";
-	///*for (int i = 0; i < linkedPolygonList->Size(); i++)
-	//{
-	//	polygonStatus = "Auto Translation: " + CreateTranformationMenuText(i, linkedPolygonList->GetNode(head, i)->data->GetTranslationStatus());
-	//	glutAddMenuEntry(polygonStatus.c_str(), i);
-
-	//}*/
-
-	//glutAddMenuEntry("Turn Transformation ON", 0);
-	//glutAddMenuEntry("Turn Transformation OFF", 1);
-
-	//
-	////glutAddSubMenu("Toggle Auto Translation 2", menuIDs[TRANSLATION_STATUS_MENU]);
-
-	//
-	//menuIDs[ROTATION_STATUS_MENU] = glutCreateMenu(GLUTCallbacks::RotationsMenu);
-
-	//glutAddMenuEntry("Turn Rotation ON", 0);
-	//glutAddMenuEntry("Turn Rotation OFF", 1);
-
-	//std::string polygonStatus = "";
-	//for (int i = 0; i < linkedPolygonList->Size(); i++)
-	//{
-	//	//polygonStatus = "Auto Rotation: " + CreateTranformationMenuText(i, linkedPolygonList->GetNode(head, i)->data->GetTranslationStatus());
-	//	//glutAddMenuEntry(polygonStatus.c_str(), i);
-
-	//}
-
+	
+	//creates a new menu to alter the selected object's current transformation
 	menuIDs[TRANSFORMATION_MENU] = glutCreateMenu(GLUTCallbacks::TransformationsMenu);
 	
+	//adds menu entries providing options to toggle the object's current automations
 	glutAddMenuEntry("Toggle Auto Translation", 0);
 	glutAddMenuEntry("Toggle Auto Rotation", 1);
 	glutAddMenuEntry("Toggle Visibility", 2);
 	
-
+	
+	
+	//creates a new menu to add new polygon objects to the simulation
 	menuIDs[ADD_SHAPE_MENU] = glutCreateMenu(GLUTCallbacks::AddPolygonMenu);
 
-	//adds new menu entries with the menu value of each entry corrisponding to the enum value for accurate conversion
+	//adds menu entries providing options to specify which new object to load in
 	glutAddMenuEntry("Add New Cube", int(CUBE));
 	glutAddMenuEntry("Add New Pyramid", int(PYRAMID));
 	glutAddMenuEntry("Add New Teapot", int(TEAPOT));
 
 
+	
+	//creates a new menu to choose wheither to add or remove a polygon from the current simulation
 	menuIDs[ADD_REMOVE_MENU] = glutCreateMenu(GLUTCallbacks::AddRemoveMenu);
 
+	//adds menu entries specifying wheither to add or remove a polygon
+	//the decision to add a new polygon will lead to a sub-menu specifying the type
 	glutAddSubMenu("Add New Polygon", menuIDs[ADD_SHAPE_MENU]);
 	glutAddMenuEntry("Remove Selected Polygon", -1);
 
 
-	menuIDs[TOGGLE_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
 
-	glutAddSubMenu("Toggle Auto Transformations", menuIDs[TRANSFORMATION_MENU]);
+	//creates
+	/*menuIDs[TOGGLE_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
 
+	glutAddSubMenu("Toggle Auto Transformations", menuIDs[TRANSFORMATION_MENU]);*/
+
+
+	//creates a new menu specifying wheither to have the camera track the current selected polygon
 	menuIDs[TRACKING_MENU] = glutCreateMenu(GLUTCallbacks::TrackingMenu);
 
-	//glutAddSubMenu("Toggle Auto Transformations", menuIDs[TRANSFORMATION_MENU]);
+	//adds menu entries specifying wheither to start or stop tracking
 	glutAddMenuEntry("Start Tracking Selected Object", 0);
 	glutAddMenuEntry("Stop Tracking Selected Object", 1);
 
 
+
+	//creates a new sub menu specifying the current (all) polygon(s) the user is able to select from
 	menuIDs[POLYGON_MENU] = glutCreateMenu(GLUTCallbacks::PolygonMenu);
 
 	//adds all loaded polygons to the polygon menu
 	std::string polygonName = "";
 	for (int i = 0; i < linkedPolygonList->Size(); i++)
 	{
+		//format: Shape <shape ID> : <shape name>
 		polygonName = "Shape " + std::to_string(i) + ": " + linkedPolygonList->GetNode(head, i)->data->GetPolygonName();
-		//glutAddSubMenu(polygonName.c_str(), menuIDs[TRANSFORMATION_MENU]);
+		
 		glutAddMenuEntry(polygonName.c_str(), i);
 
 		polygonMenuAmount++;
 	}
 
+	//creates a new sub menu specifying the materials the user can use to customise the selected polygon
 	menuIDs[MATERIAL_MENU] = glutCreateMenu(GLUTCallbacks::MaterialMenu);
 
+	//adds menu entries specifying the materials the user can select from
 	glutAddMenuEntry("Penguins", int(Polygon3D::PENGUINS));
 	glutAddMenuEntry("Stars", int(Polygon3D::STARS));
 
-	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
 
-	//glutSetMenu(0);
+	//creates the main menu the user can use to interact with the simulation
+	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
+	
+	//adds menu entries outlining the current operations the user can execute
 	glutAddSubMenu("Select Shape", menuIDs[POLYGON_MENU]);
 	glutAddSubMenu("Toggle Automatic Transformations", menuIDs[TRANSFORMATION_MENU]);
 	glutAddSubMenu("Add/Remove Shape", menuIDs[ADD_REMOVE_MENU]);
@@ -276,17 +241,23 @@ void HelloGL::InitMenu()
 	glutAddSubMenu("Change Background Color", menuIDs[BACKGROUND_COLOUR_MENU]);
 	glutAddSubMenu("Track Selected Object", menuIDs[TRACKING_MENU]);
 
+	//gives the user an easy way to back out of the menu
 	glutAddMenuEntry("None", -2);
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
-	//glutMenuStatusFunc()//GLUT_MENU_NOT_IN_USE 
+	//assigns the menu to load on right mouse click
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 }
 
+/// <summary>
+/// Loads in a new polygon with randomised translation, rotation, texture and scale
+/// </summary>
+/// <param name="newPolygon">The type of polygon to be created. END_OF_POLYGON_ENUM is used to assign a random polygon</param>
+/// <returns>the newly created polygon</returns>
 Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 {
 
-	Polygon3D::Textures newTexture = Polygon3D::PENGUINS;
+	Polygon3D::Textures newTexture = Polygon3D::PENGUINS; //holds the polygon's randomised texture
 
 	float newTranslation = rand() % 10; //random number between 0.001 and 0.1
 	newTranslation /= 1000;
@@ -297,7 +268,7 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 	float newRotation = rand() % 10; //random number between 0.001 and 0.1
 
 
-	//if no polygon was specified, chooses a random polygon to load
+	//if no polygon was specified (polygon == END_OF_POLYGON_ENUM), chooses a random polygon to load
 	if (newPolygon == END_OF_MESH_ENUM)
 	{
 		newPolygon = Meshes(rand() % END_OF_MESH_ENUM); //chooses a random mesh to load
@@ -305,6 +276,7 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 
 	newTexture = Polygon3D::Textures(rand() % Polygon3D::END_OF_TEXTURE_ENUM); //chooses a random mesh to load
 
+	//creates a new transformation struct instance to pass randomised values into sanitation
 	Transformation newMeshTransform;
 	newMeshTransform.translation = newTranslation;
 	newMeshTransform.rotation = newRotation;
@@ -312,63 +284,67 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 
 	SanitiseTransformation(newMeshTransform);
 
+	//loads the new polygon using the correct constructor
 	switch (newPolygon)
 	{
 	case HelloGL::CUBE:
 
 		return linkedPolygonList->MakeNode(&head, new Cube(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, newTexture))->data;
-		//break;
 
 	case HelloGL::PYRAMID:
 
 		return linkedPolygonList->MakeNode(&head, new Pyramid(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation, newTexture))->data;
-		//break;
 
 	case HelloGL::TEAPOT:
 
 		return linkedPolygonList->MakeNode(&head, new Teapot(newMeshTransform.scale, newMeshTransform.translation, newMeshTransform.rotation))->data;
-
 
 	default:
 		break;
 	}
 }
 
+/// <summary>
+/// Sets the desired polygon to be the new selected shape
+/// </summary>
+/// <param name="chosenOption">ID of the new selected polygon</param>
 void HelloGL::PolygonMenu(int chosenOption)
 {
 	if (chosenOption > -1 && chosenOption < linkedPolygonList->Size())
 	{
+		//format: Shape <shape ID> : <shape name> was chosen
 		newAnnouncement = "Shape " + std::to_string(chosenOption) + ": " + linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName() + " was chosen";
 		selectedPolygon = linkedPolygonList->GetNode(head, chosenOption)->data;
 
+		//updates the shape data preview text to show the toggle states of the new selected polygon
 		UpdateShapeDataText();
-
-		//printf("%s %i is chosen", linkedPolygonList->GetNode(head, chosenOption)->data->GetPolygonName().c_str(), chosenOption);
 	}
 }
+
 
 void HelloGL::ToggleMenu(int chosenOption)
 {
 	printf("Chosen Toggle option: %i", chosenOption);
 }
 
+/// <summary>
+/// Toggles the desired transformation of the current selected polygon
+/// </summary>
+/// <param name="chosenOption">the transformation to toggle</param>
 void HelloGL::TransformationsMenu(int chosenOption)
 {
 	if (selectedPolygon != nullptr)
 	{
+		//toggles the specified transformation and sends a notice that a new announcement text needs to be made
 		switch (chosenOption)
 		{
 		case 0:
-
-			//TranslationsMenu(chosenOption);
 
 			selectedPolygon->ToggleTranformation(Polygon3D::TRANSLATION);
 			menusToUpdate[TRANSLATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
 			break;
 
 		case 1:
-
-			//RotationsMenu(chosenOption);
 
 			selectedPolygon->ToggleTranformation(Polygon3D::ROTATION);
 			menusToUpdate[ROTATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
@@ -384,7 +360,6 @@ void HelloGL::TransformationsMenu(int chosenOption)
 			break;
 		}
 	}
-	//printf("Chosen Transformation option: %i", chosenOption);
 }
 
 /// <summary>
@@ -400,14 +375,6 @@ void HelloGL::TranslationsMenu(int chosenOption)
 		selectedPolygon->ToggleTranformation(Polygon3D::TRANSLATION);
 		menusToUpdate[TRANSLATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
 	}
-
-	//linkedPolygonList->fin
-	
-
-	//changes the value of the menu update map to reflect that the choosen polygon needs its entry changed
-	
-	
-	
 }
 
 /// <summary>
@@ -434,9 +401,10 @@ void HelloGL::RotationsMenu(int chosenOption)
 /// <summary>
 /// Creates a new requested polygon and adds it to the linked list
 /// </summary>
-/// <param name="chosenOption">Index of the chosen option</param>
+/// <param name="chosenOption">chosen polygon</param>
 void HelloGL::AddPolygon(Meshes newPolygon)
 {
+	//creates a new polygon based on the specified mesh
 	switch (newPolygon)
 	{
 	case CUBE:
@@ -445,6 +413,10 @@ void HelloGL::AddPolygon(Meshes newPolygon)
 
 	case PYRAMID:
 		selectedPolygon = CreateNewPolygon(PYRAMID);
+		break;
+
+	case TEAPOT:
+		selectedPolygon = CreateNewPolygon(TEAPOT);
 		break;
 
 	default:
@@ -460,21 +432,30 @@ void HelloGL::AddPolygon(Meshes newPolygon)
 /// <summary>
 /// Changes the background colour to the given option
 /// </summary>
-/// <param name="chosenColor"></param>
+/// <param name="chosenColor">new color of background</param>
 void HelloGL::ChangeBackgroundColour(Color chosenColor)
 {
+	//updates the background color array with the new values of the specified color
 	SetColor(Color(chosenColor), backgroundColorArray);
+
+	//sets the background color to the new color
 	glClearColor(backgroundColorArray[0], backgroundColorArray[1], backgroundColorArray[2], backgroundColorArray[3]);
 }
 
+/// <summary>
+/// Parents/Deparents the camera to/from the current selected polygon
+/// </summary>
+/// <param name="chosenOption">object tracking state</param>
 void HelloGL::SetObjectTracking(int chosenOption)
 {
 	switch (chosenOption)
 	{
 	case 0:
 
+		//sets selected object to be the camera's new parent if there is currently an object selected
 		if (selectedPolygon != nullptr)
 		{
+			//format: Shape <shape ID> is being tracked by camera
 			newAnnouncement = "Shape " + std::to_string(linkedPolygonList->Find(head, selectedPolygon)) + "is being tracked by Camera";
 			cameraParent = selectedPolygon;
 		}
@@ -483,6 +464,7 @@ void HelloGL::SetObjectTracking(int chosenOption)
 
 	case 1:
 
+		//removes the camera's parent and resets it to its default position
 		cameraParent = nullptr;
 		camera->center.x = 0.0f;
 		camera->center.y = 0.0f;
@@ -495,11 +477,16 @@ void HelloGL::SetObjectTracking(int chosenOption)
 	}
 }
 
-
+/// <summary>
+/// Changes the material of the current selected polygon
+/// </summary>
+/// <param name="chosenOption">the index of the new material</param>
 void HelloGL::MaterialMenu(int chosenOption)
 {
+	//ensures that there is a polygon to change the material of
 	if (selectedPolygon != nullptr)
 	{
+		//converts the index to a Texture enum and force the current selected polygon to load in the new texture
 		switch (Polygon3D::Textures(chosenOption))
 		{
 		case Polygon3D::PENGUINS:
@@ -521,25 +508,14 @@ void HelloGL::MaterialMenu(int chosenOption)
 }
 
 /// <summary>
-/// Creates a new title for the menu entry depending on the passed in state
+/// Converts bool states to their written ON/OFF counterparts
 /// </summary>
 /// <param name="polygonID">The polygon assigned to the entry</param>
-/// <param name="isActive">The current state to reflect</param>
-/// <returns>The formated text stating the current state of the passed in polygon index</returns>
+/// <param name="isActive">the bool to convert</param>
+/// <returns>The string translation</returns>
 std::string HelloGL::CreateTranformationMenuText( const int polygonID, const bool isActive)
 {
 	std::string polygonStatus = "";
-
-	/*switch (isActive)
-	{
-	case true:
-		polygonStatus = "Shape " + std::to_string(polygonID) + ": ON";
-		break;
-
-	case false:
-		polygonStatus = "Shape " + std::to_string(polygonID) + ": OFF";
-		break;
-	}*/
 
 	switch (isActive)
 	{
@@ -553,7 +529,7 @@ std::string HelloGL::CreateTranformationMenuText( const int polygonID, const boo
 
 
 /// <summary>
-/// Updates the translation menu to show the current translation status of the polygon
+/// Updates the polygon menu to show the current list of polygons
 /// </summary>
 /// <param name="polygonID">Polygon item to update</param>
 void HelloGL::ChangeMenuStatus(const Menus menu, const int polygonID)
@@ -564,6 +540,7 @@ void HelloGL::ChangeMenuStatus(const Menus menu, const int polygonID)
 	case POLYGON_MENU:
 
 	{
+		//sets the current menu to update to be the polygon menu
 		glutSetMenu(menuIDs[POLYGON_MENU]);
 
 
@@ -572,15 +549,19 @@ void HelloGL::ChangeMenuStatus(const Menus menu, const int polygonID)
 		//updates all the current existing listings
 		for (int i = 0; i < glutGet(GLUT_MENU_NUM_ITEMS); i++)
 		{
+			//format: Shape <shape ID> : <shape name>
 			polygonName = "Shape " + std::to_string(i) + ": " + linkedPolygonList->GetNode(head, i)->data->GetPolygonName();
 
+			//documentation states menu entries start from 1
 			glutChangeToMenuEntry(i + 1, polygonName.c_str(), i);
-			//glutRemoveMenuItem(i);
 		}
 
-		//adds new listings
+		//adds need new listings
+		//glutGet(GLUT_MENU_NUM_ITEMS) == current amount of menu entries
+		//determines amount of new entires needing to be added and runs for that duration
 		for (int i = 0; i < linkedPolygonList->Size() - glutGet(GLUT_MENU_NUM_ITEMS); i++)
 		{
+			//format: Shape <shape ID> : <shape name>
 			polygonName = "Shape " + std::to_string(glutGet(GLUT_MENU_NUM_ITEMS) + i) + ": " + linkedPolygonList->GetNode(head, glutGet(GLUT_MENU_NUM_ITEMS) + i)->data->GetPolygonName();
 			
 			glutAddMenuEntry(polygonName.c_str(), glutGet(GLUT_MENU_NUM_ITEMS) + i);
@@ -590,43 +571,32 @@ void HelloGL::ChangeMenuStatus(const Menus menu, const int polygonID)
 
 		break;
 	}
-	/*case TRANSLATION_STATUS_MENU:
-	{
-		newTranslationStatus = CreateTranformationMenuText(polygonID, linkedPolygonList->GetNode(head, polygonID)->data->GetTranslationStatus());
-		break;
-	}
-	case ROTATION_STATUS_MENU:
-	{
-		newTranslationStatus = CreateTranformationMenuText(polygonID, linkedPolygonList->GetNode(head, polygonID)->data->GetRotationStatus());
-		break;
-	}*/
+	
 	default:
 		break;
 	}
 	
-
-//	//changes the menu pointer to point to the translation menu and updates the text of the desired polygon menu entry
-//	glutSetMenu(menuIDs[menu]);
-//	glutChangeToMenuEntry(polygonID + 1, newTranslationStatus.c_str(), polygonID);
 }
 
+/// <summary>
+/// Ensures that translation, rotation and scale values are not 0
+/// </summary>
+/// <param name="newMeshTransform">struct of transforms to sanitise</param>
+/// <returns>the sanitised struct of transforms</returns>
 Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 {
 	//Creates a cube with randomised properties
 	if (newMeshTransform.translation == 0.000f)
 	{
 		newMeshTransform.translation = 0.0001f;
-		//polygonList.push_back(new Pyramid(newMeshTransform.scale, 0.0001f, newMeshTransform.rotation)); //creates a new cube object
 	}
 	else if (newMeshTransform.scale == 0.00f)
 	{
 		newMeshTransform.scale = 0.01f;
-		//polygonList.push_back(new Pyramid(0.01f, newMeshTransform.translation, newMeshTransform.rotation)); //creates a new cube object
 	}
 	else if (newMeshTransform.rotation == 0.0f)
 	{
 		newMeshTransform.rotation = 1.0f;
-		//polygonList.push_back(new Pyramid(newMeshTransform.scale, newMeshTransform.translation, 1.0f)); //creates a new cube object
 	}
 
 	return newMeshTransform;
@@ -640,6 +610,7 @@ void HelloGL::Display()
 {
 	glClear(GL_COLOR_BUFFER_BIT); //clears the scene
 
+	//renders polygons to screen
 	for (int i = 0; i < linkedPolygonList->Size(); i++)
 	{
 		//draws polygon if its visibility is enabled
@@ -647,15 +618,11 @@ void HelloGL::Display()
 		{
 			linkedPolygonList->GetNode(head, i)->data->Draw();
 		}
-		
-		//polygonList[i]->Draw();
 	}
 	
-	
+	//renders text objects to screen
 	updateText->DrawString(newAnnouncement, {-0.4f, -0.4f, 0.0f});
-
 	dataText->DrawString(dataToShow, {-0.4f, 0.38f, 0.0f});
-
 	cameraPosText->DrawString(newCameraPosition, {-0.4f, 0.0f, 0.0f});
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
@@ -925,10 +892,7 @@ void HelloGL::UpdateCameraPosText()
 		+ "Z: " + std::to_string(camera->eye.z);
 }
 
-//void HelloGL::UpdateCameraPosition()
-//{
-//	cameraParent.parentPosition
-//}
+
 
 /// <summary>
 /// Returns an array of color values
