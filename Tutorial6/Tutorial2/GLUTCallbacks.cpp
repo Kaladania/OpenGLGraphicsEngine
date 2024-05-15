@@ -81,4 +81,9 @@ namespace GLUTCallbacks //creates free methods wrappers to allow FreeGLUT to acc
 	{
 		helloGL->ChangeBackgroundColour(HelloGL::Color(chosenOption));
 	}
+
+	void TrackingMenu(int chosenOption)
+	{
+		helloGL->SetObjectTracking(chosenOption);
+	}
 }

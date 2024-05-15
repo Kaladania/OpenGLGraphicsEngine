@@ -36,8 +36,25 @@ HelloGL::~HelloGL(void)
 	delete updateText;
 	updateText = nullptr;
 
+	delete cameraPosText;
+	cameraPosText = nullptr;
+
+	delete dataText;
+	dataText = nullptr;
+
 	delete selectedPolygon;
 	selectedPolygon = nullptr;
+
+	if (cameraParent != nullptr)
+	{
+		delete cameraParent;
+		cameraParent = nullptr;
+	}
+
+	linkedPolygonList->DeleteList(&head);
+	linkedPolygonList = nullptr;
+
+	head = nullptr;
 }
 
 /// <summary>
@@ -223,6 +240,12 @@ void HelloGL::InitMenu()
 
 	glutAddSubMenu("Toggle Auto Transformations", menuIDs[TRANSFORMATION_MENU]);
 
+	menuIDs[TRACKING_MENU] = glutCreateMenu(GLUTCallbacks::TrackingMenu);
+
+	//glutAddSubMenu("Toggle Auto Transformations", menuIDs[TRANSFORMATION_MENU]);
+	glutAddMenuEntry("Start Tracking Selected Object", 0);
+	glutAddMenuEntry("Stop Tracking Selected Object", 1);
+
 
 	menuIDs[POLYGON_MENU] = glutCreateMenu(GLUTCallbacks::PolygonMenu);
 
@@ -237,15 +260,16 @@ void HelloGL::InitMenu()
 		polygonMenuAmount++;
 	}
 
-	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::PolygonMenu);
+	menuIDs[MAIN_MENU] = glutCreateMenu(GLUTCallbacks::ToggleMenu);
 
 	//glutSetMenu(0);
 	glutAddSubMenu("Select Shape", menuIDs[POLYGON_MENU]);
 	glutAddSubMenu("Toggle Automatic Transformations", menuIDs[TRANSFORMATION_MENU]);
 	glutAddSubMenu("Add/Remove Shape", menuIDs[ADD_REMOVE_MENU]);
 	glutAddSubMenu("Change Background Color", menuIDs[BACKGROUND_COLOUR_MENU]);
+	glutAddSubMenu("Track Selected Object", menuIDs[TRACKING_MENU]);
 
-	glutAddMenuEntry("None", -1);
+	glutAddMenuEntry("None", -2);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	//glutMenuStatusFunc()//GLUT_MENU_NOT_IN_USE 
@@ -421,11 +445,42 @@ void HelloGL::AddPolygon(Meshes newPolygon)
 	menusToUpdate[POLYGON_MENU] = 0;
 }
 
-
+/// <summary>
+/// Changes the background colour to the given option
+/// </summary>
+/// <param name="chosenColor"></param>
 void HelloGL::ChangeBackgroundColour(Color chosenColor)
 {
 	SetColor(Color(chosenColor), backgroundColorArray);
 	glClearColor(backgroundColorArray[0], backgroundColorArray[1], backgroundColorArray[2], backgroundColorArray[3]);
+}
+
+void HelloGL::SetObjectTracking(int chosenOption)
+{
+	switch (chosenOption)
+	{
+	case 0:
+
+		if (selectedPolygon != nullptr)
+		{
+			newAnnouncement = "Shape " + std::to_string(linkedPolygonList->Find(head, selectedPolygon)) + "is being tracked by Camera";
+			cameraParent = selectedPolygon;
+		}
+
+		break;
+
+	case 1:
+
+		cameraParent = nullptr;
+		camera->center.x = 0.0f;
+		camera->center.y = 0.0f;
+		camera->eye.z = 1.0f;
+		newAnnouncement = "Camera is no longer tracking an object";
+		break;
+
+	default:
+		break;
+	}
 }
 
 /// <summary>
@@ -562,7 +617,9 @@ void HelloGL::Display()
 	
 	updateText->DrawString(newAnnouncement, {-0.4f, -0.4f, 0.0f});
 
-	dataText->DrawString(dataToShow, { -0.4f, 0.38f, 0.0f });
+	dataText->DrawString(dataToShow, {-0.4f, 0.38f, 0.0f});
+
+	cameraPosText->DrawString(newCameraPosition, {-0.4f, 0.0f, 0.0f});
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
@@ -587,11 +644,13 @@ void HelloGL::Update()
 
 	Vector3D polygonRotation = Vector3D();
 
+	//preps for menu entry update check
 	std::string newUpdateText = "Shape ";
 	std::string newDataText = "Shape ";
 	int index = 0;
 	bool hasStateBeenChanged = false;
 
+	//loops through the update map and checks if any menu entries need to be updated
 	for (auto& menu : menusToUpdate)
 	{
 		if (menu.second != -1)
@@ -677,10 +736,22 @@ void HelloGL::Update()
 		index++;
 	}
 
+	//updates the announcement and shape data text to reflect current actions and selections
 	if (hasStateBeenChanged)
 	{
 		newAnnouncement = newUpdateText;
 		UpdateShapeDataText();
+	}
+
+	//updates the camera position text to reflect the new position of the camera
+	UpdateCameraPosText();
+
+	//sets camera to follow selected objects position and zooms in on said object
+	if (cameraParent != nullptr)
+	{
+		camera->center.x = cameraParent->GetPosition().x;
+		camera->center.y = cameraParent->GetPosition().y;
+		camera->eye.z = 0.5f;
 	}
 }
 
@@ -693,81 +764,76 @@ void HelloGL::Update()
 /// <param name="y">y co-ordinate</param>
 void HelloGL::Keyboard(unsigned char key, int x, int y)
 {    
-	switch (key)
+	//enables keyboard input if the camera is not tracking an object
+	if (cameraParent == nullptr)
 	{
-	case 'k':
-		camera->eye.x -= 1.00f;
-		break;
 
-	case ';':
-		camera->eye.x += 1.0f;
-		break;
+		switch (key)
+		{
+		case 'k':
+			camera->center.x -= 0.1f;
+			break;
 
-	case 'o':
-		camera->eye.y += 2.0f;
-		break;
+		case ';':
+			camera->center.x += 0.1f;
+			break;
 
-	case 'l':
-		camera->eye.y -= 2.0f;
-		break;
+		case 'o':
+			camera->center.y += 0.1f;
+			break;
 
-	case 'i':
-		camera->eye.z -= 3.0f;
-		break;
+		case 'l':
+			camera->center.y -= 0.1f;
+			break;
 
-	case 'p':
-		camera->eye.z += 3.0f;
-		break;
+		case 'i':
+			camera->eye.z -= 0.5f;
+			break;
 
-	case 'a':
-		std::get<0>(translationAxis) += -0.02f;
-		break;
+		case 'p':
+			camera->eye.z += 0.5f;
+			break;
 
-	case 'd':
-		std::get<0>(translationAxis) += 0.02f;
-		break;
+			/*case 'a':
+				std::get<0>(translationAxis) += -0.02f;
+				break;
 
-	case 'w':
-		std::get<1>(translationAxis) += 0.02f;
-		break;
+			case 'd':
+				std::get<0>(translationAxis) += 0.02f;
+				break;
 
-	case 's':
-		std::get<1>(translationAxis) += -0.02f;
-		break;
+			case 'w':
+				std::get<1>(translationAxis) += 0.02f;
+				break;
 
-	case 'q':
-		std::get<2>(translationAxis) += -0.2f;
-		break;
+			case 's':
+				std::get<1>(translationAxis) += -0.02f;
+				break;
 
-	case 'e':
-		std::get<2>(translationAxis) += 0.2f;
-		break;
+			case 'q':
+				std::get<2>(translationAxis) += -0.2f;
+				break;
 
-	case '1':
-		rotationAxis = std::make_tuple(-1.0f, 0.0f, 0.0f);
-		polygonRotation = UpdateRotation(polygonRotation, -2.0f);
-		break;
+			case 'e':
+				std::get<2>(translationAxis) += 0.2f;
+				break;
 
-	case '4':
-		rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
-		polygonRotation = UpdateRotation(polygonRotation, -2.0f);
-		break;
+			case '1':
+				rotationAxis = std::make_tuple(-1.0f, 0.0f, 0.0f);
+				polygonRotation = UpdateRotation(polygonRotation, -2.0f);
+				break;
 
-	case '6':
-		rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
-		polygonRotation = UpdateRotation(polygonRotation, 2.0f);
-		break;
+			case '4':
+				rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
+				polygonRotation = UpdateRotation(polygonRotation, -2.0f);
+				break;
 
-	case 'g':
+			case '6':
+				rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
+				polygonRotation = UpdateRotation(polygonRotation, 2.0f);
+				break;*/
 
-		glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-		break;
-
-	case 'h':
-
-		glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
-		break;
-	
+		}
 	}
 
 	/*if (key == 'd') 
@@ -799,7 +865,9 @@ float HelloGL::UpdateRotation(float rotation, float rotationSpeed)
 
 }
 
-
+/// <summary>
+/// Update displayed info of the current selected shape
+/// </summary>
 void HelloGL::UpdateShapeDataText()
 {
 	int polygonLocation = linkedPolygonList->Find(head, selectedPolygon);
@@ -810,7 +878,20 @@ void HelloGL::UpdateShapeDataText()
 		+ "\nVisibility: " + CreateTranformationMenuText(0, selectedPolygon->GetToggleStatus(Polygon3D::VISIBILITY));
 }
 
+/// <summary>
+/// Update displayed position info of the camera
+/// </summary>
+void HelloGL::UpdateCameraPosText()
+{
+	newCameraPosition = "Camera Position | X: " + std::to_string(camera->center.x)
+		+ "Y: " + std::to_string(camera->center.y)
+		+ "Z: " + std::to_string(camera->eye.z);
+}
 
+//void HelloGL::UpdateCameraPosition()
+//{
+//	cameraParent.parentPosition
+//}
 
 /// <summary>
 /// Returns an array of color values

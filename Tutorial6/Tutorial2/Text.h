@@ -19,9 +19,11 @@ private:
 	//Vector3D position;
 	//Vector3D color;
 
+	void* textAttribute = nullptr;
+
 public:
 
-	Text();
+	Text(void* attribute);
 	~Text();
 
 	void DrawString(std::string text, Vector3D position);

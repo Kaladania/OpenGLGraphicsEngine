@@ -596,6 +596,8 @@ void Polygon3D::TranslatePolygon(Vector3D translationVector)
 {
 	glTranslatef(translationVector.x, translationVector.y, translationVector.z);
 
+	position = translationVector;
+
 	if (translation > 0.5f && !switchDirection)
 	{
 		switchDirection = true;

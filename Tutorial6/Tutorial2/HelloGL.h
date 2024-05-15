@@ -33,6 +33,12 @@ struct Transformation
 	float scale;
 };
 
+//struct CameraParent
+//{
+//	bool isParented = false;
+//	Vector3D parentPosition;
+//};
+
 //struct MenuUpdateNeed
 //{
 //	//union { //allows iterative access to axises
@@ -88,11 +94,13 @@ private:
 	enum Menus;
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 	
-	Text* updateText = new Text;
-	Text* dataText = new Text;
+	Text* updateText = new Text(GLUT_BITMAP_TIMES_ROMAN_24);
+	Text* dataText = new Text(GLUT_BITMAP_HELVETICA_18);
+	Text* cameraPosText = new Text(GLUT_BITMAP_HELVETICA_18);
 
 	std::string newAnnouncement = "";
 	std::string dataToShow = "";
+	std::string newCameraPosition = "";
 
 
 	std::map<Menus, int> menusToUpdate; //dictionary of menus needing to be updated for that frame and the value to update them to
@@ -101,6 +109,10 @@ private:
 	ListNode* head = nullptr;
 
 	int polygonMenuAmount = 0; //holds the amount of polygons current being shown in Polygon Menu
+
+	//CameraParent cameraParent;
+
+	Polygon3D* cameraParent = nullptr;
 
 	/*std::map<Color, std::array<float, 4>> enumToColorArray =
 	{ {RED, {1.0f, 0.0f, 0.0f, 0.0f}}, {ORANGE, {1.0f, 0.5f, 0.0f, 0.0f}}, {BLACK, {0.0f, 0.0f, 0.0f, 0.0f}} };*/
@@ -142,6 +154,7 @@ public:
 		SCALING_STATUS_MENU,
 		VISIBILITY_STATUS_MENU,
 		BACKGROUND_COLOUR_MENU,
+		TRACKING_MENU,
 		END_OF_MENU_ENUM
 	};
 
@@ -178,6 +191,8 @@ public:
 
 	void ChangeBackgroundColour(Color chosenColor);
 
+	void SetObjectTracking(int chosenOption);
+
 	std::string CreateTranformationMenuText(const int polygonID, const bool isActive);
 	void ChangeMenuStatus(const Menus menu, const int polygonID);
 
@@ -204,6 +219,8 @@ public:
 
 	//void ShowAllShapeData();
 	void UpdateShapeDataText();
+	void UpdateCameraPosText();
+	//void UpdateCameraPosition();
 	//Vector3D UpdateRotation(Vector3D rotation, Vector3D rotationSpeed);
 
 	//int FindPolygonInList(Polygon3D* polygon);

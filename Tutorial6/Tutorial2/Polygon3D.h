@@ -45,8 +45,9 @@ protected:
 	Texture2D* texture = nullptr;
 	
 	Vector3D rotationAxis = Vector3D(); //rotation vector
-	Vector3D rotationDirection; //current rotation direction
+	Vector3D rotationDirection = Vector3D(); //current rotation direction
 	Vector3D translation = Vector3D(); //translation vector
+	Vector3D position = Vector3D();
 	Vector3D scale = Vector3D(1.0f, 1.0f, 1.0f); //scale vector
 
 	float rotationSpeed = 0; //speed of automatic rotation
@@ -117,6 +118,11 @@ public:
 	Vector3D GetRotation()
 	{
 		return rotation;
+	}
+
+	Vector3D GetPosition()
+	{
+		return position;
 	}
 
 	//Updates rotation direction
