@@ -20,6 +20,7 @@ struct CustomisationToggles
 	bool m_rotatePolygon = true;
 	bool m_scalePolygon = true;
 	bool isVisible = true;
+	bool manualControl = false;
 };
 
 enum Textures;
@@ -96,7 +97,8 @@ public:
 		SCALE,
 		MATERIAL,
 		LIGHTING,
-		VISIBILITY
+		VISIBILITY,
+		MANUAL
 	};
 
 	enum Textures
@@ -130,10 +132,8 @@ public:
 		return rotation;
 	}
 
-	Vector3D GetPosition()
-	{
-		return position;
-	}
+	Vector3D GetPosition() { return position;}
+	void SetPosition(Vector3D newPosition) { position = newPosition; }
 
 	//Updates rotation direction
 	void SetRotation(Vector3D rotationAxis)

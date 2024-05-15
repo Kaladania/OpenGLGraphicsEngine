@@ -341,6 +341,7 @@ void HelloGL::TransformationsMenu(int chosenOption)
 		case 0:
 
 			selectedPolygon->ToggleTranformation(Polygon3D::TRANSLATION);
+			selectedPolygon->ToggleTranformation(Polygon3D::MANUAL);
 			menusToUpdate[TRANSLATION_STATUS_MENU] = linkedPolygonList->Find(head, selectedPolygon);
 			break;
 
@@ -798,57 +799,60 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 			camera->eye.z += 0.5f;
 			break;
 
-			/*case 'a':
-				std::get<0>(translationAxis) += -0.02f;
-				break;
-
-			case 'd':
-				std::get<0>(translationAxis) += 0.02f;
-				break;
-
-			case 'w':
-				std::get<1>(translationAxis) += 0.02f;
-				break;
-
-			case 's':
-				std::get<1>(translationAxis) += -0.02f;
-				break;
-
-			case 'q':
-				std::get<2>(translationAxis) += -0.2f;
-				break;
-
-			case 'e':
-				std::get<2>(translationAxis) += 0.2f;
-				break;
-
-			case '1':
-				rotationAxis = std::make_tuple(-1.0f, 0.0f, 0.0f);
-				polygonRotation = UpdateRotation(polygonRotation, -2.0f);
-				break;
-
-			case '4':
-				rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
-				polygonRotation = UpdateRotation(polygonRotation, -2.0f);
-				break;
-
-			case '6':
-				rotationAxis = std::make_tuple(0.0f, 0.0f, -1.0f);
-				polygonRotation = UpdateRotation(polygonRotation, 2.0f);
-				break;*/
-
 		}
 	}
 
-	/*if (key == 'd') 
+	//ensures that there is currently a selected object AND said object is not currently being automatically moved before keyboard inputs are enabled
+	if (selectedPolygon != nullptr && !selectedPolygon->GetToggleStatus(Polygon3D::TRANSLATION))
 	{
-		polygonRotation = UpdateRotation(polygonRotation, 2.0f);
-	}
-	else if (key == 'a')
-	{
-		polygonRotation = UpdateRotation(polygonRotation, -2.0f);
-	}*/
-	
+		glPushMatrix();
+
+		//gets the polygon's current position
+		Vector3D newPosition = selectedPolygon->GetPosition();
+
+		//alters position based on key input
+		switch (key)
+		{
+		case 'a': //move polygon left
+
+			newPosition.x -= 0.1;
+			break;
+			
+		case 'd': //move polygon right
+
+			newPosition.x += 0.1;
+			break;
+
+		case 's': //move polygon down
+
+			newPosition.y -= 0.1;
+			break;
+
+		case 'w': //move polygon up
+
+			newPosition.y += 0.1;
+			break;
+
+		case 'q': //move polygon backwards (into distance)
+
+			newPosition.z -= 0.1;
+			break;
+
+		case 'e': //move polygon forwards (into camera)
+
+			newPosition.z += 0.1;
+			break;
+
+
+		default:
+			break;
+		}
+
+		//updates the polygon's position
+		selectedPolygon->SetPosition(newPosition);
+		
+		glPopMatrix();
+	}	
 }
 
 

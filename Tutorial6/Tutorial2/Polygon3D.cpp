@@ -126,6 +126,11 @@ void Polygon3D::Draw()
 			break;
 		}
 	}
+	else if (m_customisationToggles.manualControl)
+	{
+		//sets translation to update based on objects position for manual control
+		TranslatePolygon(position);
+	}
 	
 
 	if (m_customisationToggles.m_rotatePolygon)
@@ -586,6 +591,10 @@ void Polygon3D::ToggleTranformation(ToggleStates transformationToToggle)
 
 	case VISIBILITY:
 		m_customisationToggles.isVisible = !m_customisationToggles.isVisible;
+		break;
+
+	case MANUAL:
+		m_customisationToggles.manualControl = !m_customisationToggles.manualControl;
 		break;
 	}
 }
