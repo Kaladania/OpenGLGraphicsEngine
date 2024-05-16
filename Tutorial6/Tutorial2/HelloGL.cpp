@@ -609,8 +609,11 @@ Transformation HelloGL::SanitiseTransformation(Transformation newMeshTransform)
 /// </summary>
 void HelloGL::Display()
 {
-	glClear(GL_COLOR_BUFFER_BIT); //clears the scene
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clears the scene + plus find sign for or
 
+	
+	
+	//glLoadIdentity(); //resewt matrix stack
 	//renders polygons to screen
 	for (int i = 0; i < linkedPolygonList->Size(); i++)
 	{
@@ -621,10 +624,16 @@ void HelloGL::Display()
 		}
 	}
 	
+
+
+	//glPushMatrix();
+
 	//renders text objects to screen
-	updateText->DrawString(newAnnouncement, {-0.4f, -0.4f, 0.0f});
-	dataText->DrawString(dataToShow, {-0.4f, 0.38f, 0.0f});
-	cameraPosText->DrawString(newCameraPosition, {-0.4f, 0.0f, 0.0f});
+	updateText->DrawString(newAnnouncement, { 0,0,0 });
+	dataText->DrawString(dataToShow, { -0.4f, 0.38f, 0.0f });
+	cameraPosText->DrawString(newCameraPosition, { -0.4f, 0.0f, 0.0f });
+
+	//glPopMatrix();
 
 	glFlush(); //flushes scene drawn to graphics card (draws polygon on the screen)
 	glutSwapBuffers();
