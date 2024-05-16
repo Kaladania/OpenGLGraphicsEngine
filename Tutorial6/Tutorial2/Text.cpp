@@ -5,7 +5,7 @@
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
 
-Text::Text(void* attribute)
+Text::Text(void* attribute, std::array<float, 4>& colorArray)
 {
 	material.ambient = { 1.4f, 1.4f, 1.4f, 1.4f };
 	material.diffuse = { 1.4f, 1.4f, 1.4f, 1.4f };
@@ -13,6 +13,7 @@ Text::Text(void* attribute)
 	material.shininess = 400.0f;
 
 	textAttribute = attribute;
+	this->colorArray = colorArray;
 }
 
 Text::~Text()
@@ -26,12 +27,33 @@ void Text::DrawString(std::string text, Vector3D position)
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material.diffuse.x));
 	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material.specular.x));
 
+	glDisable(GL_LIGHTING);
+	glEnable(GL_COLOR);
+	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT), -1,1);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	
 	glTranslatef(position.x, position.y, position.z);
-	glRasterPos3f(0.0f, 0.0f, 0.0f);
-	//glColor3f(color.x, color.y, color.z);
+	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]); // white
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glRasterPos2f(0.0f, 0.0f);
 	glutBitmapString(textAttribute, (unsigned char*)text.c_str());
+
+	glColor3f(0, 0, 0);
+
 	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+
+	glDisable(GL_COLOR);
+	glEnable(GL_LIGHTING);
 }
 
 void Text::ChangeMaterial(Material newMaterial)

@@ -92,9 +92,10 @@ private:
 	enum Menus;
 	std::map <Menus, int> menuIDs = { {POLYGON_MENU, 0}, {TOGGLE_MENU, 0}, {TRANSFORMATION_MENU, 0} };
 	
-	Text* updateText = new Text(GLUT_BITMAP_TIMES_ROMAN_24);
-	Text* dataText = new Text(GLUT_BITMAP_HELVETICA_18);
-	Text* cameraPosText = new Text(GLUT_BITMAP_HELVETICA_18);
+	Text* updateText = nullptr;
+	Text* dataText = nullptr;
+	Text* cameraPosText = nullptr;
+	Text* controlText = nullptr;
 
 	std::string newAnnouncement = "";
 	std::string dataToShow = "";
@@ -116,6 +117,8 @@ private:
 	{ {RED, {1.0f, 0.0f, 0.0f, 0.0f}}, {ORANGE, {1.0f, 0.5f, 0.0f, 0.0f}}, {BLACK, {0.0f, 0.0f, 0.0f, 0.0f}} };*/
 
 	std::array<float, 4> backgroundColorArray;
+
+	bool showControls = true;
 
 
 

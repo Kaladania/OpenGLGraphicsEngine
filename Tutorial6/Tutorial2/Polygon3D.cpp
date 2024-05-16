@@ -64,6 +64,7 @@ void Polygon3D::Draw()
 	
 	glPushMatrix();
 
+	
 	//Inverts the rotation and translation
 	if (switchDirection)
 	{
@@ -78,6 +79,8 @@ void Polygon3D::Draw()
 
 	if (m_customisationToggles.m_translatePolygon)
 	{
+		
+
 		//Applys a random translation direction
 		switch (chosenTranslationAxis)
 		{
@@ -126,10 +129,11 @@ void Polygon3D::Draw()
 			break;
 		}
 	}
-	else if (m_customisationToggles.manualControl)
+	else if (m_customisationToggles.manualControl) //if automatic control is disabled, manual control is enabled by default
 	{
-		//sets translation to update based on objects position for manual control
-		TranslatePolygon(position);
+		TranslatePolygon(position); //sets translation to update based on objects position for manual control
+		translation = position; //updates the translation starting point
+		chosenTranslationAxis = 6; //ensures that full translation is passed on continuation of auto-movement for seemless transition
 	}
 	
 
