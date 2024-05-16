@@ -5,7 +5,7 @@
 #include "freeglut.h"
 #include "GLUTCallbacks.h"
 
-Text::Text(void* attribute)
+Text::Text(void* attribute, std::array<float, 4>& colorArray)
 {
 	material.ambient = { 1.4f, 1.4f, 1.4f, 1.4f };
 	material.diffuse = { 1.4f, 1.4f, 1.4f, 1.4f };
@@ -13,6 +13,7 @@ Text::Text(void* attribute)
 	material.shininess = 400.0f;
 
 	textAttribute = attribute;
+	this->colorArray = colorArray;
 }
 
 Text::~Text()
@@ -37,7 +38,7 @@ void Text::DrawString(std::string text, Vector3D position)
 	glLoadIdentity();
 	
 	glTranslatef(position.x, position.y, position.z);
-	glColor4f(1,1,1,1); // white
+	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]); // white
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 

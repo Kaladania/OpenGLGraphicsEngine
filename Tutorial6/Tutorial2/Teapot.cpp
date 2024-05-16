@@ -87,6 +87,8 @@ void Teapot::Draw()
 
 	if (m_customisationToggles.m_translatePolygon)
 	{
+		
+
 		//Applys a random translation direction
 		switch (chosenTranslationAxis)
 		{
@@ -135,7 +137,12 @@ void Teapot::Draw()
 			break;
 		}
 	}
-
+	else if (m_customisationToggles.manualControl) //if automatic control is disabled, manual control is enabled by default
+	{
+		TranslatePolygon(position); //sets translation to update based on objects position for manual control
+		translation = position; //updates the translation starting point
+		chosenTranslationAxis = 6; //ensures that full translation is passed on continuation of auto-movement for seemless transition
+	}
 
 	if (m_customisationToggles.m_rotatePolygon)
 	{

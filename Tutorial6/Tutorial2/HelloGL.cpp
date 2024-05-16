@@ -65,6 +65,20 @@ void HelloGL::InitObjects()
 	camera = new Camera();
 	lighting = new Lighting();
 
+	std::array<float, 4> newColour;
+
+	SetColor(WHITE, newColour);
+	updateText = new Text(GLUT_BITMAP_TIMES_ROMAN_24, newColour);
+
+	SetColor(GREEN, newColour);
+	dataText = new Text(GLUT_BITMAP_HELVETICA_18, newColour);
+
+	SetColor(LIGHTBLUE, newColour);
+	cameraPosText = new Text(GLUT_BITMAP_HELVETICA_12, newColour);
+
+	SetColor(RED, newColour);
+	controlText = new Text(GLUT_BITMAP_HELVETICA_10, newColour);
+
 	camera->eye.z = 1.0f;
 	camera->up.y = 1.0f;
 
@@ -241,6 +255,7 @@ void HelloGL::InitMenu()
 	glutAddSubMenu("Change Background Color", menuIDs[BACKGROUND_COLOUR_MENU]);
 	glutAddSubMenu("Track Selected Object", menuIDs[TRACKING_MENU]);
 
+	glutAddMenuEntry("Toggle Control Info", -1);
 	//gives the user an easy way to back out of the menu
 	glutAddMenuEntry("None", -2);
 
@@ -324,7 +339,10 @@ void HelloGL::PolygonMenu(int chosenOption)
 
 void HelloGL::ToggleMenu(int chosenOption)
 {
-	printf("Chosen Toggle option: %i", chosenOption);
+	if (chosenOption == -1)
+	{
+		showControls = !showControls;
+	}
 }
 
 /// <summary>
@@ -457,7 +475,7 @@ void HelloGL::SetObjectTracking(int chosenOption)
 		if (selectedPolygon != nullptr)
 		{
 			//format: Shape <shape ID> is being tracked by camera
-			newAnnouncement = "Shape " + std::to_string(linkedPolygonList->Find(head, selectedPolygon)) + "is being tracked by Camera";
+			newAnnouncement = "Shape " + std::to_string(linkedPolygonList->Find(head, selectedPolygon)) + " is being tracked by Camera";
 			cameraParent = selectedPolygon;
 		}
 
@@ -629,9 +647,19 @@ void HelloGL::Display()
 	//glPushMatrix();
 
 	//renders text objects to screen
-	updateText->DrawString(newAnnouncement, { 0,0,0 });
-	dataText->DrawString(dataToShow, { -0.4f, 0.38f, 0.0f });
-	cameraPosText->DrawString(newCameraPosition, { -0.4f, 0.0f, 0.0f });
+	updateText->DrawString(newAnnouncement, { 10,10,0 });
+	dataText->DrawString(dataToShow, {10, SCREEN_HEIGHT - 30, 0});
+	cameraPosText->DrawString(newCameraPosition, {10, 40, 0 });
+
+	//allows user to show/hide controls
+	if (showControls)
+	{
+		controlText->DrawString("Camera: I(^) K(v) J(<) L(>) U(backward) O(forward)"
+			"\nObject (when Auto Translate OFF): W(^) S(v) A(<) D(>) Q(backward) E(forward)"
+			"\nRight Click for Menu",
+			{ SCREEN_WIDTH - 400, SCREEN_HEIGHT - 20, 0 });
+	}
+	
 
 	//glPopMatrix();
 
@@ -784,27 +812,35 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 
 		switch (key)
 		{
-		case 'k':
+		case 'l':
 			camera->center.x -= 0.1f;
 			break;
 
-		case ';':
+		case 'j':
 			camera->center.x += 0.1f;
 			break;
 
-		case 'o':
+		case 'k':
 			camera->center.y += 0.1f;
 			break;
 
-		case 'l':
+		case 'i':
 			camera->center.y -= 0.1f;
 			break;
 
-		case 'i':
+		case 'o':
+
 			camera->eye.z -= 0.5f;
+
+			//caps camera z movement to prevent scene (and controls) from flipping in negative camera
+			if (camera->eye.z < 0.5f)
+			{
+				camera->eye.z = 0.5f;
+			}
+			
 			break;
 
-		case 'p':
+		case 'u':
 			camera->eye.z += 0.5f;
 			break;
 
@@ -814,7 +850,7 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 	//ensures that there is currently a selected object AND said object is not currently being automatically moved before keyboard inputs are enabled
 	if (selectedPolygon != nullptr && !selectedPolygon->GetToggleStatus(Polygon3D::TRANSLATION))
 	{
-		glPushMatrix();
+		//glPushMatrix();
 
 		//gets the polygon's current position
 		Vector3D newPosition = selectedPolygon->GetPosition();
@@ -824,32 +860,32 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 		{
 		case 'a': //move polygon left
 
-			newPosition.x -= 0.1;
+			newPosition.x -= 0.05;
 			break;
 			
 		case 'd': //move polygon right
 
-			newPosition.x += 0.1;
+			newPosition.x += 0.05;
 			break;
 
 		case 's': //move polygon down
 
-			newPosition.y -= 0.1;
+			newPosition.y -= 0.05;
 			break;
 
 		case 'w': //move polygon up
 
-			newPosition.y += 0.1;
+			newPosition.y += 0.05;
 			break;
 
 		case 'q': //move polygon backwards (into distance)
 
-			newPosition.z -= 0.1;
+			newPosition.z -= 0.05;
 			break;
 
 		case 'e': //move polygon forwards (into camera)
 
-			newPosition.z += 0.1;
+			newPosition.z += 0.05;
 			break;
 
 
@@ -860,7 +896,7 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 		//updates the polygon's position
 		selectedPolygon->SetPosition(newPosition);
 		
-		glPopMatrix();
+		//glPopMatrix();
 	}	
 }
 
