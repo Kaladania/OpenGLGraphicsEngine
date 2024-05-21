@@ -23,37 +23,36 @@ Text::~Text()
 
 void Text::DrawString(std::string text, Vector3D position)
 {
-	glMaterialfv(GL_FRONT, GL_AMBIENT, &(material.ambient.x));
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material.diffuse.x));
-	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material.specular.x));
+	glDisable(GL_LIGHTING); //stops lighting from affecting colour of text
+	glEnable(GL_COLOR); //enables colour so that text can be given an RGB colour value
+	glMatrixMode(GL_PROJECTION); //sets matrix mode to projection to customise viewport
 
-	glDisable(GL_LIGHTING);
-	glEnable(GL_COLOR);
-	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT), -1,1);
-	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity(); //resets the matrix
+	glOrtho(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT), -1,1); //sets the dimensions of the viewport
+	glMatrixMode(GL_MODELVIEW); //sets matrix mode to projectile to customise object
+
 	glPushMatrix();
-	glLoadIdentity();
+	glLoadIdentity(); //resets the matrix
 	
-	glTranslatef(position.x, position.y, position.z);
-	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]); // white
+	glTranslatef(position.x, position.y, position.z); //renders text at given position
+	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]); // renders text with the given colour
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0); //sets a default texture to prevent colours from being influeced by shape textures
 
-	glRasterPos2f(0.0f, 0.0f);
-	glutBitmapString(textAttribute, (unsigned char*)text.c_str());
+	glRasterPos2f(0.0f, 0.0f); //sets the inital position to bottom-right origin point
+	glutBitmapString(textAttribute, (unsigned char*)text.c_str()); //renders text
 
-	glColor3f(0, 0, 0);
+	glColor3f(0, 0, 0); //resets colour back to black
 
-	glPopMatrix();
+	glPopMatrix(); //pops translation matrix
 	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
+
+	glPopMatrix(); //pops Ortho matrix
 	glMatrixMode(GL_MODELVIEW);
 
-	glDisable(GL_COLOR);
-	glEnable(GL_LIGHTING);
+	glDisable(GL_COLOR); //disbales colour so scene can function as normal
+	glEnable(GL_LIGHTING); //re-enables lightning so that objects can continue to be illuminated
 }
 
 void Text::ChangeMaterial(Material newMaterial)

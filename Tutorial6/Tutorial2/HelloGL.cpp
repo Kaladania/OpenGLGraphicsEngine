@@ -87,16 +87,6 @@ void HelloGL::InitObjects()
 	lighting->specular = { 0.2f, 0.2f, 0.2f, 1.0f };
 	lighting->position = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-	
-
-	//float newTranslation = 0;
-	//float newScale = 0;
-	//float newRotation = 0;
-
-	//Meshes newMesh = CUBE;
-	//Polygon3D::Textures newTexture = Polygon3D::PENGUINS;
-
-	
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -109,12 +99,6 @@ void HelloGL::InitObjects()
 	}
 
 	newAnnouncement = "Number of Polygons Loaded: " + std::to_string(linkedPolygonList->Size());
-
-	//linkedPolygonList->DeleteAt(head, 1);
-	//linkedPolygonList->PrintList(head);
-
-	//linkedPolygonList->DeleteList(&head);
-	//linkedPolygonList->PrintList(head);
 }
 
 /// <summary>
@@ -297,7 +281,7 @@ Polygon3D* HelloGL::CreateNewPolygon(Meshes newPolygon)
 	newMeshTransform.rotation = newRotation;
 	newMeshTransform.scale = newScale;
 
-	SanitiseTransformation(newMeshTransform);
+	newMeshTransform = SanitiseTransformation(newMeshTransform);
 
 	//loads the new polygon using the correct constructor
 	switch (newPolygon)

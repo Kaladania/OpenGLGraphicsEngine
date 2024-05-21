@@ -32,13 +32,10 @@ Polygon3D::Polygon3D(Vector3D scale, float newTranslationSpeed, float newRotatio
 /// <param name="newRotationSpeed">Speed of object rotation</param>
 Polygon3D::Polygon3D(float scale, float newTranslationSpeed, float newRotationSpeed, Textures chosenTexture)
 {
-	//SetUpVertices();
 	translationSpeed = newTranslationSpeed;
 	rotationSpeed = newRotationSpeed;
 
 	material = new Material();
-	/*LoadVerticesFromFile();
-	LoadTextureFromFile();*/
 }
 
 /// <summary>
@@ -52,12 +49,8 @@ void Polygon3D::Draw()
 	{
 		glBindTexture(GL_TEXTURE_2D, this->texture->GetID());
 	}
-	/*glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
-	
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
-
+	//renders object material
 	glMaterialfv(GL_FRONT, GL_AMBIENT, &(material->ambient.x));
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(material->diffuse.x));
 	glMaterialfv(GL_FRONT, GL_SPECULAR, &(material->specular.x));
@@ -203,31 +196,6 @@ void Polygon3D::Draw()
 
 	for (int i = 0; i < indiciesAmount; i++)
 	{
-		////Iterates through colours to ensure each triangle is coloured differently
-		//if (i % 3 == 0)
-		//{
-		//	SetColor((Color)colorIterator);
-
-		//	glColor4f(colorArray[0], colorArray[1], colorArray[2], colorArray[3]);
-
-		//	colorIterator++;
-
-		//	//prevents triangle from being black to ensure it can be seen
-		//	if (colorIterator == BLACK)
-		//	{
-		//		colorIterator++;
-		//	}
-
-		//	//loops back to RED
-		//	if (colorIterator == END_OF_COLOR_ENUM)
-		//	{
-		//		colorIterator = 0;
-		//	}
-		//}
-
-
-
-		//glVertex3f(vertexList[i].x, vertexList[i].y, vertexList[i].z); //draws vertex
 		
 		if (normalsIterator <= indexedNormals.size() - 1)
 		{
@@ -240,20 +208,6 @@ void Polygon3D::Draw()
 
 		normalsIterator++;
 		
-
-		//switch (i)
-		//{
-		//case 0:
-		//	glTexCoord2f(0.0f, 0.0f);
-
-		//case 1:
-		//	glTexCoord2f(0.0f, 1.0f);
-
-		//case 2:
-		//	glTexCoord2f(1.0f, 1.0f);
-		//}
-		//glTexCoord2f(textureCoordinates[i].u, textureCoordinates[i].v);
-		//glTexCoord2f(0.0f, 0.0f);
 		if (textCoordIterator <= indexedTextCoords.size() - 1)
 		{
 			glTexCoord2f(indexedTextCoords[textCoordIterator].u, indexedTextCoords[textCoordIterator].v);
@@ -298,8 +252,8 @@ bool Polygon3D::LoadVerticesFromFile()
 
 	int numVertices, numNormals, numTextCoords, numIndices;
 
+	//loads vertexs
 	inFile >> numVertices;
-	//indexedVertices = new Vector3D[numVertices];
 
 	for (int i = 0; i < numVertices; i++)
 	{
@@ -308,7 +262,6 @@ bool Polygon3D::LoadVerticesFromFile()
 	}
 
 	inFile >> numTextCoords;
-	//indexedNormals = new Vector3D[numNormals];
 
 	for (int i = 0; i < numTextCoords; i++)
 	{
@@ -316,8 +269,8 @@ bool Polygon3D::LoadVerticesFromFile()
 		indexedTextCoords.push_back(TexCoord(GLfloat(x), GLfloat(y)));
 	}
 
+	//loads normals
 	inFile >> numNormals;
-	//indexedNormals = new Vector3D[numNormals];
 
 	for (int i = 0; i < numNormals; i++)
 	{
@@ -326,9 +279,9 @@ bool Polygon3D::LoadVerticesFromFile()
 	}
 
 
+	//loads indices
 	inFile >> numIndices;
 	indiciesAmount = numIndices;
-	//indices = new int[numIndices];
 
 	for (int i = 0; i < numIndices; i++)
 	{
@@ -336,48 +289,6 @@ bool Polygon3D::LoadVerticesFromFile()
 		indices.push_back(x);
 	}
 
-	/*int numVertices, numNormals, numIndices;
-
-	inFile >> numVertices;
-	indexedVertices = new Vector3D[numVertices];
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedVertices[i] = Vector3D(x, y, z);
-		printf("%i %i %i", x, y, z);
-	}
-
-	inFile >> numNormals;
-	indexedNormals = new Vector3D[numNormals];
-
-	for (int i = 0; i < numNormals; i++)
-	{
-		inFile >> x >> y >> z;
-		indexedNormals[i] = Vector3D(x, y, z);
-	}
-
-	inFile >> numIndices;
-	indices = new GLfloat[numIndices];
-
-	for (int i = 0; i < numVertices; i++)
-	{
-		inFile >> x;
-		indices[i] = x;
-	}*/
-
-	//while (!inFile.eof())
-	//{
-	//	while ((inFile >> x >> y >> z))
-	//	{
-	//		vertexList.push_back(Vector3D(x, y, z));
-	//		//printf(" %i, %i, %i", x, y, z);
-	//	}
-	//}
-
-
-
-	
 	inFile.close();
 
 }
@@ -386,7 +297,6 @@ bool Polygon3D::LoadVerticesFromFile()
 bool Polygon3D::LoadTextureFromFile(Textures newTexture)
 {
 	//loads in a new texture
-	//Texture2D* texture = new Texture2D();
 
 	if (texture != nullptr)
 	{
@@ -419,94 +329,10 @@ bool Polygon3D::LoadTextureFromFile(Textures newTexture)
 	}
 
 	bool success = texture->LoadTexture(filePath, tileSize, tileSize);
-	//glBindTexture(GL_TEXTURE_2D, texture->GetID()); //binds the new texture
 
 	return success;
 }
 
-
-
-///// <summary>
-///// Returns an array of color values
-///// </summary>
-///// <param name="color">The color being requested</param>
-///// <param name="colorArray">Array of float values representing R, G, B and A</param>
-//void Polygon3D::SetColor(const Color color)
-//{
-//	this->color = color;
-//	switch (color)
-//	{
-//	case RED:
-//		colorArray[0] = 1.0f;
-//		colorArray[1] = 0.0f;
-//		colorArray[2] = 0.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case ORANGE:
-//		colorArray[0] = 1.0f;
-//		colorArray[1] = 0.5f;
-//		colorArray[2] = 0.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case YELLOW:
-//		colorArray[0] = 1.0f;
-//		colorArray[1] = 1.0f;
-//		colorArray[2] = 0.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case GREEN:
-//		colorArray[0] = 0.0f;
-//		colorArray[1] = 1.0f;
-//		colorArray[2] = 0.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case LIGHTBLUE:
-//		colorArray[0] = 0.0f;
-//		colorArray[1] = 1.0f;
-//		colorArray[2] = 1.0f;
-//		colorArray[3] = 1.0f;
-//		break;
-//
-//	case DARKBLUE:
-//		colorArray[0] = 0.0f;
-//		colorArray[1] = 0.0f;
-//		colorArray[2] = 1.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case PURPLE:
-//		colorArray[0] = 1.0f;
-//		colorArray[1] = 0.0f;
-//		colorArray[2] = 1.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case BLACK:
-//		colorArray[0] = 0.0f;
-//		colorArray[1] = 0.0f;
-//		colorArray[2] = 0.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	case WHITE:
-//		colorArray[0] = 1.0f;
-//		colorArray[1] = 1.0f;
-//		colorArray[2] = 1.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//
-//	default: //returns white if current color is not supported
-//		colorArray[0] = 1.0f;
-//		colorArray[1] = 1.0f;
-//		colorArray[2] = 1.0f;
-//		colorArray[3] = 0.0f;
-//		break;
-//	}
-//}
 
 /// <summary>
 /// Scales the Polygon by the given vector
@@ -517,7 +343,6 @@ void Polygon3D::ScalePolygon(Vector3D scale, std::vector<Vector3D>& vertexList)
 	for (int i = 0; i < vertexList.size(); i++)
 	{
 		vertexList[i] = vertexList[i] * scale;
-		//printf("%f, %f, %f \n", vertexList[i].x, vertexList[i].y, vertexList[i].z);
 	}
 }
 
@@ -530,7 +355,6 @@ void Polygon3D::ScalePolygon(float scale, std::vector<Vector3D>& vertexList)
 	for (int i = 0; i < vertexList.size(); i++)
 	{
 		vertexList[i] = vertexList[i] * scale;
-		//printf("%f, %f, %f \n", vertexList[i].x, vertexList[i].y, vertexList[i].z);
 	}
 }
 
