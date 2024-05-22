@@ -186,7 +186,6 @@ void HelloGL::InitMenu()
 	//adds menu entries specifying wheither to add or remove a polygon
 	//the decision to add a new polygon will lead to a sub-menu specifying the type
 	glutAddSubMenu("Add New Polygon", menuIDs[ADD_SHAPE_MENU]);
-	glutAddMenuEntry("Remove Selected Polygon", -1);
 
 
 

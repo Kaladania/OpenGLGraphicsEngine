@@ -1,4 +1,7 @@
-﻿  HelloGL.cpp
+﻿  GLUTCallbacks.cpp
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(141,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(92,7): message : see declaration of 'HelloGL::Menus'
+  HelloGL.cpp
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(141,2): warning C4240: nonstandard extension used: access to 'HelloGL::Menus' now defined to be 'public', previously it was defined to be 'private'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(92,7): message : see declaration of 'HelloGL::Menus'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(14,15): warning C4099: 'Vector3D': type name first seen using 'struct' now seen using 'class'
@@ -6,18 +9,19 @@ C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.h(27,8
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Polygon3D.h(15,15): warning C4099: 'Vector4D': type name first seen using 'struct' now seen using 'class'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\Text.h(9,8): message : see declaration of 'Vector4D'
 C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(261,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(264,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(267,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(712,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(731,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(749,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(847,25): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(852,25): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(857,25): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(862,25): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(867,25): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(872,25): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(304): warning C4715: 'HelloGL::CreateNewPolygon': not all control paths return a value
-C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(531): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(260,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(263,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(266,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(711,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(730,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(748,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(846,25): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(851,25): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(856,25): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(861,25): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(866,25): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(871,25): warning C4305: '+=': truncation from 'double' to 'float'
+  Generating Code...
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(303): warning C4715: 'HelloGL::CreateNewPolygon': not all control paths return a value
+C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Tutorial2\HelloGL.cpp(530): warning C4715: 'HelloGL::CreateTranformationMenuText': not all control paths return a value
   Tutorial2.vcxproj -> C:\Users\Nicole\Documents\GitHub\GraphicsProg\Tutorial6\Debug\Tutorial2.exe

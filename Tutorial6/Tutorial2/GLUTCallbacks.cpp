@@ -72,11 +72,6 @@ namespace GLUTCallbacks //creates free methods wrappers to allow FreeGLUT to acc
 		helloGL->AddPolygon(HelloGL::Meshes(chosenOption));
 	}
 
-	void RemovePolygonMenu(int chosenOption)
-	{
-		//helloGL->R
-	}
-
 	void BackgroundColourMenu(int chosenOption)
 	{
 		helloGL->ChangeBackgroundColour(HelloGL::Color(chosenOption));
